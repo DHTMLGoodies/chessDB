@@ -13,7 +13,7 @@ class Seek extends LudoDbTable
         'join' => array(
             array('table' => 'Time_Control', 'pk' => 'id', 'fk' => 'time_control')
         ),
-        'indexes' => array('playerId')
+        'indexes' => array('player_id')
     );
 
 }
