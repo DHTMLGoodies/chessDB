@@ -2,13 +2,13 @@
 
 error_reporting(E_ALL);
 ini_set('display_errors','on');
-require_once("../../../db-connection.php");
-require_once("../../../php/connect.php");
-require_once("../../../autoloader.php");
+require_once("../autoload.php");
 
-class SeekTest extends PHPUnit_Framework_TestCase{
+class SeekTest extends ChessTests{
 
     public function setUp(){
+        parent::setUp();
+
         $seek = new Seek();
         $seek->drop();
         $seek->createTable();
