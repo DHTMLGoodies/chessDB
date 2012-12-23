@@ -9,6 +9,7 @@
 class Session extends LudoDbTable
 {
     protected $config = array(
+        'table' => 'Session',
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
             'session_key' => 'varchar(512)',

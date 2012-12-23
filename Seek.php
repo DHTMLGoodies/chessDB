@@ -2,8 +2,8 @@
 
 class Seek extends LudoDbTable
 {
-    protected $tableName = 'Seek';
     protected $config = array(
+        'table' => 'Seek',
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
             'player_id' => 'int',
