@@ -7,18 +7,31 @@
  */
 class Fen extends LudoDbTable
 {
+
     protected $config = array(
         'table' => 'Fen',
+        'idField' => 'id',
+        'lookupField' => 'fen',
         'columns' => array(
-            'id' => 'int_auto_increment not null',
-            'fen' => 'varchar(64) not null primary key'
+            'id' => 'int auto_increment not null primary key',
+            'fen' => 'varchar(128)'
         )
     );
 
-    public function setFen($fen){
-        $fen = explode(" ", $fen);
-        $fen = $fen[0];
-        $this->setValue('fen', $fen);
+    public function populate($fen){
+        parent::populate($fen);
+        if(!$this->getId()){
+            $this->setFen($fen);
+            $this->commit();
+        }
     }
 
+    protected function getValidId($fen){
+        $fen = explode(" ", $fen);
+        return $fen[0]." ". $fen[1]." ". $fen[2];
+    }
+
+    public function setFen($fen){
+        $this->setValue('fen', $this->getValidId($fen));
+    }
 }
