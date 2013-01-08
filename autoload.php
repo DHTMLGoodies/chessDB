@@ -32,6 +32,7 @@ spl_autoload_register(
                 'ludofinder' => '/ludoDB/LudoFinder.php',
                 'ludosql' => '/ludoDB/LudoSQL.php',
                 'metadata' => '/Metadata.php',
+                'metadatacollection' => '/MetadataCollection.php',
                 'metadatatest' => '/Tests/MetadataTest.php',
                 'metadatavalue' => '/MetadataValue.php',
                 'move' => '/Move.php',

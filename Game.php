@@ -19,8 +19,7 @@ class Game extends LudoDbTable
                 'method' => 'getFullName'
             ),
             'metadata' => array(
-                'class' => 'GameMetadata',
-                'fk' => 'id'
+                'class' => 'MetadataCollection'
             ),
             'moves' => array(
                 'class' => 'Moves',

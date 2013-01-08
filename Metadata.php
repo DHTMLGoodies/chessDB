@@ -28,4 +28,8 @@ class Metadata extends LudoDbTable
     public function setKey($value){
         $this->setValue('metadata_key', $value);
     }
+
+    public function getMetadataKey(){
+        return $this->getValue('metadata_key');
+    }
 }

@@ -49,7 +49,11 @@ class MetadataValue extends LudoDbTable
     }
 
     public function getMetadataKey(){
-        $id = $this->getMetadataId();
+        $m = new Metadata($this->getMetadataId());
+        return $m->getMetadataKey();
+    }
 
+    public function getMetadataValue(){
+        return $this->getValue('metadata_value');
     }
 }
