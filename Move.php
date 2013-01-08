@@ -12,6 +12,7 @@ class Move extends LudoDbTable
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
             'game_id' => 'int',
+            'notation' => 'varchar(32)',
             'from_square' => 'varchar(10)',
             'to_square' => 'varchar(10)',
             'fen_id' => 'int',
@@ -31,11 +32,11 @@ class Move extends LudoDbTable
     }
 
     public function setFrom($from){
-        $this->setValue('from', $from);
+        $this->setValue('from_square', $from);
     }
 
     public function setTo($to){
-        $this->setValue('to', $to);
+        $this->setValue('to_square', $to);
     }
     public function setParentMove($id){
         $this->setValue('parent_move_id', $id);

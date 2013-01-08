@@ -5,7 +5,7 @@
  * Date: 08.01.13
  * Time: 08:53
  */
-require_once("../autoload.php");
+require_once(__DIR__."/../autoload.php");
 
 class MetadataTest extends ChessTests
 {
@@ -109,7 +109,6 @@ class MetadataTest extends ChessTests
     }
 
     private function createGameMetadata($gameId, $key, $value){
-
         // given
         $m = new MetadataValue($key);
         // when

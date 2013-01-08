@@ -24,7 +24,7 @@ class Game extends LudoDbTable
             ),
             'moves' => array(
                 'class' => 'Moves',
-                'fk' => 'id'
+                'set' => 'setMoves'
             )
         )
     );
