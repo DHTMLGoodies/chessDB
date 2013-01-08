@@ -36,6 +36,7 @@ spl_autoload_register(
                 'metadatatest' => '/Tests/MetadataTest.php',
                 'metadatavalue' => '/MetadataValue.php',
                 'move' => '/Move.php',
+                'moves' => '/Moves.php',
                 'person' => '/ludoDB/Tests/classes/Person.php',
                 'phone' => '/ludoDB/Tests/classes/Phone.php',
                 'phonecollection' => '/ludoDB/Tests/classes/PhoneCollection.php',

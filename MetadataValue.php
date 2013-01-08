@@ -9,6 +9,7 @@ class MetadataValue extends LudoDbTable
 {
     protected $config = array(
         'table' => 'Metadata_Value',
+        'idField' => 'id',
         'lookupField' => 'metadata_id',
         'columns' => array(
             'id' => 'int auto_increment not null primary key',

@@ -19,7 +19,8 @@ class Game extends LudoDbTable
                 'method' => 'getFullName'
             ),
             'metadata' => array(
-                'class' => 'MetadataCollection'
+                'class' => 'MetadataCollection',
+                'set' => 'setMetadata'
             ),
             'moves' => array(
                 'class' => 'Moves',
@@ -27,4 +28,8 @@ class Game extends LudoDbTable
             )
         )
     );
+
+    public function setMetadata($metadataValues){
+
+    }
 }

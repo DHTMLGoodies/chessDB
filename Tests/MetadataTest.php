@@ -79,9 +79,33 @@ class MetadataTest extends ChessTests
         $this->assertEquals('Levon Aronian', $values['Black']);
         $this->assertEquals('*', $values['Result']);
 
+    }
 
 
+    /**
+     * @test
+     */
 
+    public function shouldBeAbleToCreateMetadataForMoreGames(){
+        // given
+        $this->createGameMetadata(10, 'White', 'Magnus Carlsen');
+        $this->createGameMetadata(10, 'Black', 'Levon Aronian');
+        $this->createGameMetadata(10,'Result', '*');
+
+        // given
+        $this->createGameMetadata(11, 'White', 'Magnus Carlsen');
+        $this->createGameMetadata(11, 'Black', 'Levon Aronian');
+        $this->createGameMetadata(11,'Result', '*');
+
+        // when
+        $c = new MetadataCollection(10);
+        $values = $c->getValues();
+        $c2 = new MetadataCollection(11);
+        $values2 = $c->getValues();
+
+        // then
+        $this->assertEquals(3, count($values));
+        $this->assertEquals(3, count($values2));
     }
 
     private function createGameMetadata($gameId, $key, $value){

@@ -12,12 +12,13 @@ class Move extends LudoDbTable
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
             'game_id' => 'int',
-            'from' => 'varchar(10)',
-            'to' => 'varchar(10)',
+            'from_square' => 'varchar(10)',
+            'to_square' => 'varchar(10)',
             'fen_id' => 'int',
             'parent_move_id' => 'int',
             'comment' => 'text'
-        )
+        ),
+        'indexes' => array('game_id','fen_id')
     );
 
     public function setFen($fen){
