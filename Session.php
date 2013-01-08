@@ -16,7 +16,8 @@ class Session extends LudoDbTable
             'user_id' => 'int',
             'created' => 'timestamp',
             'last_action' => 'datetime'
-        )
+        ),
+        'indexes' => array('session_key','user_id')
     );
 
     protected function beforeInsert(){
