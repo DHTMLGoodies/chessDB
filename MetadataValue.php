@@ -10,23 +10,23 @@ class MetadataValue extends LudoDbTable
     protected $config = array(
         'table' => 'Metadata_Value',
         'idField' => 'id',
-        'lookupField' => 'metadata_id',
+        'queryFields' => array('game_id','Metadata.metadata_key'),
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
             'game_id' => 'int',
             'metadata_value' => 'varchar(4000)',
             'metadata_id' => 'int'
         ),
-        'indexes' => array('game_id','metadata_id')
+        'indexes' => array('game_id','metadata_id'),
+        'join' => array(
+            array(
+                'table' => 'Metadata',
+                'fk' => 'metadata_id',
+                'pk' => 'id',
+                'columns' => array('metadata_key')
+            )
+        )
     );
-
-    protected function populate($id){
-        if(!is_numeric($id)){
-            $m = new Metadata($id);
-            $id = $m->getId();
-        }
-        parent::populate($id);
-    }
 
     public function setMetadataKey($key){
         $m = new Metadata($key);

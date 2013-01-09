@@ -9,7 +9,7 @@ class Metadata extends LudoDbTable
 {
     protected $config = array(
         'table' => 'Metadata',
-        'lookupField' => 'metadata_key',
+        'queryFields' => array('metadata_key'),
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
             'metadata_key' => 'varchar(255)'
@@ -17,15 +17,15 @@ class Metadata extends LudoDbTable
         'indexes' => array('metadata_key')
     );
 
-    public function populate($key){
-        parent::populate($key);
+    public function populate(){
+        parent::populate();
         if(!$this->getId()){
-            $this->setKey($key);
+            $this->setMetadataKey($this->queryValues[0]);
             $this->commit();
         }
     }
 
-    public function setKey($value){
+    public function setMetadataKey($value){
         $this->setValue('metadata_key', $value);
     }
 

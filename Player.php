@@ -2,8 +2,8 @@
 
 class Player extends LudoDbTable
 {
-    protected $tableName = 'Player';
     protected $config = array(
+        'table' => 'Player',
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
             'username' => 'varchar(64) unique',

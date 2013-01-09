@@ -14,7 +14,7 @@ class MetadataTest extends ChessTests
     public function setUp()
     {
         parent::setUp();
-        if (self::$dbConstructed) {
+        if (!self::$dbConstructed) {
             self::$dbConstructed = true;
 
             $m = new Metadata();
@@ -45,7 +45,7 @@ class MetadataTest extends ChessTests
     public function shouldBeAbleToCreateMetadataForAGame()
     {
         // given
-        $m = new MetadataValue('Black');
+        $m = new MetadataValue();
         // when
         $m->setGameid(1);
         $m->setMetadataKey('Black');
@@ -53,11 +53,10 @@ class MetadataTest extends ChessTests
         $m->commit();
         $id = $m->getId();
 
-        $m = new MetadataValue($id);
+        $m = new MetadataValue(1, 'Black');
 
         // then
-        $this->assertEquals($id, $m->getMetadataId());
-
+        $this->assertEquals($id, $m->getId());
     }
 
     /**

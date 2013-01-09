@@ -54,7 +54,7 @@ class PlayerTest extends ChessTests
 
     private function clearUserTable(){
         $player = new Player();
-        if($player->exists())$player->deleteAll();
+        if($player->exists())$player->deleteTableData();
     }
 
 

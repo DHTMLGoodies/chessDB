@@ -9,8 +9,15 @@ class Game extends LudoDbTable
 {
     protected $config = array(
         'table' => 'Game',
+        'queryFields' => 'id',
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
+            'fen_id' => 'int',
+            'fen' => array(
+                'class' => 'Fen',
+                'get' => 'getFen',
+                'fk' => 'fen_id'
+            ),
             'database_id' => 'int',
             'created_by' => 'int',
             'creator' => array(
@@ -29,7 +36,28 @@ class Game extends LudoDbTable
         )
     );
 
-    public function setMetadata($metadataValues){
+    public function setFen($fen){
+        $fenObj = new Fen($fen);
+        $this->setValue('fen_id', $fenObj->getId());
+    }
 
+    public function getFen(){
+        return $this->getValue('fen');
+    }
+
+    public function setMetadata($metadataValues){
+        $this->setValue('metadata', $metadataValues);
+    }
+
+    public function setDatabaseId($databaseId){
+        $this->setValue('database_id', $databaseId);
+    }
+
+    public function getDatabaseId(){
+        return $this->getValue('database_id');
+    }
+
+    public function setMoves($moves){
+        $this->setValue('moves', $moves);
     }
 }

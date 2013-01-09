@@ -2,8 +2,8 @@
 
 class TimeControl extends LudoDbTable
 {
-    protected $tableName = 'Time_Control';
     protected $config = array(
+        'table' => 'Time_Control',
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
             'increment' => 'int default 0',

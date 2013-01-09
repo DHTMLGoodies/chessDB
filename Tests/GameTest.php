@@ -6,6 +6,11 @@
  * Time: 15:29
  * To change this template use File | Settings | File Templates.
  */
+error_reporting(E_ALL);
+ini_set('display_errors','on');
+
+require_once(__DIR__."/../autoload.php");
+
 class GameTest extends ChessTests
 {
     private $gameJSON = '{
@@ -99,5 +104,38 @@ class GameTest extends ChessTests
         ]
     }';
 
+    public function setUp(){
+        parent::setUp();
+        $game = new Game();
+        $game->drop();
+        $game->createTable();
+        $move = new Move();
+        $move->drop();
+        $move->createTable();
+    }
+
+    /**
+     * @test
+     */
+    public function shouldBeAbleToCreateGame(){
+        // given
+        $game = new Game();
+        $game->setDatabaseId(1);
+        $game->commit();
+        $game->setMetadata($this->getMetadataValues());
+        $id = $game->getId();
+
+        // when
+        $newGame = new Game($id);
+
+        // then
+        $this->assertNotNull($id);
+        $this->assertEquals(1, $newGame->getDatabaseId());
+    }
+
+    private function getMetadataValues(){
+        $arr  = json_decode($this->gameJSON, true);
+        return $arr['metadata'];
+    }
 
 }

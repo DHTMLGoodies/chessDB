@@ -46,4 +46,8 @@ class Move extends LudoDbTable
         $this->setValue('comment', $comment);
     }
 
+    public function setNotation($notation){
+        $this->setValue('notation', $notation);
+    }
+
 }

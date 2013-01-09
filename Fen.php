@@ -10,7 +10,7 @@ class Fen extends LudoDbTable
     protected $config = array(
         'table' => 'Fen',
         'idField' => 'id',
-        'lookupField' => 'fen',
+        'queryFields' => 'fen',
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
             'fen' => 'varchar(128)'
@@ -18,16 +18,19 @@ class Fen extends LudoDbTable
         'indexes' => array('fen')
     );
 
-    public function populate($fen){
-        parent::populate($fen);
-        if(!$this->getId()){
-            $this->setFen($fen);
+    public function populate(){
+        if(is_numeric($this->queryValues[0])){
+            $this->config['queryFields'] = 'id';
+        }
+        parent::populate();
+        if(!$this->getId() && !is_numeric($this->queryValues[0])){
+            $this->setFen($this->queryValues[0]);
             $this->commit();
         }
     }
 
-    protected function getValidId($fen){
-        return $this->getFenForStorage($fen);
+    protected function getValidQueryParam($key, $value){
+        return $this->getFenForStorage($value);
     }
 
     private function getFenForStorage($fen){
@@ -39,7 +42,7 @@ class Fen extends LudoDbTable
     }
 
     public function setFen($fen){
-        $this->setValue('fen', $this->getValidId($fen));
+        $this->setValue('fen', $this->getFenForStorage($fen));
     }
 
     public function getFen(){
