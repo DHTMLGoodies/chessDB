@@ -1,0 +1,3 @@
+[submodule "ludoDB"]
+	path = ludoDB
+	url = https://github.com/DHTMLGoodies/ludoDB.git
