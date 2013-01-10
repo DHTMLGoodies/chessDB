@@ -7,13 +7,14 @@
  * To change this template use File | Settings | File Templates.
  */
 error_reporting(E_ALL);
-ini_set('display_errors','on');
+ini_set('display_errors', 'on');
 
-require_once(__DIR__."/../autoload.php");
+require_once(__DIR__ . "/../autoload.php");
 
 class GameTest extends ChessTests
 {
     private $gameJSON = '{
+        "fen":"rnbqkbnr\/pppppppp\/8\/8\/8\/8\/PPPPPPPP\/RNBQKBNR w KQkq - 0 1",
         "metadata":
         {
             "event":"London olm",
@@ -26,7 +27,7 @@ class GameTest extends ChessTests
             "whiteelo":"",
             "blackelo":"",
             "eco":"D35",
-            "fen":"rnbqkbnr\/pppppppp\/8\/8\/8\/8\/PPPPPPPP\/RNBQKBNR w KQkq - 0 1",
+
             "castle":1
         },
         "moves":[
@@ -104,7 +105,8 @@ class GameTest extends ChessTests
         ]
     }';
 
-    public function setUp(){
+    public function setUp()
+    {
         parent::setUp();
         $game = new Game();
         $game->drop();
@@ -112,12 +114,16 @@ class GameTest extends ChessTests
         $move = new Move();
         $move->drop();
         $move->createTable();
+        $fen = new Fen();
+        $fen->drop();
+        $fen->createTable();
     }
 
     /**
      * @test
      */
-    public function shouldBeAbleToCreateGame(){
+    public function shouldBeAbleToCreateGame()
+    {
         // given
         $game = new Game();
         $game->setDatabaseId(1);
@@ -133,9 +139,39 @@ class GameTest extends ChessTests
         $this->assertEquals(1, $newGame->getDatabaseId());
     }
 
-    private function getMetadataValues(){
-        $arr  = json_decode($this->gameJSON, true);
-        return $arr['metadata'];
+    /**
+     * @test
+     */
+    public function shouldBeAbleToSetAndGetFenOnGame(){
+        // given
+        $game = new Game();
+        $fen = "rnbqkbnr\/pppppppp\/8\/8\/8\/8\/PPPPPPPP\/RNBQKBNR w KQkq - 0 1";
+        $expectedFen = $this->getExpectedStorageFen($fen);
+
+        // when
+        $game->setFen($fen);
+        $game->commit();
+        $this->assertEquals(1, $game->getFenId(), "Fen id is numeric before");
+        $this->assertEquals($expectedFen, $game->getFen(), "Fen before");
+
+        $newGame = new Game($game->getId());
+
+        // then
+        $this->assertEquals(1, $newGame->getFenId(), "Fen id is numeric after");
+        $this->assertEquals($expectedFen, $newGame->getFen());
     }
 
+    private function getExpectedStorageFen($fen){
+        $tokens = preg_split("/\s/s", $fen);
+        array_pop($tokens);
+        array_pop($tokens);
+        array_pop($tokens);
+        return implode(" ", $tokens);
+    }
+
+    private function getMetadataValues()
+    {
+        $arr = json_decode($this->gameJSON, true);
+        return $arr['metadata'];
+    }
 }

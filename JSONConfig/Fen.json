@@ -1,0 +1,10 @@
+{
+	"table": "Fen",
+	"idField" : "id",
+	"constructorParams" : "fen",
+	"columns" : {
+		"id": "int auto_increment not null primary key",
+		"fen": "varchar(128)"
+	},
+	"indexes": ["fen"]
+}

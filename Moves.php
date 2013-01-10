@@ -10,7 +10,7 @@ class Moves extends LudoDbCollection
 {
     protected $config = array(
         'table' => 'Move',
-        'queryFields' => 'game_id',
+        'constructorParams' => 'game_id',
         'columns' => array('from_square','to_square','notation','comment')
     );
 
@@ -24,7 +24,7 @@ class Moves extends LudoDbCollection
             if(isset($move['fen']))$m->setFen($move['fen']);
             if(isset($move['comment']))$m->setComment($move['comment']);
 
-            $m->setGame($this->queryValues[0]);
+            $m->setGame($this->constructorValues[0]);
             $m->commit();
         }
     }

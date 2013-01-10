@@ -9,7 +9,7 @@ class MetadataCollection extends LudoDbCollection
 {
     protected $config = array(
         'table' => 'Metadata_Value',
-        'queryFields' => 'game_id',
+        'constructorParams' => 'game_id',
         'columns' => array('metadata_value'),
         'join' => array(
             array(
@@ -34,10 +34,10 @@ class MetadataCollection extends LudoDbCollection
     public function setMetadata($metadataValues){
         $this->deleteRecords();
         foreach($metadataValues as $key=>$value){
-            $m = new MetadataValue($this->queryValues[0], $key);
+            $m = new MetadataValue($this->constructorValues[0], $key);
             $m->setMetadataKey($key);
             $m->setMetadataValue($value);
-            $m->setGameId($this->queryValues[0]);
+            $m->setGameId($this->constructorValues[0]);
             $m->commit();
         }
     }

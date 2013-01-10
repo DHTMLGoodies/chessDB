@@ -7,9 +7,10 @@
  */
 class Game extends LudoDbTable
 {
+    protected $JSONConfig = true;
     protected $config = array(
         'table' => 'Game',
-        'queryFields' => 'id',
+        'constructorParams' => 'id',
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
             'fen_id' => 'int',
@@ -43,6 +44,10 @@ class Game extends LudoDbTable
 
     public function getFen(){
         return $this->getValue('fen');
+    }
+
+    public function getFenId(){
+        return $this->getValue('fen_id');
     }
 
     public function setMetadata($metadataValues){

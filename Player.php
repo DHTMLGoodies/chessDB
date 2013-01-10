@@ -35,8 +35,8 @@ class Player extends LudoDbTable
     public function isValid(){
         $username = $this->getUsername();
         if(!$username)return false;
-        $sql = "select ".$this->getIdField()." from ". $this->getTableName()." where username='". $this->getUsername()."'";
-        if($this->getId())$sql.=" and ". $this->getIdField()." <> '".$this->getId()."'";
+        $sql = "select ".$this->configParser()->getIdField()." from ". $this->configParser()->getTableName()." where username='". $this->getUsername()."'";
+        if($this->getId())$sql.=" and ". $this->configParser()->getIdField()." <> '".$this->getId()."'";
         return $this->db->countRows($sql) === 0;
     }
 }

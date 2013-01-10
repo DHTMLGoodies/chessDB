@@ -7,24 +7,15 @@
  */
 class Fen extends LudoDbTable
 {
-    protected $config = array(
-        'table' => 'Fen',
-        'idField' => 'id',
-        'queryFields' => 'fen',
-        'columns' => array(
-            'id' => 'int auto_increment not null primary key',
-            'fen' => 'varchar(128)'
-        ),
-        'indexes' => array('fen')
-    );
+    protected $JSONConfig = true;
 
     public function populate(){
-        if(is_numeric($this->queryValues[0])){
-            $this->config['queryFields'] = 'id';
+        if(is_numeric($this->constructorValues[0])){
+            $this->configParser()->setConstructorParams('id');
         }
         parent::populate();
-        if(!$this->getId() && !is_numeric($this->queryValues[0])){
-            $this->setFen($this->queryValues[0]);
+        if(!$this->getId() && !is_numeric($this->constructorValues[0])){
+            $this->setFen($this->constructorValues[0]);
             $this->commit();
         }
     }
@@ -36,6 +27,7 @@ class Fen extends LudoDbTable
     private function getFenForStorage($fen){
         if(!is_numeric($fen)){
             $fen = explode(" ", $fen);
+            if(count($fen)<3)$this->db->log(json_encode($this->constructorValues));
             return $fen[0]." ". $fen[1]." ". $fen[2];
         }
         return $fen;
