@@ -1,6 +1,6 @@
 <?php
 
-class TimeControl extends LudoDbTable
+class TimeControl extends LudoDBTable
 {
     protected $config = array(
         'table' => 'Time_Control',

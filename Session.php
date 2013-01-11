@@ -6,7 +6,7 @@
  * Time: 21:20
  * To change this template use File | Settings | File Templates.
  */
-class Session extends LudoDbTable
+class Session extends LudoDBTable
 {
     protected $config = array(
         'table' => 'Session',

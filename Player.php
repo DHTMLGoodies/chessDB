@@ -1,6 +1,6 @@
 <?php
 
-class Player extends LudoDbTable
+class Player extends LudoDBTable
 {
     protected $config = array(
         'table' => 'Player',

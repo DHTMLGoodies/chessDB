@@ -1,6 +1,6 @@
 <?php
 
-class Seek extends LudoDbTable
+class Seek extends LudoDBTable
 {
     protected $config = array(
         'table' => 'Seek',

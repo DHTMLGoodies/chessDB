@@ -5,7 +5,7 @@
  * Date: 23.12.12
  * Time: 20:52
  */
-class Move extends LudoDbTable
+class Move extends LudoDBTable
 {
     protected $config = array(
         'table' => 'Move',

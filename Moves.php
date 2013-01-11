@@ -6,7 +6,7 @@
  * Time: 12:33
  * To change this template use File | Settings | File Templates.
  */
-class Moves extends LudoDbCollection
+class Moves extends LudoDBCollection
 {
     protected $config = array(
         'table' => 'Move',

@@ -5,7 +5,7 @@
  * Date: 23.12.12
  * Time: 20:05
  */
-class Metadata extends LudoDbTable
+class Metadata extends LudoDBTable
 {
     protected $config = array(
         'table' => 'Metadata',
