@@ -8,6 +8,7 @@ spl_autoload_register(
         if ($classes === null) {
             $classes = array(
                 'accessortest' => '/ludoDB/Tests/AccessorTest.php',
+                'brand' => '/ludoDB/Tests/classes/Brand.php',
                 'car' => '/ludoDB/Tests/classes/Car.php',
                 'carcollection' => '/ludoDB/Tests/classes/CarCollection.php',
                 'carproperties' => '/ludoDB/Tests/classes/CarProperties.php',
@@ -19,7 +20,6 @@ spl_autoload_register(
                 'configparsertest' => '/ludoDB/Tests/ConfigParserTest.php',
                 'configparsertestjson' => '/ludoDB/Tests/ConfigParserTestJSON.php',
                 'country' => '/ludoDB/Tests/classes/Country.php',
-                'dbtest' => '/ludoDB/Tests/DBTest.php',
                 'fen' => '/Fen.php',
                 'fentest' => '/Tests/FenTest.php',
                 'findertest' => '/ludoDB/Tests/FinderTest.php',
@@ -34,6 +34,7 @@ spl_autoload_register(
                 'ludodbobject' => '/ludoDB/LudoDBObject.php',
                 'ludodbregistry' => '/ludoDB/LudoDBRegistry.php',
                 'ludodbtable' => '/ludoDB/LudoDBTable.php',
+                'ludodbtabletests' => '/ludoDB/Tests/LudoDBTableTests.php',
                 'ludofinder' => '/ludoDB/LudoFinder.php',
                 'ludosql' => '/ludoDB/LudoSQL.php',
                 'manager' => '/ludoDB/Tests/classes/Manager.php',
@@ -43,6 +44,9 @@ spl_autoload_register(
                 'metadatavalue' => '/MetadataValue.php',
                 'move' => '/Move.php',
                 'moves' => '/Moves.php',
+                'movesold' => '/Moves-old.php',
+                'mysqltests' => '/ludoDB/Tests/MysqlTests.php',
+                'objectcreatortest' => '/ludoDB/Tests/ObjectCreatorTest.php',
                 'person' => '/ludoDB/Tests/classes/Person.php',
                 'personforconfigparser' => '/ludoDB/Tests/classes/PersonForConfigParser.php',
                 'phone' => '/ludoDB/Tests/classes/Phone.php',

@@ -145,7 +145,7 @@ class GameTest extends ChessTests
     public function shouldBeAbleToSetAndGetFenOnGame(){
         // given
         $game = new Game();
-        $fen = "rnbqkbnr\/pppppppp\/8\/8\/8\/8\/PPPPPPPP\/RNBQKBNR w KQkq - 0 1";
+        $fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
         $expectedFen = $this->getExpectedStorageFen($fen);
 
         // when

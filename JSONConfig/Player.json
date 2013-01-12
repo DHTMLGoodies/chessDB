@@ -1,0 +1,29 @@
+{
+    "table": "Player",
+    "columns": {
+        "id": "int auto_increment not null primary key",
+        "username": {
+            "db": "varchar(64) unique",
+            "access": "rw",
+            "canConstructBy": true
+        },
+        "password": {
+            "db": "varchar(128)",
+            "access": "rw",
+            "canConstructBy": true
+        },
+        "online_player": {
+            "db": "char(1)"
+        },
+        "country": {
+            "db": "int"
+        },
+        "active": {
+            "db": "int"
+        },
+        "user_access": {
+            "db": "bit(64)"
+        },
+        "indexes": ["country", "active", "online_player"]
+    }
+}
