@@ -1,37 +1,41 @@
 {
-	"table": "Game",
-	"constructorParams": "id",
-	"columns": {
-		"id" : "int auto_increment not null primary key",
-		"fen_id": {
-			"db": "int"
+	"table":"Game",
+	"constructorParams":"id",
+	"columns":{
+		"id":"int auto_increment not null primary key",
+		"fen_id":{
+			"db":"int"
 		},
 		"fen":{
-			"class": "Fen",
-			"get": "getFen",
-			"fk": "fen_id"
+			"class":"Fen",
+			"get":"getFen",
+			"fk":"fen_id"
 		},
-		"database_id": {
-			"db": "int",
-			"access": "rw"
-		},
-		"created_by" : {
-			"db": "int",
+		"database_id":{
+			"db":"int",
 			"access":"rw"
 		},
-		"creator": {
+		"created_by":{
+			"db":"int",
+			"access":"rw"
+		},
+		"creator":{
 			"class":"Player",
-			"fk": "created_by",
-			"get": "getFullName"
+			"fk":"created_by",
+			"get":"getFullName"
 		},
-		"metadata": {
-			"class": "MetadataCollection",
-			"set": "setMetadata"
+		"result":{
+			"db":"varchar(64) default '*'",
+			"access":"rw"
 		},
-		"moves": {
-			"class": "moves",
-			"set": "setMoves"
+		"metadata":{
+			"class":"MetadataCollection",
+			"set":"setMetadata"
+		},
+		"moves":{
+			"class":"moves",
+			"set":"setMoves"
 		}
 	},
-	"indexes": ["database_id","created_by"]
+	"indexes":["database_id", "created_by"]
 }

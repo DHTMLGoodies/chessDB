@@ -7,6 +7,7 @@
  */
 class Move extends LudoDBTable
 {
+    protected $JSONConfig = true;
     protected $config = array(
         'table' => 'Move',
         'columns' => array(
@@ -30,24 +31,4 @@ class Move extends LudoDBTable
     public function setGame($id){
         $this->setValue('game_id', $id);
     }
-
-    public function setFrom($from){
-        $this->setValue('from_square', $from);
-    }
-
-    public function setTo($to){
-        $this->setValue('to_square', $to);
-    }
-    public function setParentMove($id){
-        $this->setValue('parent_move_id', $id);
-    }
-
-    public function setComment($comment){
-        $this->setValue('comment', $comment);
-    }
-
-    public function setNotation($notation){
-        $this->setValue('notation', $notation);
-    }
-
 }

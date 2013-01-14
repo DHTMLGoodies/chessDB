@@ -8,22 +8,14 @@
  */
 class Moves extends LudoDBCollection
 {
-    protected $config = array(
-        'table' => 'Move',
-        'constructorParams' => 'game_id',
-        'columns' => array('from_square','to_square','notation','comment')
-    );
+    protected $JSONConfig = true;
 
     public function setMoves($moves){
         $this->deleteRecords();
         foreach($moves as $move){
             $m = new Move();
-            if(isset($move['from']))$m->setFrom($move['from']);
-            if(isset($move['to']))$m->setTo($move['to']);
-            if(isset($move['m']))$m->setNotation($move['m']);
+            $m->setValues($move);
             if(isset($move['fen']))$m->setFen($move['fen']);
-            if(isset($move['comment']))$m->setComment($move['comment']);
-
             $m->setGame($this->constructorValues[0]);
             $m->commit();
         }

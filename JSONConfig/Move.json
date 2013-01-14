@@ -1,0 +1,42 @@
+{
+	"table": "Move",
+	"columns": {
+		"id": "int auto_increment not null primary key",
+		"game_id": {
+			"db": "int",
+			"access": "rw"
+		},
+		"notation": {
+			"db": "varchar(32)",
+			"access": "rw",
+			"alias": "m"
+		},
+		"from_square": {
+			"db": "varchar(15)",
+			"access": "rw",
+			"alias": "from"
+		},
+		"to_square": {
+			"db": "varchar(15)",
+			"access": "rw",
+			"alias": "to"
+		},
+		"fen_id": {
+			"db": "int",
+			"access": "rw"
+		},
+		"parent_move_id": {
+			"db": "int",
+			"access": "rw"
+		},
+		"comment": {
+			"db": "text",
+			"access": "rw"
+		},
+		"action": {
+			"db": "varchar(512)",
+			"access": "rw"
+		}
+	},
+	"indexes": ["game_id", "fen_id"]
+}
