@@ -5,14 +5,11 @@
  * Date: 19.12.12
  * Time: 22:42
  */
-class PlayerFinder extends LudoFinder
+class PlayerFinder
 {
-
-    public function __construct(){
-        parent::__construct(new Player());
-    }
     public function byUserNameAndPassword($username, $password)
     {
-        return $this->where('username', $username)->where('password', md5($password))->find();
+        $player = new Player();
+        return $player->where('username')->equals($username)->where('password')->equals(md5($password))->create();
     }
 }

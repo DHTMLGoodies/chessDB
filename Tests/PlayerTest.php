@@ -11,8 +11,12 @@ require_once(__DIR__."/../autoload.php");
 class PlayerTest extends ChessTests
 {
     public function setUp(){
+
         parent::setUp();
-        $this->clearUserTable();
+
+        $player = new Player();
+        $player->drop();
+        $player->createTable();
     }
 
     /**
@@ -27,7 +31,6 @@ class PlayerTest extends ChessTests
         // then
         $this->assertNull($secondUser->getId());
         $this->assertFalse($secondUser->isValid());
-
     }
 
     /**
@@ -41,21 +44,10 @@ class PlayerTest extends ChessTests
         $finder = new PlayerFinder();
         $user = $finder->byUserNameAndPassword('user1','pass1');
 
+
         // then
+        $this->assertEquals(1, $user->getId());
         $this->assertEquals('user1', $user->getUsername());
         $this->assertEquals(md5('pass1'), $user->getPassword());
     }
-
-    public function shouldBeAbleToFindPlayerBySession(){
-        // given
-        $user = $this->createUser('user','pass');
-
-    }
-
-    private function clearUserTable(){
-        $player = new Player();
-        if($player->exists())$player->deleteTableData();
-    }
-
-
 }

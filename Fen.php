@@ -9,9 +9,9 @@ class Fen extends LudoDBTable
 {
     protected $JSONConfig = true;
 
-    public function populate(){
+    protected function populate(){
         if(is_numeric($this->constructorValues[0])){
-            $this->configParser()->setConstructorParams('id');
+            $this->configParser()->setConstructorParams(array('id'));
         }
         parent::populate();
         if(!$this->getId() && !is_numeric($this->constructorValues[0])){
