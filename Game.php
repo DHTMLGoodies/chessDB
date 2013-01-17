@@ -10,7 +10,7 @@ class Game extends LudoDBTable
     protected $JSONConfig = true;
     protected $config = array(
         'table' => 'Game',
-        'constructorParams' => 'id',
+        'constructBy' => 'id',
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
             'fen_id' => 'int',

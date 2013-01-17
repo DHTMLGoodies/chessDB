@@ -1,6 +1,6 @@
 {
 	"table":"Game",
-	"constructorParams":"id",
+	"constructBy":"id",
 	"columns":{
 		"id":"int auto_increment not null primary key",
 		"fen_id":{

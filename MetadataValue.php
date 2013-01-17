@@ -10,7 +10,7 @@ class MetadataValue extends LudoDBTable
     protected $config = array(
         'table' => 'Metadata_Value',
         'idField' => 'id',
-        'constructorParams' => array('game_id','Metadata.metadata_key'),
+        'constructBy' => array('game_id','Metadata.metadata_key'),
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
             'game_id' => 'int',

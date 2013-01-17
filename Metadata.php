@@ -9,7 +9,7 @@ class Metadata extends LudoDBTable
 {
     protected $config = array(
         'table' => 'Metadata',
-        'constructorParams' => array('metadata_key'),
+        'constructBy' => array('metadata_key'),
         'columns' => array(
             'id' => 'int auto_increment not null primary key',
             'metadata_key' => 'varchar(255)'

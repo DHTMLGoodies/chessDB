@@ -11,7 +11,7 @@ class Fen extends LudoDBTable
 
     protected function populate(){
         if(is_numeric($this->constructorValues[0])){
-            $this->configParser()->setConstructorParams(array('id'));
+            $this->configParser()->setConstructBy(array('id'));
         }
         parent::populate();
         if(!$this->getId() && !is_numeric($this->constructorValues[0])){
