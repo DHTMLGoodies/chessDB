@@ -20,7 +20,7 @@ class Fen extends LudoDBTable
         }
     }
 
-    protected function getValidQueryParam($key, $value){
+    protected function getValidConstructByValue($key, $value){
         return $this->getFenForStorage($value);
     }
 
