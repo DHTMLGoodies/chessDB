@@ -48,6 +48,8 @@ spl_autoload_register(
                 'moves' => '/Moves.php',
                 'mysqltests' => '/ludoDB/Tests/MysqlTests.php',
                 'objectcreatortest' => '/ludoDB/Tests/ObjectCreatorTest.php',
+                'people' => '/ludoDB/Tests/classes/People.php',
+                'peopleplain' => '/ludoDB/Tests/classes/PeoplePlain.php',
                 'performancetest' => '/ludoDB/Tests/PerformanceTest.php',
                 'person' => '/ludoDB/Tests/classes/Person.php',
                 'personforconfigparser' => '/ludoDB/Tests/classes/PersonForConfigParser.php',
