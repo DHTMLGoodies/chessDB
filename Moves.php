@@ -20,4 +20,13 @@ class Moves extends LudoDBCollection
             $m->commit();
         }
     }
+
+    /**
+     * @param LudoDBTable $model
+     * @param array $columns
+     * @return array
+     */
+    protected function getValuesFromModel($model, $columns){
+        return $model->getSomeValuesFiltered($columns);
+    }
 }

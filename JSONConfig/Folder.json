@@ -1,0 +1,15 @@
+{
+	"table": "Folder",
+	"columns": {
+		"id": {
+			"db": "int auto_increment not null primary key"
+		},
+		"title": {
+			"db": "varchar(256)",
+			"access": "rw"
+		},
+		"parent": {
+			"db": "int"
+		}
+	}
+}
