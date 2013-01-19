@@ -174,4 +174,10 @@ class GameTest extends ChessTests
         $arr = json_decode($this->gameJSON, true);
         return $arr['metadata'];
     }
+
+    private function getGameWithVariation(){
+        $parser = new PgnParser("pgn/test.pgn");
+        $games = $parser->getGames();
+        return $games[0];
+    }
 }

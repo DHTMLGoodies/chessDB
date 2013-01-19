@@ -8,20 +8,6 @@
 class Move extends LudoDBTable
 {
     protected $JSONConfig = true;
-    protected $config = array(
-        'table' => 'Move',
-        'columns' => array(
-            'id' => 'int auto_increment not null primary key',
-            'game_id' => 'int',
-            'notation' => 'varchar(32)',
-            'from_square' => 'varchar(10)',
-            'to_square' => 'varchar(10)',
-            'fen_id' => 'int',
-            'parent_move_id' => 'int',
-            'comment' => 'text'
-        ),
-        'indexes' => array('game_id','fen_id')
-    );
 
     public function setFen($fen){
         $fen = new Fen($fen);
@@ -30,5 +16,9 @@ class Move extends LudoDBTable
 
     public function setGame($id){
         $this->setValue('game_id', $id);
+    }
+
+    public function setParentMoveId($id){
+        $this->setValue('parent_move_id', $id);
     }
 }

@@ -1,0 +1,22 @@
+[Event "Computer chess game"]
+[Site "BORROW-PC"]
+[Date "2013.01.19"]
+[Round "?"]
+[White "borrow"]
+[Black "borrow"]
+[Result "*"]
+[BlackElo "2400"]
+[ECO "C55"]
+[Opening "Two Knights"]
+[Time "10:41:37"]
+[Variation "Deutz Gambit"]
+[WhiteElo "2400"]
+[TimeControl "300"]
+[Termination "unterminated"]
+[PlyCount "7"]
+[WhiteType "human"]
+[BlackType "human"]
+
+1. e4 d5 (1. .. e5 {Test comment before} 2. Nf3 {Test comment after} Nc6 3.
+Bc4 Nf6 4. O-O d6!) 2. exd5 Nf6 3. c4 Bf5 4. Nf3 *
+
