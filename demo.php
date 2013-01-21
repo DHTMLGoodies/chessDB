@@ -8,7 +8,9 @@
  */
 
 require_once("autoload.php");
-LudoDB::enableLogging();
+require_once("../Profiling.php");
+ini_set('display_errors','on');
+
 $gameJSON = '{
             "fen":"rnbqkbnr\/pppppppp\/8\/8\/8\/8\/PPPPPPPP\/RNBQKBNR w KQkq - 0 1",
             "metadata":
@@ -102,8 +104,9 @@ $gameJSON = '{
 
 
 ini_set('display_errors', 'on');
+error_reporting(E_ALL);
 date_default_timezone_set("Europe/Berlin");
-header("Content-type: application/json");
+# header("Content-type: application/json");
 
 LudoDB::setHost('localhost');
 LudoDB::setUser('root');
@@ -118,13 +121,23 @@ foreach($tables as $table){
     $inst->createTable();
 }
 
-$gameData = json_decode($gameJSON, true);
-$game = new Game();
-$game->setDatabaseId(100);
-$game->setFen($gameData['fen']);
-$game->setMetadata($gameData['metadata']);
-$game->setMoves($gameData['moves']);
-$game->commit();
+$profiling = new Profiling('smart-folder-tree');
 
-$game = new Game($game->getId());
+$gameData = json_decode($gameJSON, true);
+LudoDB::enableLogging();
+
+for($i=0;$i<20;$i++){
+    $game = new Game();
+    $game->setDatabaseId(100);
+    $game->setFen($gameData['fen']);
+    $game->setMetadata($gameData['metadata']);
+    $game->setMoves($gameData['moves']);
+    $game->commit();
+
+    $game = new Game($game->getId());
+    $data = $game->getValues();
+}
+echo $profiling->end();
+
 echo $game;
+

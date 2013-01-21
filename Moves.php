@@ -27,7 +27,8 @@ class Moves extends LudoDBCollection
     }
 
     private function addMove($move, $parentId = 0){
-        $m = new Move();
+        $m = $this->parser->getModel();
+
         $m->setValues($move);
         if(isset($move['fen']))$m->setFen($move['fen']);
         $m->setGame($this->constructorValues[0]);

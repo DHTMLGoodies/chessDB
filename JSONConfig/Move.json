@@ -29,6 +29,10 @@
 			"db": "int",
 			"access": "rw"
 		},
+		"v_index": {
+			"db": "int default 0",
+			"access": "rw"
+		},
 		"comment": {
 			"db": "text",
 			"access": "rw"
