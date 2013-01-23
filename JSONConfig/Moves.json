@@ -1,5 +1,5 @@
 {
 	"model": "Move",
-	"constructBy": ["game_id","parent_move_id"],
-	"columns": ["from_square", "to_square", "notation", "comment"]
+	"constructBy": ["game_id"],
+	"columns": ["from_square", "to_square", "notation", "comment","action", "start_variation", "end_variation"]
 }

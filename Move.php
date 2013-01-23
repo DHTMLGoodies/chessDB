@@ -21,4 +21,11 @@ class Move extends LudoDBTable
     public function setParentMoveId($id){
         $this->setValue('parent_move_id', $id);
     }
+
+    public function startVariation(){
+        $this->setValue('start_variation', '1');
+    }
+    public function endVariation(){
+        $this->setValue('end_variation', '1');
+    }
 }

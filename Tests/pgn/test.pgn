@@ -6,17 +6,44 @@
 [Black "borrow"]
 [Result "*"]
 [BlackElo "2400"]
-[ECO "C55"]
-[Opening "Two Knights"]
+[ECO "D90"]
+[Opening "Grunfeld"]
 [Time "10:41:37"]
-[Variation "Deutz Gambit"]
+[Variation "Three Knights Variation"]
 [WhiteElo "2400"]
 [TimeControl "300"]
 [Termination "unterminated"]
-[PlyCount "7"]
+[PlyCount "21"]
 [WhiteType "human"]
 [BlackType "human"]
 
 1. e4 d5 (1. .. e5 {Test comment before} 2. Nf3 {Test comment after} Nc6 3.
-Bc4 Nf6 4. O-O d6!) 2. exd5 Nf6 3. c4 Bf5 4. Nf3 *
+Bc4 Nf6 (3. .. d6 4. O-O {(O-O Ng8-f6 Nb1-c3 Nc6-d4 Nf3-g5 d6-d5 e4xd5
+h7-h6 Ng5-e4 c7-c6 d5xc6 Nf6xe4 Nc3xe4 b7xc6) +0.48/11 8} Nf6 5. Nc3 {Last
+move in variation}) 4. O-O {Variation ended} d6) 2. exd5 {Variation ended}
+Nf6 3. c4 (3. Nf3?! Qxd5 4. Nc3 Qa5 5. d4) 3. .. Bf5 {Variation ended} (3.
+.. Nbd7 4. Nf3 Nb6 5. d4 g6 6. Nc3 Qd6) 4. Nf3 Nbd7 5. Be2 e6 6. dxe6 fxe6
+7. O-O Bc5 8. d4 Be7 9. Nc3 O-O 10. Ng5 {Why did you make this stupid move
+? :)} h6 11. Nf3 *
+
+[Event "Computer chess game"]
+[Site "ALFMAGNE-PC"]
+[Date "2013.01.23"]
+[Round "?"]
+[White "Alf Magne"]
+[Black "Alf Magne"]
+[Result "*"]
+[BlackElo "2400"]
+[ECO "C70"]
+[Opening "Spanish"]
+[Time "17:03:12"]
+[Variation "Caro Variation"]
+[WhiteElo "2400"]
+[TimeControl "300"]
+[Termination "unterminated"]
+[PlyCount "9"]
+[WhiteType "human"]
+[BlackType "human"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 (3. Bc4) 3. .. a6 4. Ba4 d6 (4. .. b5) 5. O-O *
 

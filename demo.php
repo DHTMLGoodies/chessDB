@@ -8,6 +8,8 @@
  */
 
 require_once("autoload.php");
+require_once("../parser/Board0x88Config.php");
+require_once("../parser/FenParser0x88.php");
 require_once("../Profiling.php");
 ini_set('display_errors','on');
 
@@ -126,7 +128,7 @@ $profiling = new Profiling('smart-folder-tree');
 $gameData = json_decode($gameJSON, true);
 LudoDB::enableLogging();
 
-for($i=0;$i<20;$i++){
+for($i=0;$i<1;$i++){
     $game = new Game();
     $game->setDatabaseId(100);
     $game->setFen($gameData['fen']);
@@ -134,10 +136,10 @@ for($i=0;$i<20;$i++){
     $game->setMoves($gameData['moves']);
     $game->commit();
 
-    $game = new Game($game->getId());
-    $data = $game->getValues();
+   # $game = new Game($game->getId());
+    #$data = $game->getValues();
 }
 echo $profiling->end();
 
-echo $game;
+# echo $game;
 

@@ -21,16 +21,16 @@
 			"access": "rw",
 			"alias": "to"
 		},
+		"start_variation": {
+			"db": "char(1) default 0",
+			"access": "rw"
+		},
+		"end_variation": {
+			"db": "char(1) default 0",
+			"access": "rw"
+		},
 		"fen_id": {
 			"db": "int",
-			"access": "rw"
-		},
-		"parent_move_id": {
-			"db": "int",
-			"access": "rw"
-		},
-		"v_index": {
-			"db": "int default 0",
 			"access": "rw"
 		},
 		"comment": {
