@@ -108,7 +108,7 @@ $gameJSON = '{
 ini_set('display_errors', 'on');
 error_reporting(E_ALL);
 date_default_timezone_set("Europe/Berlin");
-# header("Content-type: application/json");
+header("Content-type: application/json");
 
 LudoDB::setHost('localhost');
 LudoDB::setUser('root');
@@ -123,23 +123,21 @@ foreach($tables as $table){
     $inst->createTable();
 }
 
-$profiling = new Profiling('smart-folder-tree');
+
 
 $gameData = json_decode($gameJSON, true);
 LudoDB::enableLogging();
 
-for($i=0;$i<1;$i++){
-    $game = new Game();
-    $game->setDatabaseId(100);
-    $game->setFen($gameData['fen']);
-    $game->setMetadata($gameData['metadata']);
-    $game->setMoves($gameData['moves']);
-    $game->commit();
 
-   # $game = new Game($game->getId());
-    #$data = $game->getValues();
-}
-echo $profiling->end();
+$game = new Game();
+$game->setDatabaseId(100);
+$game->setFen($gameData['fen']);
+$game->setMetadata($gameData['metadata']);
+$game->setMoves($gameData['moves']);
+$game->commit();
+
+
+echo $game;
 
 # echo $game;
 

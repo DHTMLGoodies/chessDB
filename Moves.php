@@ -1,10 +1,9 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
+ * Moves collection
  * User: Alf Magne
  * Date: 09.01.13
  * Time: 12:33
- * To change this template use File | Settings | File Templates.
  */
 class Moves extends LudoDBCollection
 {
@@ -91,55 +90,55 @@ class Moves extends LudoDBCollection
     private $currentBranch;
     private $lastMove;
     private $branches = array();
+
     public function getValues()
     {
         $this->values = array();
-        $this->currentBranch = &$this->values;
+        $this->currentBranch = & $this->values;
         $model = $this->parser->getModel();
         $model->disableCommit();
 
-        $columns = array('from_square','to_square','notation','comment');
-        foreach ($this as $value) {
-            if (!isset($columns)) $columns = array_keys($value);
-            if (isset($value)) {
-                $model->clearValues();
-                $model->setValues($value);
+        $columns = array('from_square', 'to_square', 'notation', 'comment');
 
-                $moveValues = $this->getValuesFromModel($model, $columns);
-                if($value['start_variation']){
-                    $this->startBranch();
-                }
-                if($value['end_variation']){
-                    $this->endBranch();
-                }
+        foreach ($this as $move) {
+            if (!isset($columns)) $columns = array_keys($move);
+            $model->clearValues();
+            $model->setValues($move);
 
-                $this->appendMoveToValues($moveValues);
-
-
+            $moveValues = $this->getValuesFromModel($model, $columns);
+            if ($move['start_variation']) {
+                $this->startBranch();
             }
+            if ($move['end_variation']) {
+                $this->endBranch();
+            }
+            $this->appendMoveToValues($moveValues);
         }
         $model->enableCommit();
         return $this->values;
     }
 
-    private function appendMoveToValues($move){
-        $this->currentBranch[] = &$move;
-        $this->lastMove = &$move;
+    private function appendMoveToValues($move)
+    {
+        $this->currentBranch[] = & $move;
+        $this->lastMove = & $move;
     }
 
-    private function startBranch(){
-        if(!isset($this->lastMove['variations'])){
+    private function startBranch()
+    {
+        if (!isset($this->lastMove['variations'])) {
             $this->lastMove['variations'] = array();
         }
         $variation = array();
-        $this->lastMove['variations'][] = &$variation;
-        $this->currentBranch = &$variation;
-        $this->branches[] = &$variation;
+        $this->lastMove['variations'][] = & $variation;
+        $this->currentBranch = & $variation;
+        $this->branches[] = & $variation;
     }
 
-    private function endBranch(){
+    private function endBranch()
+    {
         array_pop($this->branches);
-        $this->currentBranch = &$this->branches[count($this->branches)-1];
-        if(!isset($this->currentBranch))$this->currentBranch = &$this->values;
+        $this->currentBranch = & $this->branches[count($this->branches) - 1];
+        if (!isset($this->currentBranch)) $this->currentBranch = & $this->values;
     }
 }
