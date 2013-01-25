@@ -10,6 +10,9 @@ class Chat extends LudoDBTable
 {
     protected $JSONConfig = true;
 
+    public function setChannel($channel){
+        $this->setValue('channel', $channel);
+    }
     public function addMessage($message, $by){
         if(!$this->getId())$this->commit();
         $m = new ChatMessage();
