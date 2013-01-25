@@ -1,0 +1,16 @@
+{
+	"table": "Chat",
+	"columns": {
+		"id" : {
+			"db": "int auto_increment not null primary key"
+		},
+		"channel": {
+			"db": "varchar(64) unique",
+			"access": "rw"
+		},
+		"created": {
+			"db": "datetime",
+			"access": "rw"
+		}
+	}
+}

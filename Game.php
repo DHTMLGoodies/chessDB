@@ -46,6 +46,10 @@ class Game extends LudoDBTable
         return $ret;
     }
 
+    /**
+     * Return last fen position in game or start position.
+     * @return String
+     */
     public function getCurrentFen(){
         return $this->gameParser()->getFen();
     }
@@ -62,6 +66,11 @@ class Game extends LudoDBTable
         return $this->fenParser;
     }
 
+    /**
+     * Append new move to the game
+     * @param $move
+     * @return Array
+     */
     public function appendMove($move){
         if(!$this->getId())$this->commit();
         $move = $this->gameParser()->getParsed($move);
@@ -70,7 +79,6 @@ class Game extends LudoDBTable
         $m = new Move();
         $m->setValues($move);
         $m->commit();
-
         return $move;
     }
 }
