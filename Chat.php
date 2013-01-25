@@ -9,4 +9,13 @@
 class Chat extends LudoDBTable
 {
     protected $JSONConfig = true;
+
+    public function addMessage($message, $by){
+        if(!$this->getId())$this->commit();
+        $m = new ChatMessage();
+        $m->setChat($this);
+        $m->setMessage($message);
+        $m->setByUser($by);
+        $m->commit();
+    }
 }
