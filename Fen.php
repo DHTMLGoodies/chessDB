@@ -40,4 +40,9 @@ class Fen extends LudoDBTable
     public function getFen(){
         return $this->getValue('fen');
     }
+
+    public static function getIdByFen($fen){
+        $fen = new Fen($fen);
+        return $fen->getId();
+    }
 }

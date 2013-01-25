@@ -4,6 +4,7 @@ class ChessTests extends PHPUnit_Framework_TestCase
 {
     private $connected = false;
     private static $logCleared = false;
+
     public function setUp(){
         if(!$this->connected){
             LudoDB::setHost('localhost');

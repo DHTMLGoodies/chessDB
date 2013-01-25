@@ -8,42 +8,16 @@
 class Game extends LudoDBTable
 {
     protected $JSONConfig = true;
-    protected $config = array(
-        'table' => 'Game',
-        'constructBy' => 'id',
-        'columns' => array(
-            'id' => 'int auto_increment not null primary key',
-            'fen_id' => 'int',
-            'fen' => array(
-                'class' => 'Fen',
-                'get' => 'getFen',
-                'fk' => 'fen_id'
-            ),
-            'database_id' => 'int',
-            'created_by' => 'int',
-            'creator' => array(
-                'class' => 'Player',
-                'fk' => 'created_by',
-                'method' => 'getFullName'
-            ),
-            'metadata' => array(
-                'class' => 'MetadataCollection',
-                'set' => 'setMetadata'
-            ),
-            'moves' => array(
-                'class' => 'Moves',
-                'set' => 'setMoves'
-            )
-        )
-    );
 
     public function setFen($fen){
-        $fenObj = new Fen($fen);
-        $this->setValue('fen_id', $fenObj->getId());
+        $this->setValue('fen_id', Fen::getIdByFen($fen));
     }
 
     public function getFen(){
-        return $this->getValue('fen');
+        if($this->getId() && $this->getValue('fen_id')){
+            return $this->getValue('fen');
+        }
+        return 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
     }
 
     public function getFenId(){
@@ -64,5 +38,39 @@ class Game extends LudoDBTable
 
     public function setMoves($moves){
         $this->setValue('moves', $moves);
+    }
+
+    public function getMoves(){
+        $ret = $this->getValue('moves');
+        if(!isset($ret))$ret = array();
+        return $ret;
+    }
+
+    public function getCurrentFen(){
+        return $this->gameParser()->getFen();
+    }
+
+    private $fenParser;
+    private function gameParser(){
+        if(!isset($this->fenParser)){
+            $this->fenParser = new FenParser0x88($this->getFen());
+            $moves = $this->getMoves();
+            foreach($moves as $move){
+                $this->fenParser->makeMove($move);
+            }
+        }
+        return $this->fenParser;
+    }
+
+    public function appendMove($move){
+        if(!$this->getId())$this->commit();
+        $move = $this->gameParser()->getParsed($move);
+        $move['game_id'] = $this->getId();
+        $move['fen_id'] = Fen::getIdByFen($move['fen']);
+        $m = new Move();
+        $m->setValues($move);
+        $m->commit();
+
+        return $move;
     }
 }
