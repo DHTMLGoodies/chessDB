@@ -76,7 +76,7 @@ class Moves extends LudoDBCollection
     }
 
     /**
-     * @param LudoDBTable $model
+     * @param LudoDBModel $model
      * @param array $columns
      * @return array
      */

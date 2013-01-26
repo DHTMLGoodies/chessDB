@@ -5,7 +5,7 @@
  * Date: 25.01.13
  * Time: 23:33
  */
-class ChatMessage extends LudoDBTable
+class ChatMessage extends LudoDBModel
 {
     protected $JSONConfig = true;
 

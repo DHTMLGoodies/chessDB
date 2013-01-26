@@ -20,6 +20,7 @@ class AllTests
         $suite->addTestSuite("PlayerTest");
         $suite->addTestSuite("SeekTest");
         $suite->addTestSuite("SessionTest");
+        $suite->addTestSuite("ChatTests");
         return $suite;
     }
 }
