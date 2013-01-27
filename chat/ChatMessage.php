@@ -12,4 +12,12 @@ class ChatMessage extends LudoDBModel
     public function setChat(Chat $chat){
         $this->setValue('chat', $chat->getId());
     }
+
+    public function setMessage($message){
+        $this->setValue('message', $message);
+    }
+
+    public function setByUser($userId){
+        $this->setValue('by_user', $userId);
+    }
 }
