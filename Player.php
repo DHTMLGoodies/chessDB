@@ -26,6 +26,10 @@ class Player extends LudoDBModel
         return $this->db->countRows($sql) === 0;
     }
 
+    public function setUsername($username){
+        $this->setValue('username', $username);
+    }
+
     private function getUsername(){
         return $this->getValue('username');
     }
