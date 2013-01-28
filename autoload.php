@@ -17,6 +17,7 @@ spl_autoload_register(
                 'chatmessage' => '/chat/ChatMessage.php',
                 'chatmessages' => '/chat/ChatMessages.php',
                 'chesstests' => '/Tests/ChessTests.php',
+                'cities' => '/ludoDB/Tests/classes/JSONCaching/Cities.php',
                 'city' => '/ludoDB/Tests/classes/City.php',
                 'client' => '/ludoDB/Tests/classes/Client.php',
                 'collectiontest' => '/ludoDB/Tests/CollectionTest.php',

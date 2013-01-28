@@ -19,7 +19,7 @@ class ChessTests extends PHPUnit_Framework_TestCase
         }
     }
 
-    protected function createUser($username, $password){
+    public function createUser($username, $password){
         $player = new Player();
         if(!$player->exists())$player->createTable();
         $player->setUsername($username);
@@ -39,6 +39,5 @@ class ChessTests extends PHPUnit_Framework_TestCase
         $fh = fopen("sql.txt", "a+");
         fwrite($fh, $data);
         fclose($fh);
-
     }
 }

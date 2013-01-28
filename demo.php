@@ -119,7 +119,7 @@ LudoDB::setDb('PHPUnit');
 $tables = array('Move','Game','Fen','Metadata','MetadataValue');
 foreach($tables as $table){
     $inst = new $table;
-    $inst->drop();
+    $inst->drop()->yesImSure();
     $inst->createTable();
 }
 
