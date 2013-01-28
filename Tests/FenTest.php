@@ -8,7 +8,7 @@ class FenTest extends ChessTests
     public function setUp(){
         parent::setUp();
         $fen = new Fen();
-        $fen->drop();
+        $fen->drop()->yesImSure();
         $fen->createTable();
     }
 

@@ -8,11 +8,11 @@ class SeekTest extends ChessTests{
         parent::setUp();
 
         $seek = new Seek();
-        $seek->drop();
+        $seek->drop()->yesImSure();
         $seek->createTable();
 
         $tc = new TimeControl();
-        $tc->drop();
+        $tc->drop()->yesImSure();
         $tc->createTable();
     }
     /**

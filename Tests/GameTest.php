@@ -21,14 +21,14 @@ class GameTest extends ChessTests
 
         if (rand(0,100) === 50 || 1==1) {
             $game = new Game();
-            $game->drop();
+            $game->drop()->yesImSure();
             $game->createTable();
             $m = new Move();
-            $m->drop();
+            $m->drop()->yesImSure();
             $m->createTable();
         }
         $fen = new Fen();
-        $fen->drop();
+        $fen->drop()->yesImSure();
         $fen->createTable();
     }
 

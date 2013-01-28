@@ -18,11 +18,11 @@ class MetadataTest extends ChessTests
             self::$dbConstructed = true;
 
             $m = new Metadata();
-            $m->drop();
+            $m->drop()->yesImSure();
             $m->createTable();
 
             $m = new MetadataValue();
-            $m->drop();
+            $m->drop()->yesImSure();
             $m->createTable();
         }
     }
