@@ -136,8 +136,27 @@ $game->setMetadata($gameData['metadata']);
 $game->setMoves($gameData['moves']);
 $game->commit();
 
+# $game = new Game(1);
 
-echo $game;
+$request = new LudoRequestHandler();
+echo $request->handle(array(
+    'model' => 'Game',
+    'action' => 'read',
+    'data' => 1
+));
+# echo $game;
+
+/*
+$gameData = $game->getValues();
+
+$s = microtime(true);
+for($i=0;$i<100;$i++){
+    $a = serialize($gameData);
+    $b = unserialize($a);
+}
+*/
+
+
 
 # echo $game;
 

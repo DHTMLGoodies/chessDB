@@ -12,13 +12,11 @@ class Game extends LudoDBModel
 
     public function setFen($fen){
         $this->setValue('fen_id', Fen::getIdByFen($fen));
+        $this->setValue('fen', $fen);
     }
 
     public function getFen(){
-        if($this->getId() && $this->getValue('fen_id')){
-            return $this->getValue('fen');
-        }
-        return 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+        return $this->getValue('fen');
     }
 
     public function getFenId(){

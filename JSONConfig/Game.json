@@ -7,9 +7,8 @@
 			"db":"int"
 		},
 		"fen":{
-			"class":"Fen",
-			"get":"getFen",
-			"fk":"fen_id"
+			"db": "varchar(128)",
+			"access": "rw"
 		},
 		"database_id":{
 			"db":"int",
