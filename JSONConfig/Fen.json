@@ -1,4 +1,5 @@
 {
+	"sql": "select * from fen where fen = ?",
 	"table": "Fen",
 	"idField" : "id",
 	"constructBy" : "fen",

@@ -19,7 +19,7 @@ $gameJSON = '{
             {
                 "event":"London olm",
                 "site":"London",
-                "date":"1927.??.??",
+                "date":"1927.1.1",
                 "round":"?",
                 "white":"Nimzowitsch, Aaron ",
                 "black":"Romi, Massimiliano",
@@ -104,16 +104,33 @@ $gameJSON = '{
             ]
         }';
 
-
+#echo "<pre>";
 ini_set('display_errors', 'on');
 error_reporting(E_ALL);
 date_default_timezone_set("Europe/Berlin");
-header("Content-type: application/json");
+# header("Content-type: application/json");
 
 LudoDB::setHost('localhost');
 LudoDB::setUser('root');
 LudoDB::setPassword('administrator');
 LudoDB::setDb('PHPUnit');
+# LudoDB::mySqlI('MySQLI');
+
+/*
+$pdo = new PDO('mysql:host=localhost;dbname=PHPUnit', 'root', 'administrator');
+
+
+#$stmt = $pdo->prepare("select Fen.id,Fen.fen from Fen where Fen.fen=?");
+$stmt = $pdo->prepare("insert into Fen(fen)values(?)");
+$stmt->execute(array('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq'));
+
+foreach($row as $key=>$value){
+    echo $key.": ". $value."<br>";
+}
+# var_dump($row);
+
+//
+die();*/
 
 // Construct database tables
 $tables = array('Move','Game','Fen','Metadata','MetadataValue');
@@ -125,6 +142,7 @@ foreach($tables as $table){
 
 
 
+header("Content-type: application/json");
 $gameData = json_decode($gameJSON, true);
 LudoDB::enableLogging();
 
@@ -139,13 +157,14 @@ $game->commit();
 # $game = new Game(1);
 
 $request = new LudoRequestHandler();
-echo $request->handle(array(
-    'model' => 'Game',
-    'action' => 'read',
-    'data' => 1
-));
+echo $request->handle('Game/1');
 # echo $game;
 
+/*
+
+
+var_dump($row);
+*/
 /*
 $gameData = $game->getValues();
 

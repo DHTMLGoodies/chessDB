@@ -9,8 +9,8 @@ spl_autoload_register(
             $classes = array(
                 'accessortest' => '/ludoDB/Tests/AccessorTest.php',
                 'brand' => '/ludoDB/Tests/classes/Brand.php',
-                'capital' => '/ludoDB/Tests/classes/JSONCaching/Capital.php',
-                'capitals' => '/ludoDB/Tests/classes/JSONCaching/Capitals.php',
+                'capital' => '/ludoDB/Tests/classes/caching/Capital.php',
+                'capitals' => '/ludoDB/Tests/classes/caching/Capitals.php',
                 'car' => '/ludoDB/Tests/classes/Car.php',
                 'carcollection' => '/ludoDB/Tests/classes/CarCollection.php',
                 'carproperties' => '/ludoDB/Tests/classes/CarProperties.php',

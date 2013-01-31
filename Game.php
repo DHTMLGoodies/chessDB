@@ -8,7 +8,7 @@
 class Game extends LudoDBModel
 {
     protected $JSONConfig = true;
-    protected $JSONCaching = true;
+    protected $caching = true;
 
     public function setFen($fen){
         $this->setValue('fen_id', Fen::getIdByFen($fen));
