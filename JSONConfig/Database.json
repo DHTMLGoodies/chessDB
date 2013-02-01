@@ -1,5 +1,6 @@
 {
-	"table": "Database",
+    "sql": "select id,title,folder_id from chess_database where id=?",
+	"table": "chess_database",
 	"columns": {
 		"id": {
 			"db": "int auto_increment not null primary key"
