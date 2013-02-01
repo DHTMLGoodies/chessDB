@@ -138,7 +138,7 @@ $game->commit();
 
 # $game = new Game(1);
 
-$request = new LudoRequestHandler();
+$request = new LudoDBRequestHandler();
 echo $request->handle('Game/1');
 # echo $game;
 
