@@ -114,6 +114,7 @@ LudoDB::setHost('localhost');
 LudoDB::setUser('root');
 LudoDB::setPassword('administrator');
 LudoDB::setDb('PHPUnit');
+
 # LudoDB::mySqlI('MySQLI');
 
 /*

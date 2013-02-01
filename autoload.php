@@ -38,7 +38,7 @@ spl_autoload_register(
                 'ludodb' => '/ludoDB/LudoDB.php',
                 'ludodbadapter' => '/ludoDB/LudoDBInterfaces.php',
                 'ludodbcache' => '/ludoDB/LudoDBCache.php',
-                'ludodbclassnotfoundexception' => '/ludoDB/LudoDBClassNotFoundException.php',
+                'ludodbclassnotfoundexception' => '/ludoDB/LudoDBExceptions.php',
                 'ludodbcollection' => '/ludoDB/LudoDBCollection.php',
                 'ludodbcollectionconfigparser' => '/ludoDB/LudoDBCollectionConfigParser.php',
                 'ludodbconfigparser' => '/ludoDB/LudoDBConfigParser.php',
