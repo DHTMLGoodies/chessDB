@@ -9,6 +9,7 @@ class Game extends LudoDBModel
 {
     protected $JSONConfig = true;
     protected $caching = true;
+    private $defaultFen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 
     public function setFen($fen){
         $this->setValue('fen_id', Fen::getIdByFen($fen));
@@ -56,13 +57,21 @@ class Game extends LudoDBModel
     private $fenParser;
     private function gameParser(){
         if(!isset($this->fenParser)){
-            $this->fenParser = new FenParser0x88($this->getFen());
+            $fen = $this->getFen();
+            if(!$fen)$fen = $this->defaultFen;
+            $this->fenParser = new FenParser0x88($fen);
             $moves = $this->getMoves();
             foreach($moves as $move){
                 $this->fenParser->makeMove($move);
             }
         }
         return $this->fenParser;
+    }
+
+    protected function beforeInsert(){
+        if(!$this->getFen()){
+            $this->setFen($this->defaultFen);
+        }
     }
 
     /**

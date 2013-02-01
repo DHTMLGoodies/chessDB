@@ -20,7 +20,7 @@ class Fen extends LudoDBModel
         }
     }
 
-    protected function getValidConstructByValue($key, $value){
+    protected function getValidInput($key, $value){
         return $this->getFenForStorage($value);
     }
 

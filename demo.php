@@ -10,7 +10,7 @@
 require_once("autoload.php");
 require_once("../parser/Board0x88Config.php");
 require_once("../parser/FenParser0x88.php");
-require_once("../Profiling.php");
+error_reporting(E_ALL);
 ini_set('display_errors','on');
 
 $gameJSON = '{
@@ -108,29 +108,12 @@ $gameJSON = '{
 ini_set('display_errors', 'on');
 error_reporting(E_ALL);
 date_default_timezone_set("Europe/Berlin");
-# header("Content-type: application/json");
+header("Content-type: application/json");
 
 LudoDB::setHost('localhost');
 LudoDB::setUser('root');
 LudoDB::setPassword('administrator');
 LudoDB::setDb('PHPUnit');
-# LudoDB::mySqlI('MySQLI');
-
-/*
-$pdo = new PDO('mysql:host=localhost;dbname=PHPUnit', 'root', 'administrator');
-
-
-#$stmt = $pdo->prepare("select Fen.id,Fen.fen from Fen where Fen.fen=?");
-$stmt = $pdo->prepare("insert into Fen(fen)values(?)");
-$stmt->execute(array('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq'));
-
-foreach($row as $key=>$value){
-    echo $key.": ". $value."<br>";
-}
-# var_dump($row);
-
-//
-die();*/
 
 // Construct database tables
 $tables = array('Move','Game','Fen','Metadata','MetadataValue');
@@ -140,12 +123,11 @@ foreach($tables as $table){
     $inst->createTable();
 }
 
-
-
 header("Content-type: application/json");
 $gameData = json_decode($gameJSON, true);
-LudoDB::enableLogging();
 
+LudoDB::enableLogging();
+LudoDB::setConnectionType('PDO');
 
 $game = new Game();
 $game->setDatabaseId(100);

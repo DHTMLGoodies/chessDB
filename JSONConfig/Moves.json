@@ -1,4 +1,5 @@
 {
+    "sql": "select from_square, to_square, notation, comment, action, start_variation, end_variation from move where game_id=?",
 	"model": "Move",
 	"constructBy": ["game_id"],
 	"columns": ["from_square", "to_square", "notation", "comment","action", "start_variation", "end_variation"]

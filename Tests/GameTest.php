@@ -144,6 +144,7 @@ class GameTest extends ChessTests
 
     private function getExpectedStorageFen($fen)
     {
+        return $fen;
         $tokens = preg_split("/\s/s", $fen);
         array_pop($tokens);
         array_pop($tokens);
