@@ -65,6 +65,12 @@ class Game extends LudoDBModel
         return $this->fenParser;
     }
 
+    protected function beforeInsert(){
+        if(!$this->getFen()){
+            $this->setFen('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1');
+        }
+    }
+
     /**
      * Append new move to the game
      * @param $move
