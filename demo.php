@@ -145,7 +145,7 @@ foreach($tables as $table){
 header("Content-type: application/json");
 $gameData = json_decode($gameJSON, true);
 LudoDB::enableLogging();
-
+LudoDB::setConnectionType('PDO');
 
 $game = new Game();
 $game->setDatabaseId(100);
