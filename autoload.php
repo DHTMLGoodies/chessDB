@@ -9,6 +9,7 @@ spl_autoload_register(
             $classes = array(
                 'accessortest' => '/ludoDB/Tests/AccessorTest.php',
                 'brand' => '/ludoDB/Tests/classes/Brand.php',
+                'cachetest' => '/ludoDB/Tests/CacheTest.php',
                 'capital' => '/ludoDB/Tests/classes/JSONCaching/Capital.php',
                 'capitals' => '/ludoDB/Tests/classes/JSONCaching/Capitals.php',
                 'car' => '/ludoDB/Tests/classes/Car.php',
@@ -53,6 +54,7 @@ spl_autoload_register(
                 'ludodbpdo' => '/ludoDB/LudoDBPDO.php',
                 'ludodbregistry' => '/ludoDB/LudoDBRegistry.php',
                 'ludodbrequesthandler' => '/ludoDB/LudoDBRequestHandler.php',
+                'ludodbunauthorizedexception' => '/ludoDB/LudoDBExceptions.php',
                 'ludosql' => '/ludoDB/LudoSQL.php',
                 'manager' => '/ludoDB/Tests/classes/Manager.php',
                 'metadata' => '/Metadata.php',
