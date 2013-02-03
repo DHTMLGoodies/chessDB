@@ -90,4 +90,16 @@ class Game extends LudoDBModel implements LudoDBService
         $m->commit();
         return $move;
     }
+
+    public function areValidServiceArguments($service, $arguments){
+        if(count($arguments)>1)return false;
+        switch($service){
+            case 'read':
+                return count($arguments) === 1 && is_numeric($arguments[0]);
+            case 'save':
+                return count($arguments) === 0 || is_numeric($arguments[0]);
+
+        }
+        return true;
+    }
 }
