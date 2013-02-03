@@ -5,7 +5,7 @@
  * Date: 23.12.12
  * Time: 21:04
  */
-class Game extends LudoDBModel
+class Game extends LudoDBModel implements LudoDBService
 {
     protected $JSONConfig = true;
     protected $caching = true;

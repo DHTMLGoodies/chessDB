@@ -5,7 +5,7 @@
  * Date: 03.02.13
  * Time: 00:41
  */
-class ChessFileUpload extends LudoDBModel
+class ChessFileUpload extends LudoDBModel implements LudoDBService
 {
     protected $JSONConfig = true;
     private static $tempPath;
