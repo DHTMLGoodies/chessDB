@@ -11,6 +11,8 @@ class ChessFileUpload extends LudoDBModel
     private static $tempPath;
     protected $validExtensions = null;
 
+    public static $validServices = array('save','read');
+
     public function __construct($id = null)
     {
         if (!isset(self::$tempPath)) {

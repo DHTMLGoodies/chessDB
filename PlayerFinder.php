@@ -15,6 +15,6 @@ class PlayerFinder
     public function byUserNameAndPassword($username, $password)
     {
         $player = new Player();
-        return $player->where('username')->equals($username)->where('password')->equals(md5($password))->create();
+        return $player->where('username')->equals($username)->where('password')->equals(md5($password))->instantiate();
     }
 }
