@@ -7,6 +7,11 @@
  */
 class PlayerFinder
 {
+    /**
+     * @param $username
+     * @param $password
+     * @return Player
+     */
     public function byUserNameAndPassword($username, $password)
     {
         $player = new Player();

@@ -22,8 +22,13 @@
             "db": "int"
         },
         "user_access": {
-            "db": "bit(64)"
+            "db": "bit(64)",
+            "access": "rw"
         },
-        "indexes": ["country", "active", "online_player"]
+        "elo":{
+            "db": "smallint",
+            "access": "rw"
+        },
+        "indexes": ["country", "active", "online_player", "username", "password"]
     }
 }

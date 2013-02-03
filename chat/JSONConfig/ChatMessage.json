@@ -1,5 +1,5 @@
 {
-    "table": "ChatMessage",
+    "table": "chat_message",
     "columns": {
         "id": "int auto_increment not null primary key",
         "chat": {

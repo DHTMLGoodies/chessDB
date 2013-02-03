@@ -1,0 +1,27 @@
+{
+    "sql": "select * from file_upload where ID=?",
+    "table": "file_upload",
+    "columns": {
+        "id": "int auto_increment not null primary key",
+        "path_on_server" : {
+            "db": "varchar(512)",
+            "access": "rw"
+        },
+        "display_name": {
+            "db": "varchar(512)",
+            "access": "rw"
+        },
+        "user_id": {
+            "db": "int",
+            "access": "rw"
+        },
+        "file_size": {
+            "db": "int",
+            "access": "rw"
+        },
+        "created_date": {
+            "db": "datetime",
+            "access": "rw"
+        }
+    }
+}

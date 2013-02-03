@@ -1,4 +1,5 @@
 {
+    "sql": "select * from chat where id=?",
 	"table": "Chat",
 	"columns": {
 		"id" : {
