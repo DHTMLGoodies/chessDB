@@ -19,6 +19,7 @@ spl_autoload_register(
                 'chat' => '/chat/Chat.php',
                 'chatmessage' => '/chat/ChatMessage.php',
                 'chatmessages' => '/chat/ChatMessages.php',
+                'chessfileupload' => '/ChessFileUpload.php',
                 'chesstests' => '/Tests/ChessTests.php',
                 'city' => '/ludoDB/Tests/classes/City.php',
                 'client' => '/ludoDB/Tests/classes/Client.php',
