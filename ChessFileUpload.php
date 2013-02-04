@@ -24,6 +24,10 @@ class ChessFileUpload extends LudoDBModel implements LudoDBService
         parent::__construct($id);
     }
 
+    public static function setUploadPath($path){
+        LudoDBRegistry::set('FILE_UPLOAD_PATH', $path);
+    }
+
     public function save($values)
     {
         $this->extractUploadedFile();
@@ -61,5 +65,9 @@ class ChessFileUpload extends LudoDBModel implements LudoDBService
             throw new Exception("Invalid upload file type", 400);
         }
         return $ret;
+    }
+
+    public function areValidServiceArguments($service, $arguments){
+        return true;
     }
 }

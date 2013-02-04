@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
+ * LudoDB model for a chess game
  * User: Alf Magne Kalleland
  * Date: 23.12.12
  * Time: 21:04
@@ -45,6 +45,10 @@ class Game extends LudoDBModel implements LudoDBService
         $ret = $this->getValue('moves');
         if(!isset($ret))$ret = array();
         return $ret;
+    }
+
+    public function getMetadata(){
+        return $this->getValue('metadata');
     }
 
     /**
@@ -101,5 +105,10 @@ class Game extends LudoDBModel implements LudoDBService
 
         }
         return true;
+    }
+
+    public function save($data){
+        $data['fen'] = isset($data['fen']) ? $data['fen'] : $data['metadata']['fen'];
+        return parent::save($data);
     }
 }

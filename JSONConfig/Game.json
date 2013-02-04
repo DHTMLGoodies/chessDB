@@ -30,10 +30,12 @@
 		},
 		"metadata":{
 			"class":"MetadataCollection",
+            "access": "rw",
 			"set":"setMetadata"
 		},
 		"moves":{
 			"class":"moves",
+            "access": "rw",
 			"set":"setMoves"
 		}
 	},
