@@ -17,13 +17,19 @@ class MetadataTest extends ChessTests
         if (!self::$dbConstructed) {
             self::$dbConstructed = true;
 
+
+            $mv = new MetadataValue();
+            $mv->drop()->yesImSure();
+
+
+
             $m = new Metadata();
             $m->drop()->yesImSure();
-            $m->createTable();
 
-            $m = new MetadataValue();
-            $m->drop()->yesImSure();
             $m->createTable();
+            $mv->createTable();
+
+
         }
     }
 
@@ -64,12 +70,12 @@ class MetadataTest extends ChessTests
      */
     public function shouldGetMetadataCollection(){
         // given
-        $this->createGameMetadata(10, 'White', 'Magnus Carlsen');
-        $this->createGameMetadata(10, 'Black', 'Levon Aronian');
-        $this->createGameMetadata(10,'Result', '*');
+        $this->createGameMetadata(21, 'White', 'Magnus Carlsen');
+        $this->createGameMetadata(21, 'Black', 'Levon Aronian');
+        $this->createGameMetadata(21,'Result', '*');
 
         // when
-        $c = new MetadataCollection(10);
+        $c = new MetadataCollection(21);
         $values = $c->getValues();
 
         // then
@@ -109,6 +115,13 @@ class MetadataTest extends ChessTests
 
     private function createGameMetadata($gameId, $key, $value){
         // given
+        $game = new Game($gameId);
+        if(!$game->getId()){
+            $game->setId($gameId);
+            $game->commit();
+        }
+
+
         $m = new MetadataValue($key);
         // when
         $m->setGameid($gameId);

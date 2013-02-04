@@ -1,20 +1,26 @@
 {
-    "table": "chess_metadata_value",
-    "idField": "id",
-    "constructBy": ["game_id", "chess_metadata.metadata_key"],
-    "columns": {
-        "id": "int auto_increment not null primary key",
-        "game_id": "int",
-        "metadata_value": "varchar(4000)",
-        "metadata_id" : "int"
+    "table":"chess_metadata_value",
+    "idField":"id",
+    "constructBy":["game_id", "chess_metadata.metadata_key"],
+    "columns":{
+        "id":"int auto_increment not null primary key",
+        "game_id":{
+            "db":"int",
+            "references":"chess_game(id) on delete cascade"
+        },
+        "metadata_value":"varchar(4000)",
+        "metadata_id":{
+            "db": "int",
+            "references": "chess_metadata(id) on delete cascade"
+        }
     },
-    "indexes": ["game_id", "metadata_id"],
-    "join": [
+    "indexes":["game_id", "metadata_id"],
+    "join":[
         {
-            "table": "chess_metadata",
-            "fk": "metadata_id",
-            "pk": "id",
-            "columns": ["metadata_key"]
+            "table":"chess_metadata",
+            "fk":"metadata_id",
+            "pk":"id",
+            "columns":["metadata_key"]
         }
     ]
 }

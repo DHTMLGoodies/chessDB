@@ -23,12 +23,18 @@ class GameTest extends ChessTests
             $m = new Move();
             $m->drop()->yesImSure();
 
+            $mv = new MetadataValue();
+            $mv->drop()->yesImSure();
+
 
             $game = new Game();
             $game->drop()->yesImSure();
 
             $game->createTable();
             $m->createTable();
+
+            $mv = new MetadataValue();
+            $mv->createTable();
 
         }
         $fen = new Fen();
