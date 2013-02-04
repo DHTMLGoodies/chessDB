@@ -1,0 +1,9 @@
+{
+    "table": "chess_metadata",
+    "constructBy": ["metadata_key"],
+    "columns": {
+        "id": "int auto_increment not null primary key",
+        "metadata_key" : "varchar(255)"
+    },
+    "indexes": ["metadata_key"]
+}

@@ -1,0 +1,20 @@
+{
+    "table": "chess_metadata_value",
+    "idField": "id",
+    "constructBy": ["game_id", "chess_metadata.metadata_key"],
+    "columns": {
+        "id": "int auto_increment not null primary key",
+        "game_id": "int",
+        "metadata_value": "varchar(4000)",
+        "metadata_id" : "int"
+    },
+    "indexes": ["game_id", "metadata_id"],
+    "join": [
+        {
+            "table": "chess_metadata",
+            "fk": "metadata_id",
+            "pk": "id",
+            "columns": ["metadata_key"]
+        }
+    ]
+}

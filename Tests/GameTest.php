@@ -20,12 +20,16 @@ class GameTest extends ChessTests
         parent::setUp();
 
         if (rand(0,100) === 50 || 1==1) {
-            $game = new Game();
-            $game->drop()->yesImSure();
-            $game->createTable();
             $m = new Move();
             $m->drop()->yesImSure();
+
+
+            $game = new Game();
+            $game->drop()->yesImSure();
+
+            $game->createTable();
             $m->createTable();
+
         }
         $fen = new Fen();
         $fen->drop()->yesImSure();

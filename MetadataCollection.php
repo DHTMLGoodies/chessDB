@@ -7,19 +7,7 @@
  */
 class MetadataCollection extends LudoDBCollection
 {
-    protected $config = array(
-        'model' => 'MetadataValue',
-        'constructBy' => 'game_id',
-        'columns' => array('metadata_value'),
-        'join' => array(
-            array(
-                'table' => 'Metadata',
-                'columns' => array('metadata_key'),
-                'pk' => 'id',
-                'fk' => 'metadata_id')
-        )
-
-    );
+    protected $JSONConfig = true;
 
     public function getValues(){
         $ret = array();

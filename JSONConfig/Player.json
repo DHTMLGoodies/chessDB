@@ -1,5 +1,5 @@
 {
-    "table": "Player",
+    "table": "chess_player",
     "columns": {
         "id": "int auto_increment not null primary key",
         "username": {

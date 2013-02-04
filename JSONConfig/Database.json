@@ -11,7 +11,8 @@
 		},
 		"folder_id": {
 			"db": "int",
-			"access": "rw"
+			"access": "rw",
+            "references": "chess_folder(id) on delete cascade"
 		}
 	},
 	"indexes": ["folder_id"]

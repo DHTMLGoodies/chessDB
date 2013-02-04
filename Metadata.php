@@ -7,15 +7,7 @@
  */
 class Metadata extends LudoDBModel
 {
-    protected $config = array(
-        'table' => 'Metadata',
-        'constructBy' => array('metadata_key'),
-        'columns' => array(
-            'id' => 'int auto_increment not null primary key',
-            'metadata_key' => 'varchar(255)'
-        ),
-        'indexes' => array('metadata_key')
-    );
+    protected $JSONConfig = true;
 
     public function populate(){
         parent::populate();

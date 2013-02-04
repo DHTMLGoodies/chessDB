@@ -1,0 +1,13 @@
+{
+    "model": "MetadataValue",
+    "constructBy": "game_id",
+    "columns": ["metadata_value"],
+    "join": [
+        {
+            "table": "chess_metadata",
+            "columns": ["metadata_key"],
+            "pk": "id",
+            "fk": "metadata_id"
+        }
+    ]
+}

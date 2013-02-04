@@ -1,10 +1,11 @@
 {
-	"table": "Move",
+	"table": "chess_move",
 	"columns": {
 		"id": "int auto_increment not null primary key",
 		"game_id": {
 			"db": "int",
-			"access": "rw"
+			"access": "rw",
+            "references": "chess_game(id) on delete cascade"
 		},
 		"notation": {
 			"db": "varchar(32)",

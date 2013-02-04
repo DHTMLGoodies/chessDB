@@ -1,6 +1,6 @@
 {
-	"sql": "select * from fen where fen = ?",
-	"table": "Fen",
+	"sql": "select * from chess_fen where fen = ?",
+	"table": "chess_fen",
 	"idField" : "id",
 	"constructBy" : "fen",
 	"columns" : {
