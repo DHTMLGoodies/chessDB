@@ -41,9 +41,7 @@ class PlayerTest extends ChessTests
         $this->createUser('user1','pass1');
 
         // when
-        $finder = new PlayerFinder();
-        $user = $finder->byUserNameAndPassword('user1','pass1');
-
+        $user = new PlayerByUsernamePassword('user1', 'pass1');
 
         // then
         $this->assertEquals(1, $user->getId());

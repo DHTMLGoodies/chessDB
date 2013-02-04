@@ -83,7 +83,7 @@ spl_autoload_register(
                 'phone' => '/ludoDB/Tests/classes/Phone.php',
                 'phonecollection' => '/ludoDB/Tests/classes/PhoneCollection.php',
                 'player' => '/Player.php',
-                'playerfinder' => '/PlayerFinder.php',
+                'playerbyusernamepassword' => '/PlayerByUsernamePassword.php',
                 'playertest' => '/Tests/PlayerTest.php',
                 'requesthandlermock' => '/ludoDB/Tests/classes/RequestHandlerMock.php',
                 'requesthandlertest' => '/ludoDB/Tests/RequestHandlerTest.php',
