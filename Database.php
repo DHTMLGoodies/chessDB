@@ -15,7 +15,7 @@ class Database extends LudoDBModel implements LudoDBService
     }
 
     public static function getValidServices(){
-        return array('games');
+        return array('games','read','save');
     }
 
     public function games(){
@@ -30,4 +30,6 @@ class Database extends LudoDBModel implements LudoDBService
     public function getTitle(){
         return $this->getValue('title');
     }
+
+
 }

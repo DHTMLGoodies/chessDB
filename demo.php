@@ -125,7 +125,6 @@ $tables = array_reverse($tables);
 foreach($tables as $table){
     $inst = new $table;
     $inst->createTable();
-
 }
 
 $db = new Database();

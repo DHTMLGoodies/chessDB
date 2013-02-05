@@ -10,22 +10,23 @@ class ChessFileUpload extends LudoDBModel implements LudoDBService
     protected $JSONConfig = true;
     private static $tempPath;
     protected $validExtensions = null;
-
     public static $validServices = array('save','read');
 
+    const FILE_UPLOAD_KEY = self::FILE_UPLOAD_KEY;
+    
     public function __construct($id = null)
     {
         if (!isset(self::$tempPath)) {
-            self::$tempPath = LudoDBRegistry::get('FILE_UPLOAD_PATH');
+            self::$tempPath = LudoDBRegistry::get(self::FILE_UPLOAD_KEY);
             if (!isset(self::$tempPath)) {
-                throw new Exception("Temp path for file uploads not set. Use LudoDBRegistry::set('FILE_UPLOAD_PATH', 'your/path'); to set path", 500);
+                throw new Exception("Temp path for file uploads not set. Use LudoDBRegistry::set(self::FILE_UPLOAD_KEY, 'your/path'); to set path", 500);
             }
         }
         parent::__construct($id);
     }
 
     public static function setUploadPath($path){
-        LudoDBRegistry::set('FILE_UPLOAD_PATH', $path);
+        LudoDBRegistry::set(self::FILE_UPLOAD_KEY, $path);
     }
 
     public function save($values)
@@ -51,7 +52,7 @@ class ChessFileUpload extends LudoDBModel implements LudoDBService
     private function getTempPath($filename)
     {
         $extension = $this->getExtension($filename);
-        return LudoDBRegistry::get('FILE_UPLOAD_PATH') . "/uploaded" . date("YmdHis") . '-' . rand(10000, 99999) . "." . $extension;
+        return LudoDBRegistry::get(self::FILE_UPLOAD_KEY) . "/uploaded" . date("YmdHis") . '-' . rand(10000, 99999) . "." . $extension;
     }
 
     private function getExtension($filename)
