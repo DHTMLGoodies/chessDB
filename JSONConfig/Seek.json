@@ -1,0 +1,19 @@
+{
+    "table": "seek",
+    "sql": "select seek.id,seek.player_id, seek.ts,seek.time_control_id, time_control.time_control where seek.time_control_id = time_control.id and seek.id=?",
+    "columns": {
+        "id": "int auto_increment not null primary key",
+        "player_id": {
+            "db": "int",
+            "access": "rw",
+            "references" : "player(id) on delete cascade"
+        },
+        "ts": "timestamp",
+        "time_control_id":{
+            "db": "int",
+            "access": "rw",
+            "references": "time_control(id) on delete cascade"
+        }
+    },
+    "indexes": ["player_id"]
+}

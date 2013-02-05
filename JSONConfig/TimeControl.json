@@ -1,0 +1,52 @@
+{
+    "table": "time_control",
+    "sql": "select * from time_control where id=?",
+    "columns": {
+        "id": "int auto_increment not null primary key",
+        "time": {
+            "db": "int",
+            "access": "rw"
+        },
+        "move_increment" : {
+            "db": "int default 0",
+            "access": "rw"
+        },
+        "correspondence": {
+            "db": "char(1)",
+            "access": "rw"
+        },
+        "add_time_on": {
+            "db": "int",
+            "access": "rw"
+        },
+        "time_to_add": {
+            "db": "int",
+            "access": "rw"
+        }
+    },
+    "indexes": ["correspondence"],
+    "data": [
+        { "time": 5 },
+        { "time": 10 },
+        { "time": 15 },
+        { "time": 30 },
+        { "time": 45 },
+        { "time": 90 },
+        { "time": 90, "move_increment" : 30 },
+        { "time": 120},
+        { "time": 1, "correspondence": "1" },
+        { "time": 2, "correspondence": "1" },
+        { "time": 3, "correspondence": "1" },
+        { "time": 4, "correspondence": "1" },
+        { "time": 5, "correspondence": "1" },
+        { "time": 6, "correspondence": "1" },
+        { "time": 7, "correspondence": "1" },
+        { "time": 8, "correspondence": "1" },
+        { "time": 9, "correspondence": "1" },
+        { "time": 10, "correspondence": "1" },
+        { "time": 11, "correspondence": "1" },
+        { "time": 12, "correspondence": "1" },
+        { "time": 13, "correspondence": "1" },
+        { "time": 14, "correspondence": "1" }
+    ]
+}
