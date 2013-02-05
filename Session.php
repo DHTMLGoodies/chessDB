@@ -6,7 +6,7 @@
  * Time: 21:20
  * To change this template use File | Settings | File Templates.
  */
-class ChessSession extends LudoDBModel
+class Session extends LudoDBModel
 {
     protected $config = array(
         'sql' => 'select * from chess_session where session_key=?',

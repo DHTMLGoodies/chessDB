@@ -8,6 +8,7 @@ spl_autoload_register(
         if ($classes === null) {
             $classes = array(
                 'accessortest' => '/ludoDB/Tests/AccessorTest.php',
+                'allchesstests' => '/Tests/AllChessTests.php',
                 'author' => '/ludoDB/examples/mod_rewrite/Author.php',
                 'book' => '/ludoDB/examples/mod_rewrite/Book.php',
                 'bookauthor' => '/ludoDB/examples/mod_rewrite/BookAuthor.php',
@@ -25,7 +26,6 @@ spl_autoload_register(
                 'chatmessages' => '/chat/ChatMessages.php',
                 'chessfileupload' => '/ChessFileUpload.php',
                 'chessroles' => '/Roles.php',
-                'chesssession' => '/Session.php',
                 'chesssessiontest' => '/Tests/SessionTest.php',
                 'chesstests' => '/Tests/ChessTests.php',
                 'city' => '/ludoDB/Tests/classes/City.php',
@@ -42,6 +42,7 @@ spl_autoload_register(
                 'forsqltest' => '/ludoDB/Tests/classes/ForSQLTest.php',
                 'game' => '/Game.php',
                 'gameimport' => '/GameImport.php',
+                'games' => '/Games.php',
                 'gametest' => '/Tests/GameTest.php',
                 'importtest' => '/Tests/ImportTest.php',
                 'jsontest' => '/ludoDB/Tests/JSONTest.php',
@@ -93,6 +94,7 @@ spl_autoload_register(
                 'section' => '/ludoDB/Tests/classes/Section.php',
                 'seek' => '/Seek.php',
                 'seektest' => '/Tests/SeekTest.php',
+                'session' => '/Session.php',
                 'sqltest' => '/ludoDB/Tests/SQLTest.php',
                 'testbase' => '/ludoDB/Tests/TestBase.php',
                 'testgame' => '/ludoDB/Tests/classes/TestGame.php',

@@ -16,6 +16,7 @@ require_once __DIR__ . "/../../parser/PgnGameParser.php";
 require_once __DIR__ . "/../../parser/MoveBuilder.php";
 require_once __DIR__ . "/../../CHESS_JSON.php";
 
+
 class ImportTest extends ChessTests
 {
 

@@ -1,0 +1,4 @@
+{
+	"model": "Game",
+	"sql": "select id, result from chess_game where database_id=?"
+}

@@ -2,7 +2,7 @@
 
 require_once(__DIR__."/../autoload.php");
 
-class AllTests
+class AllChessTests
 {
     public static function main()
     {
