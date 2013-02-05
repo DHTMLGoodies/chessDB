@@ -22,4 +22,12 @@ class Database extends LudoDBModel implements LudoDBService
         $g = new Games($this->getId());
         return $g->read();
     }
+
+    public function setTitle($title){
+        $this->setValue('title', $title);
+    }
+
+    public function getTitle(){
+        return $this->getValue('title');
+    }
 }

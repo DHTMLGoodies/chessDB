@@ -104,7 +104,6 @@ $gameJSON = '{
             ]
         }';
 
-#echo "<pre>";
 ini_set('display_errors', 'on');
 error_reporting(E_ALL);
 date_default_timezone_set("Europe/Berlin");
@@ -116,45 +115,33 @@ LudoDB::setPassword('administrator');
 LudoDB::setDb('PHPUnit');
 
 // Construct database tables
-$tables = array('Move','Game','Fen','Metadata','MetadataValue');
+$tables = array('Move','Fen','MetadataValue','Metadata','Game','Database');
 foreach($tables as $table){
     $inst = new $table;
     $inst->drop()->yesImSure();
-    $inst->createTable();
+
 }
+$tables = array_reverse($tables);
+foreach($tables as $table){
+    $inst = new $table;
+    $inst->createTable();
+
+}
+
+$db = new Database();
+$db->setTitle('Test database');
+$db->commit();
 
 header("Content-type: application/json");
 $gameData = json_decode($gameJSON, true);
 
 $game = new Game();
-$game->setDatabaseId(100);
+$game->setDatabaseId($db->getId());
 $game->setFen($gameData['fen']);
 $game->setMetadata($gameData['metadata']);
 $game->setMoves($gameData['moves']);
 $game->commit();
 
-# $game = new Game(1);
 
 $request = new LudoDBRequestHandler();
 echo $request->handle('Game/1');
-# echo $game;
-
-/*
-
-
-var_dump($row);
-*/
-/*
-$gameData = $game->getValues();
-
-$s = microtime(true);
-for($i=0;$i<100;$i++){
-    $a = serialize($gameData);
-    $b = unserialize($a);
-}
-*/
-
-
-
-# echo $game;
-
