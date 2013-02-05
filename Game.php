@@ -10,11 +10,14 @@ class Game extends LudoDBModel implements LudoDBService
     protected $JSONConfig = true;
     protected $caching = true;
     private $defaultFen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
-    public static $validServices = array('read','save','delete');
 
     public function setFen($fen){
         $this->setValue('fen_id', Fen::getIdByFen($fen));
         $this->setValue('fen', $fen);
+    }
+
+    public static function getValidServices(){
+        return array('read','save','delete');
     }
 
     public function getFen(){

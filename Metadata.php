@@ -12,7 +12,7 @@ class Metadata extends LudoDBModel
     public function populate(){
         parent::populate();
         if(!$this->getId()){
-            $this->setMetadataKey($this->constructorValues[0]);
+            $this->setMetadataKey($this->arguments[0]);
             $this->commit();
         }
     }

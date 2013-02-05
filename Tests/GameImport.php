@@ -7,10 +7,12 @@
  */
 class GameImport implements LudoDBService
 {
-    public static $validServices = array('save');
-
     public function __construct(){
 
+    }
+
+    public static function getValidServices(){
+        return array('save');
     }
 
     public function save($request){

@@ -41,7 +41,7 @@ class Moves extends LudoDBCollection
         $m = $this->parser->getModel();
         $m->setValues($move);
         if (isset($move['fen'])) $m->setFen($move['fen']);
-        $m->setGame($this->constructorValues[0]);
+        $m->setGame($this->arguments[0]);
         $this->setStartVariationValue($m);
         $this->setEndVariationValue($m);
         $m->commit();

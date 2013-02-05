@@ -22,10 +22,10 @@ class MetadataCollection extends LudoDBCollection
     public function setMetadata($metadataValues){
         $this->deleteRecords();
         foreach($metadataValues as $key=>$value){
-            $m = new MetadataValue($this->constructorValues[0], $key);
+            $m = new MetadataValue($this->arguments[0], $key);
             $m->setMetadataKey($key);
             $m->setMetadataValue($value);
-            $m->setGameId($this->constructorValues[0]);
+            $m->setGameId($this->arguments[0]);
             $m->commit();
         }
     }

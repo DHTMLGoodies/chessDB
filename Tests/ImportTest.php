@@ -33,6 +33,12 @@ class ImportTest extends ChessTests
         $g->createTable();
         $m->createTable();
         $mv->createTable();
+
+        $db = new Database(1);
+        if(!$db->getId()){
+            $db->setId(1);
+            $db->commit();
+        }
     }
     /**
      * @test
