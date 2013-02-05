@@ -112,6 +112,9 @@ class Game extends LudoDBModel implements LudoDBService
 
     public function save($data){
         $data['fen'] = isset($data['fen']) ? $data['fen'] : $data['metadata']['fen'];
+        $data['white'] = isset($data['white']) ? $data['white'] : $data['metadata']['white'];
+        $data['black'] = isset($data['black']) ? $data['black'] : $data['metadata']['black'];
+
         return parent::save($data);
     }
 }

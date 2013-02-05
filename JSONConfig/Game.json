@@ -10,6 +10,14 @@
 			"db": "varchar(128)",
 			"access": "rw"
 		},
+        "white": {
+            "db": "varchar(128)",
+            "access": "rw"
+        },
+        "black": {
+            "db": "varchar(128)",
+            "access": "rw"
+        },
 		"database_id":{
 			"db":"int",
 			"access":"rw",
