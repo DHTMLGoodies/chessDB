@@ -4,7 +4,6 @@ require_once(__DIR__."/../autoload.php");
 
 class AllTests
 {
-
     public static function main()
     {
         PHPUnit_TextUI_TestRunner::run(self::suite());
@@ -19,7 +18,7 @@ class AllTests
         $suite->addTestSuite("MetadataTest");
         $suite->addTestSuite("PlayerTest");
         $suite->addTestSuite("SeekTest");
-        $suite->addTestSuite("SessionTest");
+        $suite->addTestSuite("ChessSessionTest");
         $suite->addTestSuite("ImportTest");
 
         return $suite;

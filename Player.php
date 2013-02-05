@@ -17,6 +17,10 @@ class Player extends LudoDBModel
         return null;
     }
 
+    public function getAccess(){
+        return $this->getValue('user_access');
+    }
+
     public function isValid()
     {
         $username = $this->getUsername();

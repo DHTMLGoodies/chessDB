@@ -22,7 +22,7 @@
             "db": "int"
         },
         "user_access": {
-            "db": "bit(64)",
+            "db": "bit(64) default 0",
             "access": "rw"
         },
         "elo":{
