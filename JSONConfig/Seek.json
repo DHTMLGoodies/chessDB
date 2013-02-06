@@ -13,6 +13,15 @@
             "db": "int",
             "access": "rw",
             "references": "time_control(id) on delete cascade"
+        },
+        "from_elo": {
+            "db": "int"
+        },
+        "to_elo": {
+            "db": "int"
+        },
+        "rated": {
+            "db": "char(1)"
         }
     },
     "indexes": ["player_id"]
