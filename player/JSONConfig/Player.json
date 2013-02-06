@@ -17,7 +17,7 @@
             "access": "rw"
         },
         "online_player": {
-            "db": "char(1)"
+            "db": "char(1) default '1'"
         },
         "country": {
             "db": "varchar(100)",

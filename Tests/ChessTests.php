@@ -39,6 +39,7 @@ class ChessTests extends PHPUnit_Framework_TestCase
         if (!$player->exists()) $player->createTable();
         $player->setUsername($username);
         $player->setPassword($password);
+        $player->setOnlinePlayer('1');
         $player->commit();
         return $player;
     }

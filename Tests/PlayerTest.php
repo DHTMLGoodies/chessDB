@@ -14,9 +14,6 @@ class PlayerTest extends ChessTests
 
         parent::setUp();
 
-        $player = new Player();
-        $player->drop()->yesImSure();
-        $player->createTable();
     }
 
     /**
