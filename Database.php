@@ -30,6 +30,4 @@ class Database extends LudoDBModel implements LudoDBService
     public function getTitle(){
         return $this->getValue('title');
     }
-
-
 }

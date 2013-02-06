@@ -141,6 +141,5 @@ $game->setMetadata($gameData['metadata']);
 $game->setMoves($gameData['moves']);
 $game->commit();
 
-
 $request = new LudoDBRequestHandler();
 echo $request->handle('Game/1');
