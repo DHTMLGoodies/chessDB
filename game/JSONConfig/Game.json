@@ -17,6 +17,7 @@
         },
         "black_id": {
             "db": "int",
+            "access": "rw",
             "references": "chess_player(id)"
         },
         "white": {
@@ -38,6 +39,10 @@
         "plycount": {
             "db": "int",
             "access": "rw"
+        },
+        "time_control_id": {
+            "db": "int",
+            "access": "w"
         },
         "timecontrol": {
             "db": "varchar(32)",

@@ -20,7 +20,8 @@
             "db": "char(1)"
         },
         "country": {
-            "db": "int"
+            "db": "varchar(100)",
+            "access": "rw"
         },
         "active": {
             "db": "int"
