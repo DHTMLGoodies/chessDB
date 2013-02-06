@@ -111,10 +111,36 @@ class Game extends LudoDBModel implements LudoDBService
     }
 
     public function save($data){
-        $data['fen'] = isset($data['fen']) ? $data['fen'] : $data['metadata']['fen'];
-        $data['white'] = isset($data['white']) ? $data['white'] : $data['metadata']['white'];
-        $data['black'] = isset($data['black']) ? $data['black'] : $data['metadata']['black'];
+
+        $data = $this->withSpecialMetadataKeysMoved($data);
+
+        if(isset($data['white']))$data['white_id'] = $this->getPlayerIdByName($data['white']);
+        if(isset($data['black']))$data['black_id'] = $this->getPlayerIdByName($data['black']);
 
         return parent::save($data);
+    }
+
+    private function withSpecialMetadataKeysMoved($data){
+        $keys = array('white','black','site','event','result','fen','eco',
+            'plycount','annotator','timecontrol','date','round');
+        foreach($keys as $key){
+            if(isset($data['metadata'][$key])){
+                $data[$key] = $data['metadata'][$key];
+                unset($data['metadata'][$key]);
+            }
+        }
+        return $data;
+    }
+
+    private function getPlayerIdByName($name){
+        $player = new PlayerByName($name);
+        if(!$player->getId()){
+            $p = new Player();
+            $p->setFullName($name);
+            $p->setOnlinePlayer(0);
+            $p->commit();
+            return $p->getId();
+        }
+        return null;
     }
 }

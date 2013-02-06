@@ -8,6 +8,8 @@ class ChessTests extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (!self::$connected) {
+            date_default_timezone_set('Europe/Berlin');
+
             LudoDB::setHost('localhost');
             LudoDB::setUser('root');
             LudoDB::setPassword('administrator');
@@ -18,6 +20,17 @@ class ChessTests extends PHPUnit_Framework_TestCase
             self::$logCleared = true;
             $this->clearLog();
         }
+
+        $tables = array(
+            'Move','MetadataValue','Game','Database','Folder','Fen','Player'
+        );
+        $util = new  LudoDBUtility();
+        $util->dropAndCreate($tables);
+
+        $db = new Database();
+        $db->setId(1);
+        $db->commit();
+
     }
 
     public function createUser($username, $password)

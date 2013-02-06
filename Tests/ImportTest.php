@@ -37,7 +37,7 @@ class ImportTest extends ChessTests
 
         $db = new Database(1);
         if(!$db->getId()){
-            $db->setId(1);
+            $db->setTitle('My database');
             $db->commit();
         }
     }
@@ -55,7 +55,7 @@ class ImportTest extends ChessTests
         ));
 
         // then
-        $this->assertEquals(2, count($gameIds));
+        $this->assertEquals(8, count($gameIds));
     }
 
     /**
@@ -111,8 +111,57 @@ class ImportTest extends ChessTests
         $metadata = $game->getMetadata();
 
         // then
-        $this->assertEquals("Computer chess game", $metadata['event']);
+        $this->assertEquals("unterminated", $metadata['termination']);
         $this->assertEquals("Grunfeld", $metadata['opening']);
-        $this->assertEquals("21", $metadata['plycount']);
+        $this->assertEquals("21", $game->getPlycount());
     }
+
+    /**
+     * @test
+     */
+    public function shouldImportGamesInAcceptableTime(){
+        // given
+        $this->startTimer();
+        $import = new GameImport();
+
+        // when
+        $games = $import->save(array(
+            "file" => "pgn/test-timer.pgn",
+            "databaseId" => 1
+        ));
+        $time = $this->getElapsed(__FUNCTION__);
+
+        // then
+        $this->assertEquals(25, count($games));
+        $this->assertLessThan(12.5, $time);
+    }
+
+    private $startTime;
+    private function startTimer(){
+        $this->startTime = $this->getTime();
+    }
+
+    private function getTime(){
+        list($usec, $sec) = explode(" ", microtime());
+        return ((float)$usec + (float)$sec);
+    }
+
+    private function getElapsed($test){
+        $ret = $this->getTime() - $this->startTime;
+        $ret = number_format($ret, 3);
+        $this->logTime($test, $ret);
+        return $ret;
+    }
+
+    private function logTime($test, $elapsed){
+
+        $time = new TestTimer();
+        if(!$time->exists())$time->createTable();
+        $time->setTestName("TEST: ". $test);
+        $time->setTestTime($elapsed);
+        $time->setTestDate(date("Y-m-d H:i:s"));
+        $time->commit();
+    }
+
+
 }

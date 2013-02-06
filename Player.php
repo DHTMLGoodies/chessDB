@@ -23,6 +23,7 @@ class Player extends LudoDBModel
 
     public function isValid()
     {
+        if(!$this->getValue('online_player'))return true;
         $username = $this->getUsername();
         if (!$username) return false;
         $sql = "select " . $this->parser->getIdField() . " from " . $this->parser->getTableName() . " where username='" . $this->getUsername() . "'";
@@ -36,6 +37,14 @@ class Player extends LudoDBModel
 
     private function getUsername(){
         return $this->getValue('username');
+    }
+
+    public function setFullName($name){
+        $this->setValue('full_name', $name);
+    }
+
+    public function setOnlinePlayer($online){
+        $this->setValue('online_player', $online);
     }
 
     function getGravatar($email, $size = 80, $default = "")

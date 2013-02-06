@@ -12,6 +12,10 @@
             "access": "rw",
             "canConstructBy": true
         },
+        "full_name": {
+            "db": "varchar(256)",
+            "access": "rw"
+        },
         "online_player": {
             "db": "char(1)"
         },
@@ -29,6 +33,6 @@
             "db": "smallint",
             "access": "rw"
         },
-        "indexes": ["country", "active", "online_player", "username", "password"]
+        "indexes": ["country", "active", "online_player", "username", "password", "full_name"]
     }
 }

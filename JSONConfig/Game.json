@@ -10,12 +10,45 @@
 			"db": "varchar(128)",
 			"access": "rw"
 		},
+        "white_id": {
+            "db": "int",
+            "references": "chess_player(id)",
+            "access": "rw"
+        },
+        "black_id": {
+            "db": "int",
+            "references": "chess_player(id)"
+        },
         "white": {
-            "db": "varchar(128)",
+            "db": "varchar(255)",
             "access": "rw"
         },
         "black": {
-            "db": "varchar(128)",
+            "db": "varchar(255)",
+            "access": "rw"
+        },
+        "eco": {
+            "db": "varchar(32)",
+            "access": "rw"
+        },
+        "site": {
+            "db": "varchar(512)",
+            "access": "rw"
+        },
+        "plycount": {
+            "db": "int",
+            "access": "rw"
+        },
+        "timecontrol": {
+            "db": "varchar(32)",
+            "access": "rw"
+        },
+        "round": {
+            "db": "varchar(32)",
+            "access": "rw"
+        },
+        "event": {
+            "db": "varchar(512)",
             "access": "rw"
         },
 		"database_id":{
@@ -36,6 +69,11 @@
 			"db":"varchar(64) default '*'",
 			"access":"rw"
 		},
+        "game_date":{
+            "db": "varchar(32)",
+            "access": "rw",
+            "alias": "date"
+        },
 		"metadata":{
 			"class":"MetadataCollection",
             "access": "rw",

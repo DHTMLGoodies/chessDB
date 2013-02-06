@@ -47,3 +47,92 @@ Nf6 3. c4 (3. Nf3?! Qxd5 4. Nc3 Qa5 5. d4) 3. .. Bf5 {Variation ended} (3.
 
 1. e4 e5 2. Nf3 Nc6 3. Bb5 (3. Bc4) 3. .. a6 4. Ba4 d6 (4. .. b5) 5. O-O *
 
+[Event "New Orleans"]
+[Site "New Orleans"]
+[Date "1848.??.??"]
+[Round "?"]
+[White "Morphy, Paul "]
+[Black "Morphy, Alonzo"]
+[Result "1-0"]
+[WhiteElo ""]
+[BlackElo ""]
+[ECO "C23"]
+
+1.e4 e5 2.Bc4 f5 3.exf5 Nf6 4.Nc3 d5 5.Nxd5 Bc5 6.Nxf6+ Qxf6 7.d3 Bxf5 8.Nf3 Bg4
+9.Bd5 c6 10.Be4 Nd7 11.O-O h6 12.c3 O-O-O 13.b4 Bb6 14.a4 a6 15.Qb3 Bxf3
+16.Bxf3 g5 17.Be3 g4 18.Bxg4 Bc7 19.Bf3 Rhg8 20.Be4 Rg4 21.f3 Rg7 22.b5 axb5
+23.axb5 Nb6 24.bxc6 Rdg8 25.Rf2 Qd8 26.Ra8+ Bb8 27.Bxb6 Rxg2+ 28.Rxg2 Rxg2+
+29.Kxg2 Qg5+ 30.Kh1 Qc1+ 31.Bg1  1-0
+[Event "New Orleans"]
+[Site "New Orleans"]
+[Date "1848.??.??"]
+[Round "?"]
+[White "Morphy, Paul "]
+[Black "Morphy, Alonzo"]
+[Result "1-0"]
+[WhiteElo ""]
+[BlackElo ""]
+[ECO "C33"]
+
+1.e4 e5 2.f4 exf4 3.Bc4 Qh4+ 4.Kf1 Bc5 5.d4 Bb6 6.Nf3 Qe7 7.Nc3 Nf6 8.Qd3 c6
+9.Bxf4 d5 10.exd5 O-O 11.d6 Qd8 12.Re1 Re8 13.Ng5 Rxe1+ 14.Kxe1 Qe8+ 15.Kd2 Be6
+16.Re1 Nbd7 17.Nxe6 fxe6 18.Rxe6  1-0
+[Event "New Orleans"]
+[Site "New Orleans"]
+[Date "1848.??.??"]
+[Round "?"]
+[White "Morphy, Paul "]
+[Black "NN"]
+[Result "1-0"]
+[WhiteElo ""]
+[BlackElo ""]
+[ECO "C20"]
+
+1.e4 e5 2.h3 d5 3.exd5 Bc5 4.Bc4 c6 5.Nc3 Nf6 6.d3 a5 7.Bg5 Nbd7 8.dxc6 bxc6
+9.Nf3 O-O 10.O-O h6 11.Bh4 Qc7 12.d4 exd4 13.Nxd4 Bd6 14.Nf5 Bh2+ 15.Kh1 Ne5
+16.Bb3 Ba6 17.Re1 Ng6 18.Bxf6 gxf6 19.Qh5  1-0
+[Event "New Orleans"]
+[Site "New Orleans"]
+[Date "1849.??.??"]
+[Round "?"]
+[White "Morphy, Paul "]
+[Black "Rousseau, Eugene"]
+[Result "1-0"]
+[WhiteElo ""]
+[BlackElo ""]
+[ECO "C39"]
+
+1.e4 e5 2.f4 exf4 3.Nf3 g5 4.h4 g4 5.Ng5 h6 6.Nxf7 Kxf7 7.Qxg4 Qf6 8.Bc4+ Ke7
+9.Nc3 c6 10.e5 Qxe5+ 11.Kd1 Kd8 12.Re1 Qc5 13.Bxg8 d5 14.Re8+ Kxe8 15.Qxc8+ Ke7
+16.Nxd5+ Kd6 17.Qc7+  1-0
+[Event "New Orleans"]
+[Site "New Orleans"]
+[Date "1849.??.??"]
+[Round "?"]
+[White "Mac Connel, James"]
+[Black "Morphy, Paul "]
+[Result "0-1"]
+[WhiteElo ""]
+[BlackElo ""]
+[ECO "C38"]
+
+1.e4 e5 2.f4 exf4 3.Nf3 g5 4.Bc4 Bg7 5.d3 h6 6.O-O Nf6 7.c3 b5 8.Bxb5 c6
+9.Bc4 d5 10.exd5 cxd5 11.Qe2+ Be6 12.Bb3 O-O 13.d4 Ne4 14.Bc2 f5 15.Nbd2 Nc6
+16.c4 Bxd4+ 17.Nxd4 Nxd4 18.Qd3 Qb6 19.Kh1 Nxc2 20.Qxc2 Nf2+ 21.Kg1 Nh3+
+22.Kh1 Qg1+ 23.Rxg1 Nf2+  0-1
+[Event "New Orleans"]
+[Site "New Orleans"]
+[Date "1849.??.??"]
+[Round "?"]
+[White "Morphy, Paul "]
+[Black "Mac Connel, James"]
+[Result "1-0"]
+[WhiteElo ""]
+[BlackElo ""]
+[ECO "C40"]
+
+1.e4 e5 2.Nf3 Qf6 3.Nc3 c6 4.d4 exd4 5.e5 Qg6 6.Bd3 Qxg2 7.Rg1 Qh3 8.Rg3 Qh5
+9.Rg5 Qh3 10.Bf1 Qe6 11.Nxd4 Qe7 12.Ne4 h6 13.Nf5 Qe6 14.Nfd6+ Bxd6 15.Nxd6+ Kd8
+16.Bc4 Qe7 17.Nxf7+ Kc7 18.Qd6+ Qxd6 19.exd6+ Kb6 20.Be3+ c5 21.Bxc5+ Ka5
+22.Rg3 b5 23.Ra3+  1-0
+

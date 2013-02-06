@@ -52,8 +52,11 @@ class MetadataTest extends ChessTests
     {
         // given
         $m = new MetadataValue();
+        $game = new Game();
+        $game->setDatabaseId(1);
+        $game->commit();
         // when
-        $m->setGameid(1);
+        $m->setGameId(1);
         $m->setMetadataKey('Black');
         $m->setMetadataValue('Magnus Carlsen');
         $m->commit();

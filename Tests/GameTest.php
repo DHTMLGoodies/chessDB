@@ -19,45 +19,9 @@ class GameTest extends ChessTests
     {
         parent::setUp();
 
-        if (rand(0,100) === 50 || 1==1) {
-            $m = new Move();
-            $m->drop()->yesImSure();
-
-            $mv = new MetadataValue();
-            $mv->drop()->yesImSure();
 
 
-            $game = new Game();
-            $game->drop()->yesImSure();
 
-
-            $db = new Database();
-            $db->drop()->yesImSure();
-
-            $folder = new Folder();
-            $folder->drop()->yesImSure();
-
-
-            $folder->createTable();
-            $db->createTable();
-            $game->createTable();
-            $m->createTable();
-
-            $mv = new MetadataValue();
-            $mv->createTable();
-
-
-            $db = new Database(1);
-            if(!$db->getId()){
-                $db->setId(1);
-                $db->commit();
-            }
-
-
-        }
-        $fen = new Fen();
-        $fen->drop()->yesImSure();
-        $fen->createTable();
     }
 
     /**
