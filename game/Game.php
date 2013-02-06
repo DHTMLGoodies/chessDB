@@ -122,7 +122,7 @@ class Game extends LudoDBModel implements LudoDBService
 
     private function withSpecialMetadataKeysMoved($data){
         $keys = array('white','black','site','event','result','fen','eco',
-            'plycount','annotator','timecontrol','date','round');
+            'plycount','annotator','timecontrol','date','round','termination');
         foreach($keys as $key){
             if(isset($data['metadata'][$key])){
                 $data[$key] = $data['metadata'][$key];

@@ -111,7 +111,7 @@ class ImportTest extends ChessTests
         $metadata = $game->getMetadata();
 
         // then
-        $this->assertEquals("unterminated", $metadata['termination']);
+        $this->assertEquals("unterminated", $game->getTermination());
         $this->assertEquals("Grunfeld", $metadata['opening']);
         $this->assertEquals("21", $game->getPlycount());
     }

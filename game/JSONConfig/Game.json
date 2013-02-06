@@ -79,6 +79,10 @@
             "access": "rw",
             "alias": "date"
         },
+        "termination": {
+            "db": "varchar(64)",
+            "access": "rw"
+        },
 		"metadata":{
 			"class":"MetadataCollection",
             "access": "rw",
