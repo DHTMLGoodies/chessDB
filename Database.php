@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
+ * LudoDBModel for chess databases, i.e. collection of games.
  * User: Alf Magne
  * Date: 18.01.13
  */

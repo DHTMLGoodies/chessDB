@@ -3,7 +3,6 @@
  * LudoDB model for game import
  * User: Alf Magne Kalleland
  * Date: 04.02.13
-
  */
 class GameImport implements LudoDBService
 {

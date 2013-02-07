@@ -3,7 +3,6 @@
  * Created by JetBrains PhpStorm.
  * User: Alf Magne Kalleland
  * Date: 23.12.12
-
  */
 class Metadata extends LudoDBModel
 {

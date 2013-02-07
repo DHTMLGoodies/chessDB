@@ -1,10 +1,8 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
+ * LudoDBModel for Sessions
  * User: borrow
  * Date: 19.12.12
-
-
  */
 class Session extends LudoDBModel
 {

@@ -1,4 +1,7 @@
 <?php
+/**
+ * LudoDBModel for chess player objects
+ */
 
 class Player extends LudoDBModel
 {

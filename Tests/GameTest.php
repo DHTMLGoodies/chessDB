@@ -3,8 +3,6 @@
  * Created by JetBrains PhpStorm.
  * User: borrow
  * Date: 19.12.12
-
-
  */
 error_reporting(E_ALL);
 ini_set('display_errors', 'on');

@@ -3,7 +3,6 @@
  * LudoDB model for a chess game
  * User: Alf Magne Kalleland
  * Date: 23.12.12
-
  */
 class Game extends LudoDBModel implements LudoDBService
 {

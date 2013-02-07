@@ -3,7 +3,6 @@
  *
  * User: Alf Magne
  * Date: 05.02.13
-
  */
 class Games extends LudoDBCollection implements LudoDBService
 {

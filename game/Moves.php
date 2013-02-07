@@ -3,7 +3,6 @@
  * Moves collection
  * User: Alf Magne
  * Date: 09.01.13
-
  */
 class Moves extends LudoDBCollection
 {

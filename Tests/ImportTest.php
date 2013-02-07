@@ -1,9 +1,8 @@
 <?php
 /**
  * Created by JetBrains PhpStorm.
- * User: xait0020
+ * User: Alf Magne Kalleland
  * Date: 04.02.13
-
  */
 error_reporting(E_ALL);
 ini_set('display_errors','on');

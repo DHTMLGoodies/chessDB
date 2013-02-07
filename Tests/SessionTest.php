@@ -1,9 +1,8 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
+ * Chess Session tests
  * User: Alf Magne Kalleland
  * Date: 19.12.12
-
  */
 
 require_once __DIR__."/../autoload.php";

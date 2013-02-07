@@ -1,9 +1,8 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: xait0020
+ * Chess roles
+ * User: Alf Magne Kalleland
  * Date: 05.02.13
-
  */
 class ChessRoles
 {
