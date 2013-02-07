@@ -3,7 +3,7 @@
  * Created by JetBrains PhpStorm.
  * User: Alf Magne Kalleland
  * Date: 23.12.12
- * Time: 20:08
+
  */
 class Fen extends LudoDBModel
 {

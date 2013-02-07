@@ -3,7 +3,7 @@
  * Created by JetBrains PhpStorm.
  * User: xait0020
  * Date: 04.02.13
- * Time: 22:39
+
  */
 error_reporting(E_ALL);
 ini_set('display_errors','on');

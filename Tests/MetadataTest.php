@@ -3,7 +3,7 @@
  * Created by JetBrains PhpStorm.
  * User: Alf Magne Kalleland
  * Date: 08.01.13
- * Time: 08:53
+
  */
 require_once(__DIR__."/../autoload.php");
 

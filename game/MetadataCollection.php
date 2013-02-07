@@ -3,7 +3,7 @@
  * Created by JetBrains PhpStorm.
  * User: Alf Magne Kalleland
  * Date: 08.01.13
- * Time: 10:40
+
  */
 class MetadataCollection extends LudoDBCollection
 {

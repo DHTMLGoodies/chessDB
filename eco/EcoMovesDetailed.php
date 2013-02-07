@@ -3,7 +3,7 @@
  * Created by JetBrains PhpStorm.
  * User: xait0020
  * Date: 07.02.13
- * Time: 00:37
+
  */
 class EcoMovesDetailed extends LudoDBCollection
 {

@@ -3,7 +3,7 @@
  * LudoDB model for game import
  * User: Alf Magne Kalleland
  * Date: 04.02.13
- * Time: 22:40
+
  */
 class GameImport implements LudoDBService
 {

@@ -3,7 +3,7 @@
  * Moves collection
  * User: Alf Magne
  * Date: 09.01.13
- * Time: 12:33
+
  */
 class Moves extends LudoDBCollection
 {

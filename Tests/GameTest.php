@@ -3,8 +3,8 @@
  * Created by JetBrains PhpStorm.
  * User: borrow
  * Date: 19.12.12
- * Time: 15:29
- * To change this template use File | Settings | File Templates.
+
+
  */
 error_reporting(E_ALL);
 ini_set('display_errors', 'on');

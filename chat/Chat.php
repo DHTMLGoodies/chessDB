@@ -3,7 +3,7 @@
  * Chess Chat
  * User: Alf Magne
  * Date: 25.01.13
- * Time: 16:36
+
  */
 class Chat extends LudoDBModel
 {
