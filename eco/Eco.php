@@ -28,7 +28,7 @@ class Eco extends LudoDBModel implements LudoDBService
         return isset($fen) ? str_replace("_", "/", $fen) : null;
     }
 
-    public function areValidServiceArguments($service, $arguments){
+    public function validateService($service, $arguments){
         return count($arguments) === 1 || (count($arguments) >0 && $service == 'moves');
     }
 

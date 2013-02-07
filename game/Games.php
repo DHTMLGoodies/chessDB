@@ -12,7 +12,7 @@ class Games extends LudoDBCollection implements LudoDBService
     public static function getValidServices(){
         return array("read");
     }
-    public function areValidServiceArguments($service, $arguments){
+    public function validateService($service, $arguments){
         return count($arguments) === 1 && is_numeric($arguments[0]);
     }
 }
