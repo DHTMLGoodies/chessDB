@@ -42,6 +42,8 @@ spl_autoload_register(
                 'countries' => '/player/Countries.php',
                 'country' => '/player/Country.php',
                 'database' => '/Database.php',
+                'eco' => '/eco/Eco.php',
+                'ecomoves' => '/eco/EcoMoves.php',
                 'fen' => '/Fen.php',
                 'fentest' => '/Tests/FenTest.php',
                 'folder' => '/Folder.php',

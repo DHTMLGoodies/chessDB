@@ -1,0 +1,4 @@
+{
+    "sql": "select * from chess_eco where previous_fen_id=? order by id",
+    "model": "Eco"
+}

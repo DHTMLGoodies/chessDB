@@ -1,0 +1,39 @@
+{
+    "table":"chess_eco",
+    "sql": "select * from eco where id=?",
+    "columns":{
+        "id":"int auto_increment not null primary key",
+        "eco_code":{
+            "db": "varchar(32)",
+            "access": "rw"
+        },
+        "opening_name":{
+            "db": "varchar(512)",
+            "access": "rw",
+            "alias":"opening"
+        },
+        "variation":{
+            "db": "text",
+            "access": "rw"
+        },
+        "fen_id":{
+            "db": "int"
+        },
+        "from_square":{
+            "db": "varchar(2)",
+            "alias": "from",
+            "access": "rw"
+        },
+        "to_square":{
+            "db": "varchar(2)",
+            "alias": "to",
+            "access": "rw"
+        },
+        "notation":{
+            "db": "varchar(16)",
+            "access": "rw"
+        },
+        "previous_fen_id":"int"
+    },
+    "data": "eco.data.json"
+}
