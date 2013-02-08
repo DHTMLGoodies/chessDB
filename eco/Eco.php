@@ -19,6 +19,7 @@ class Eco extends LudoDBModel implements LudoDBService
     private $previousFen;
 
     public function __construct($previousFen = null, $fen = null){
+        if(!isset($previousFen))$previousFen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
         $this->fen = $this->getValidFen($fen);
         $this->previousFen = $this->getValidFen($previousFen);
         parent::__construct();
@@ -29,11 +30,12 @@ class Eco extends LudoDBModel implements LudoDBService
     }
 
     public function validateService($service, $arguments){
-        return count($arguments) === 1 || (count($arguments) >0 && $service == 'moves');
+        return count($arguments) === 1 || ($service == 'moves');
     }
 
     public function moves(){
         if(isset($this->fen) && $this->fen){
+
             $moves = new EcoMovesDetailed(Fen::getIdByFen($this->previousFen),Fen::getIdByFen($this->fen));
         }else{
             $moves = new EcoMoves(Fen::getIdByFen($this->previousFen));
