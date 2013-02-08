@@ -35,7 +35,6 @@ class Eco extends LudoDBModel implements LudoDBService
 
     public function moves(){
         if(isset($this->fen) && $this->fen){
-
             $moves = new EcoMovesDetailed(Fen::getIdByFen($this->previousFen),Fen::getIdByFen($this->fen));
         }else{
             $moves = new EcoMoves(Fen::getIdByFen($this->previousFen));

@@ -27,9 +27,6 @@ class ChessTests extends PHPUnit_Framework_TestCase
         $util = new  LudoDBUtility();
         $util->dropAndCreate($tables);
 
-        $db = new Database();
-        $db->setId(1);
-        $db->commit();
 
     }
 

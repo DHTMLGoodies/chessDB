@@ -1,0 +1,38 @@
+<?php
+/**
+ * Created by JetBrains PhpStorm.
+ * User: xait0020
+ * Date: 08.02.13
+ * Time: 20:55
+ */
+class Folders extends LudoDBTreeCollection implements LudoDBService
+{
+    protected $caching = false;
+    protected $config = array(
+        "sql" => "select * from chess_folder order by parent,id",
+        "model" => "Folder",
+        "childKey" => "parent",
+        "pk" => "id",
+        "fk" => "parent"
+
+    );
+    public static function getValidServices(){
+        return array('read');
+    }
+    public function validateService($service, $arguments){
+        return count($arguments) === 0;
+    }
+
+    public function getValues(){
+        $folders = parent::getValues();
+        $rows = $this->getRows();
+        $db = new Databases();
+        $databases = $db->getValues();
+        foreach($rows as & $folder){
+            if(isset($folder['id']) && isset($databases[$folder['id']])){
+                $folder['children'] = $databases[$folder['id']];
+            }
+        }
+        return $folders;
+    }
+}

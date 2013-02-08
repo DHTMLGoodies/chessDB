@@ -9,7 +9,27 @@
 			"access": "rw"
 		},
 		"parent": {
-			"db": "int"
+			"db": "int",
+            "access": "rw"
 		}
-	}
+	},
+    "data": [
+        {
+            "id":1, "title": "Tactics"
+        },{
+            "id": 2, "title": "Historic games"
+        },
+        {
+            "id": 3, "title": "Before 1950", "parent" : 2
+        },
+        {
+            "id": 4, "title": "1950 - 2000", "parent": 2
+        },
+        {
+            "id": 5, "title": "2000 -", "parent": 2
+        }
+    ],
+    "static": {
+        "type": "folder"
+    }
 }

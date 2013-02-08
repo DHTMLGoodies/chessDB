@@ -15,5 +15,17 @@
             "references": "chess_folder(id) on delete cascade"
 		}
 	},
-	"indexes": ["folder_id"]
+	"indexes": ["folder_id"],
+    "data": [
+        { "id": 1, "title": "1001 brilliant checkmates", "folder_id" : 1},
+        { "id": 2, "title": "Brilliant combinations", "folder_id" : 1},
+        { "id": 3, "title": "Morphy", "folder_id" : 3},
+        { "id": 4, "title": "Kasparov", "folder_id" : 4},
+        { "id": 5, "title": "Karpov", "folder_id" : 4},
+        { "id": 6, "title": "Fischer", "folder_id" : 4},
+        { "id": 7, "title": "Magnus Carlsen", "folder_id" : 5}
+    ],
+    "static": {
+        "type": "database"
+    }
 }
