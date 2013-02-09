@@ -7,4 +7,8 @@
 class Folder extends LudoDBModel
 {
     protected $JSONConfig = true;
+
+    protected function clearCache(){
+        LudoDBCache::clearByClass("Folders");
+    }
 }

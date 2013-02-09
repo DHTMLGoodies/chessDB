@@ -1,7 +1,8 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: xait0020
+ * Chess folder collection. Lists folders and databases
+ * in tree format.
+ * User: Alf Magne Kalleland
  * Date: 08.02.13
  * Time: 20:55
  */
@@ -14,11 +15,12 @@ class Folders extends LudoDBTreeCollection implements LudoDBService
         "childKey" => "parent",
         "pk" => "id",
         "fk" => "parent"
-
     );
+
     public static function getValidServices(){
         return array('read');
     }
+
     public function validateService($service, $arguments){
         return count($arguments) === 0;
     }
