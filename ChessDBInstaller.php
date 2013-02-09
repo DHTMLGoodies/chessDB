@@ -10,14 +10,14 @@ class ChessDBInstaller implements LudoDBService
     private $classes = array(
         'Game','Move','Eco','Database','Folder','Metadata','MetadataValue',
         'Session','Seek','Chat','ChatMessage','ChatMessages','Fen','Player',
-        'TimeControl','LudoDBCache'
+        'TimeControl'
     );
     public function install(){
         try{
             $this->validatePHP();
             $this->validateDBConnection();
             $this->checkIfInstalled();
-            $this->createDatabase();
+            $this->createCacheTable();
             $this->createTables();
         }catch(LudoDBException $e){
             throw new LudoDBException($e->getMessage(), $e->getCode());
@@ -26,13 +26,13 @@ class ChessDBInstaller implements LudoDBService
 
     private function checkIfInstalled(){
         if($this->isInstalled()){
-            throw new LudoDBException("Database installation already completed", 400);
+            throw new LudoDBException("Database installation already completed. Use LudoDB::setDb('name_of_database'); to switch to another database", 400);
         }
     }
 
-    private function createDatabase(){
-        LudoDB::createDatabase(LudoDBRegistry::get('DB_NAME'));
-        LudoDB::getInstance()->connect();
+    private function createCacheTable(){
+        $util = new LudoDBUtility();
+        $util->dropAndCreate(array("LudoDBCache"));
     }
 
     private function createTables(){
@@ -47,6 +47,8 @@ class ChessDBInstaller implements LudoDBService
             LudoDB::setDb("information_schema");
             LudoDB::getInstance()->connect();
             LudoDB::setDb($dbName);
+            LudoDB::createDatabase($dbName);
+            LudoDB::getInstance()->connect();
         }catch(Exception $e){
             throw new LudoDBException("Cannot connect to database, error message: ". $e->getMessage(), 400);
         }

@@ -6,8 +6,15 @@
  */
 class GameImport implements LudoDBService
 {
-    public function __construct(){
-
+    private $fileArg;
+    private $databaseArg;
+    public function __construct($file = null, $databaseArg = null){
+        if(isset($file)){
+            $this->fileArg = $file;
+        }
+        if(isset($databaseArg)){
+            $this->databaseArg = $databaseArg;
+        }
     }
 
     public static function getValidServices(){
@@ -23,13 +30,17 @@ class GameImport implements LudoDBService
         $parser = new PgnParser($filePath);
         $games = $parser->getGames();
         foreach($games as $game){
-            $ret[] = $this->importGame($game, $request['databaseId']);
+            $ret[] = $this->importGame($game, $this->getDatabaseId($request));
         }
         return $ret;
     }
 
     private function getFilePath($request){
-        return $request['file'];
+        return isset($request['file']) ? $request['file'] : ChessRegistry::getPgnFolder().$this->fileArg.".pgn";
+    }
+
+    private function getDatabaseId($request){
+        return isset($request['databaseId']) ? $request['databaseId'] : $this->databaseArg;
     }
 
     private function importGame($game, $intoDb = null){
