@@ -21,11 +21,13 @@ class ChessTests extends PHPUnit_Framework_TestCase
             $this->clearLog();
         }
 
-        $tables = array(
-            'Move','MetadataValue','Game','Database','Folder','dhtmlChess/Fen','Player'
+        $classes = array(
+            'Game','Move','Database','Folder','Metadata','MetadataValue',
+            'Session','Seek','Chat','ChatMessage','ChatMessages','Fen','Player',
+            'TimeControl'
         );
         $util = new  LudoDBUtility();
-        $util->dropAndCreate($tables);
+        $util->dropAndCreate($classes);
 
 
     }

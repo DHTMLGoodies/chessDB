@@ -12,9 +12,16 @@ class Folders extends LudoDBTreeCollection implements LudoDBService
     protected $config = array(
         "sql" => "select * from chess_folder order by parent,id",
         "model" => "Folder",
-        "childKey" => "parent",
+        "childKey" => "children",
         "pk" => "id",
-        "fk" => "parent"
+        "fk" => "parent",
+        "merge" => array(
+            array(
+                "class" => "Databases",
+                "fk" => "folder_id",
+                "pk" => "id"
+            )
+        )
     );
 
     public static function getValidServices(){
@@ -25,20 +32,7 @@ class Folders extends LudoDBTreeCollection implements LudoDBService
         return count($arguments) === 0;
     }
 
-    public function getValues(){
-        $folders = parent::getValues();
-        $rows = $this->getRows();
-        $db = new Databases();
-        $databases = $db->getValues();
-        foreach($rows as & $folder){
-            if(isset($folder['id']) && isset($databases[$folder['id']])){
-                $folder['children'] = $databases[$folder['id']];
-            }
-        }
-        return $folders;
-    }
-
     public function cacheEnabled(){
-        return true;
+        return false;
     }
 }

@@ -26,7 +26,7 @@ class ChessDBInstaller implements LudoDBService
 
     private function checkIfInstalled(){
         if($this->isInstalled()){
-            throw new LudoDBException("Database installation already completed. Use LudoDB::setDb('name_of_database'); to switch to another database", 400);
+            throw new LudoDBException("Database installation already completed. Use LudoDB::setDb('name_of_database'); to install DHTML Chess tables to a different database", 400);
         }
     }
 
