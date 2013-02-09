@@ -22,7 +22,6 @@ class ChessSessionTest extends ChessTests
 
         // then
         $this->assertNotNull($session);
-
     }
 
     /**
@@ -30,10 +29,13 @@ class ChessSessionTest extends ChessTests
      */
     public function shouldBeAbleToAuthenticateSession(){
         // given
-        $this->createUser("username","Pass1234");
+        $username = 'username';
+        $password = 'Pass1234';
+
+        $this->createUser($username, $password);
         LudoDB::enableSqlLogging();
         $login = new ChessLogin();
-        $session = $login->signIn("username", "Pass1234");
+        $session = $login->signIn($username, $password);
         $key = $session->getKey();
 
         // when
@@ -42,9 +44,5 @@ class ChessSessionTest extends ChessTests
 
         // then
         $this->assertNotNull($session);
-
-
-
-
     }
 }
