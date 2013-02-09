@@ -7,7 +7,6 @@
 class Game extends LudoDBModel implements LudoDBService
 {
     protected $JSONConfig = true;
-    private $defaultFen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 
     public function setFen($fen){
         $this->setValue('fen_id', Fen::getIdByFen($fen));
@@ -64,7 +63,7 @@ class Game extends LudoDBModel implements LudoDBService
     private function gameParser(){
         if(!isset($this->fenParser)){
             $fen = $this->getFen();
-            if(!$fen)$fen = $this->defaultFen;
+            if(!$fen)$fen = ChessRegistry::getDefaultFen();
             $this->fenParser = new FenParser0x88($fen);
             $moves = $this->getMoves();
             foreach($moves as $move){
@@ -76,7 +75,7 @@ class Game extends LudoDBModel implements LudoDBService
 
     protected function beforeInsert(){
         if(!$this->getFen()){
-            $this->setFen($this->defaultFen);
+            $this->setFen(ChessRegistry::getDefaultFen());
         }
     }
 

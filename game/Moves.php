@@ -10,6 +10,11 @@ class Moves extends LudoDBCollection
     private $startingVariation = false;
     private $endingVariation = false;
 
+    private $values = array();
+    private $currentBranch;
+    private $lastMove;
+    private $branches = array();
+
     public function setMoves($moves)
     {
         $this->deleteRecords();
@@ -32,12 +37,11 @@ class Moves extends LudoDBCollection
 
     /**
      * @param $move
-     * @param int $parentId
-     * @return Move|null
+     * @return Move
      */
     private function addMove($move)
     {
-        $m = $this->parser->getModel();
+        $m = $this->getModel();
         $m->setValues($move);
         if (isset($move['fen'])) $m->setFen($move['fen']);
         $m->setGame($this->arguments[0]);
@@ -45,6 +49,14 @@ class Moves extends LudoDBCollection
         $this->setEndVariationValue($m);
         $m->commit();
         return $m;
+    }
+
+    /**
+     * @return Move
+     */
+    private function getModel()
+    {
+        return $this->parser->getModel();
     }
 
     private function setStartVariationFlag()
@@ -83,12 +95,6 @@ class Moves extends LudoDBCollection
     {
         return $model->getSomeValuesFiltered($columns);
     }
-
-
-    private $values = array();
-    private $currentBranch;
-    private $lastMove;
-    private $branches = array();
 
     public function getValues()
     {

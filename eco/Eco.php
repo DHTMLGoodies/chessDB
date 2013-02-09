@@ -18,7 +18,7 @@ class Eco extends LudoDBModel implements LudoDBService
     private $previousFen;
 
     public function __construct($previousFen = null, $fen = null){
-        if(!isset($previousFen))$previousFen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+        if(!isset($previousFen))$previousFen = ChessRegistry::getDefaultFen();
         $this->fen = $this->getValidFen($fen);
         $this->previousFen = $this->getValidFen($previousFen);
         parent::__construct();
