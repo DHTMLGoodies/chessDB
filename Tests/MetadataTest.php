@@ -72,12 +72,12 @@ class MetadataTest extends ChessTests
      */
     public function shouldGetMetadataCollection(){
         // given
-        $this->createGameMetadata(21, 'White', 'Magnus Carlsen');
-        $this->createGameMetadata(21, 'Black', 'Levon Aronian');
-        $this->createGameMetadata(21,'Result', '*');
+        $this->createGameMetadata(1, 'White', 'Magnus Carlsen');
+        $this->createGameMetadata(1, 'Black', 'Levon Aronian');
+        $this->createGameMetadata(1,'Result', '*');
 
         // when
-        $c = new MetadataCollection(21);
+        $c = new MetadataCollection(1);
         $values = $c->getValues();
 
         // then
@@ -95,20 +95,20 @@ class MetadataTest extends ChessTests
 
     public function shouldBeAbleToCreateMetadataForMoreGames(){
         // given
-        $this->createGameMetadata(10, 'White', 'Magnus Carlsen');
-        $this->createGameMetadata(10, 'Black', 'Levon Aronian');
-        $this->createGameMetadata(10,'Result', '*');
+        $this->createGameMetadata(1, 'White', 'Magnus Carlsen');
+        $this->createGameMetadata(1, 'Black', 'Levon Aronian');
+        $this->createGameMetadata(1,'Result', '*');
 
         // given
-        $this->createGameMetadata(11, 'White', 'Magnus Carlsen');
-        $this->createGameMetadata(11, 'Black', 'Levon Aronian');
-        $this->createGameMetadata(11,'Result', '*');
+        $this->createGameMetadata(2, 'White', 'Magnus Carlsen');
+        $this->createGameMetadata(2, 'Black', 'Levon Aronian');
+        $this->createGameMetadata(2,'Result', '*');
 
         // when
-        $c = new MetadataCollection(10);
+        $c = new MetadataCollection(1);
         $values = $c->getValues();
-        $c2 = new MetadataCollection(11);
-        $values2 = $c->getValues();
+        $c2 = new MetadataCollection(2);
+        $values2 = $c2->getValues();
 
         // then
         $this->assertEquals(3, count($values));
@@ -119,7 +119,7 @@ class MetadataTest extends ChessTests
         // given
         $game = new Game($gameId);
         if(!$game->getId()){
-            $game->setId($gameId);
+            $game->setValues(array("id", $gameId, "white" => "Alf"));
             $game->commit();
         }
 

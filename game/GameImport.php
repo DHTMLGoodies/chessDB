@@ -43,4 +43,8 @@ class GameImport implements LudoDBService
         return true;
     }
 
+    public function cacheEnabled(){
+        return false;
+    }
+
 }
