@@ -12,11 +12,38 @@ class ChessSessionTest extends ChessTests
     /**
      * @test
      */
-    public function shouldBeAbleToCreateChessSession(){
+    public function shouldBeAbleToSignIn(){
         // given
-        $user = $this->createUser('user','pass');
+        $this->createUser("username","Pass1234");
+        LudoDB::enableSqlLogging();
+        /// when
+        $login = new ChessLogin();
+        $session = $login->signIn("username", "Pass1234");
 
-        $session = new ChessSession();
+        // then
+        $this->assertNotNull($session);
+
+    }
+
+    /**
+     * @test
+     */
+    public function shouldBeAbleToAuthenticateSession(){
+        // given
+        $this->createUser("username","Pass1234");
+        LudoDB::enableSqlLogging();
+        $login = new ChessLogin();
+        $session = $login->signIn("username", "Pass1234");
+        $key = $session->getKey();
+
+        // when
+        $auth = new ChessLogin();
+        $session = $auth->authenticate($key);
+
+        // then
+        $this->assertNotNull($session);
+
+
 
 
     }
