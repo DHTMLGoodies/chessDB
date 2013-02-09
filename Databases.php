@@ -1,13 +1,12 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
- * User: xait0020
+ * List of databases, used by Folders tree collection
+ * User: Alf Magne Kalleland
  * Date: 08.02.13
  * Time: 20:55
  */
 class Databases extends LudoDBCollection implements LudoDBService
 {
-
     protected $config = array(
         "sql" => "select * from chess_database order by ID",
         "model" => "Database",

@@ -1,10 +1,10 @@
 <?php
 /**
- * Created by JetBrains PhpStorm.
+ * Fen position class
  * User: Alf Magne Kalleland
  * Date: 23.12.12
-
  */
+
 class Fen extends LudoDBModel
 {
     protected $JSONConfig = true;
@@ -27,8 +27,7 @@ class Fen extends LudoDBModel
     private function getFenForStorage($fen){
         if(!is_numeric($fen)){
             $fen = explode(" ", $fen);
-            if(count($fen)<3)$this->db->log(json_encode($this->arguments));
-            return $fen[0]." ". $fen[1]." ". $fen[2];
+            return stripslashes($fen[0]." ". $fen[1]." ". $fen[2]);
         }
         return $fen;
     }

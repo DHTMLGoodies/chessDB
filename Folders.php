@@ -8,7 +8,7 @@
  */
 class Folders extends LudoDBTreeCollection implements LudoDBService
 {
-    protected $caching = false;
+
     protected $config = array(
         "sql" => "select * from chess_folder order by parent,id",
         "model" => "Folder",
@@ -36,5 +36,9 @@ class Folders extends LudoDBTreeCollection implements LudoDBService
             }
         }
         return $folders;
+    }
+
+    public function cacheEnabled(){
+        return true;
     }
 }

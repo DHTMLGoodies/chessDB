@@ -22,7 +22,7 @@ class ChessTests extends PHPUnit_Framework_TestCase
         }
 
         $tables = array(
-            'Move','MetadataValue','Game','Database','Folder','Fen','Player'
+            'Move','MetadataValue','Game','Database','Folder','dhtmlChess/Fen','Player'
         );
         $util = new  LudoDBUtility();
         $util->dropAndCreate($tables);

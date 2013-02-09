@@ -7,7 +7,6 @@
 class Game extends LudoDBModel implements LudoDBService
 {
     protected $JSONConfig = true;
-    protected $caching = true;
     private $defaultFen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 
     public function setFen($fen){
@@ -141,5 +140,9 @@ class Game extends LudoDBModel implements LudoDBService
             return $p->getId();
         }
         return null;
+    }
+
+    public function cacheEnabled(){
+        return true;
     }
 }
