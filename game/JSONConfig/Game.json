@@ -71,8 +71,9 @@
 			"get":"getFullName"
 		},
 		"result":{
-			"db":"varchar(64) default '*'",
-			"access":"rw"
+			"db":"varchar(64)",
+			"access":"rw",
+            "default": "*"
 		},
         "game_date":{
             "db": "varchar(32)",

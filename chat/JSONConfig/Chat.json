@@ -1,6 +1,6 @@
 {
-    "sql": "select * from chat where id=?",
-	"table": "Chat",
+    "sql": "select * from chess_chat where id=?",
+	"table": "chess_chat",
 	"columns": {
 		"id" : {
 			"db": "int auto_increment not null primary key"

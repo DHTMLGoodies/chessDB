@@ -1,6 +1,6 @@
 {
-    "table": "time_control",
-    "sql": "select * from time_control where id=?",
+    "table": "chess_time_control",
+    "sql": "select * from chess_time_control where id=?",
     "columns": {
         "id": "int auto_increment not null primary key",
         "time": {

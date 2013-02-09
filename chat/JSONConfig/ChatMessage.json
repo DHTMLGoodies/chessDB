@@ -1,10 +1,11 @@
 {
-    "table": "chat_message",
+    "table": "chess_chat_message",
     "columns": {
         "id": "int auto_increment not null primary key",
         "chat": {
             "db" : "int",
-            "access": "rw"
+            "access": "rw",
+            "references": "chess_chat(id) on delete cascade"
         },
         "message": {
             "db": "varchar(1024)",
