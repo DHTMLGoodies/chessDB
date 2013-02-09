@@ -10,9 +10,6 @@ class Fen extends LudoDBModel
     protected $JSONConfig = true;
 
     protected function populate(){
-        if(is_numeric($this->arguments[0])){
-            $this->configParser()->setConstructBy(array('id'));
-        }
         parent::populate();
         if(!$this->getId() && !is_numeric($this->arguments[0])){
             $this->setFen($this->arguments[0]);
