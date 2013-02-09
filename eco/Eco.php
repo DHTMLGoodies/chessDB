@@ -6,7 +6,6 @@
  */
 class Eco extends LudoDBModel implements LudoDBService
 {
-    protected $caching = true;
     protected $JSONConfig = true;
 
     // TODO refactor collection
@@ -111,5 +110,9 @@ class Eco extends LudoDBModel implements LudoDBService
 
     private function getPgnFile(){
         return $this->parser->getFileLocation()."/pgn/eco.pgn";
+    }
+
+    public function cacheEnabled(){
+        return true;
     }
 }

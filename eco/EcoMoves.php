@@ -7,7 +7,6 @@
  */
 class EcoMoves extends LudoDBCollection implements LudoDBService
 {
-    protected $caching = true;
     protected $JSONConfig = true;
 
     public function __construct($fen){
@@ -25,5 +24,9 @@ class EcoMoves extends LudoDBCollection implements LudoDBService
     }
     public function validateService($service, $arguments){
         return count($arguments)===1;
+    }
+
+    public function cacheEnabled(){
+        return true;
     }
 }
