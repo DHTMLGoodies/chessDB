@@ -8,10 +8,19 @@
 			"db": "varchar(256)",
 			"access": "rw"
 		},
+        "description": {
+            "db": "text",
+            "access":"rw"
+        },
 		"parent": {
 			"db": "int",
             "access": "rw"
-		}
+		},
+        "sort": {
+            "db": "int",
+            "access": "rw",
+            "default": 1
+        }
 	},
     "data": [
         {

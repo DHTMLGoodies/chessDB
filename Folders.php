@@ -10,7 +10,7 @@ class Folders extends LudoDBTreeCollection implements LudoDBService
 {
 
     protected $config = array(
-        "sql" => "select * from chess_folder order by parent,id",
+        "sql" => "select * from chess_folder order by parent,sort,id",
         "model" => "Folder",
         "childKey" => "children",
         "pk" => "id",

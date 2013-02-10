@@ -13,7 +13,11 @@
             "canConstructBy": true
         },
         "full_name": {
-            "db": "varchar(256)",
+            "db": "varchar(255)",
+            "access": "rw"
+        },
+        "email": {
+            "db": "varchar(255)",
             "access": "rw"
         },
         "online_player": {
@@ -24,7 +28,8 @@
             "access": "rw"
         },
         "active": {
-            "db": "int"
+            "db": "char(1)",
+            "access": "r"
         },
         "user_access": {
             "db": "bit(64) default 0",
