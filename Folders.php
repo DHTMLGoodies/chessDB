@@ -15,6 +15,7 @@ class Folders extends LudoDBTreeCollection implements LudoDBService
         "childKey" => "children",
         "pk" => "id",
         "fk" => "parent",
+        'hideForeignKeys' => true,
         "merge" => array(
             array(
                 "class" => "Databases",
