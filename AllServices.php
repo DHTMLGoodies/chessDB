@@ -8,27 +8,29 @@
 class AllServices implements LudoDBService
 {
     public function __construct(){
-        LudoDB::registerService('Game');
-        LudoDB::registerService('Fen');
-        LudoDB::registerService('Databases');
-        LudoDB::registerService('Database');
-        LudoDB::registerService('Folders');
-        LudoDB::registerService('Folder');
-        LudoDB::registerService('Eco');
-        LudoDB::registerService('Seek');
-        LudoDB::registerService('Session');
-        LudoDB::registerService('Folder');
-        LudoDB::registerService('ChessLogin');
-        LudoDB::registerService('ChessDBInstaller');
-        LudoDB::registerService('Chat');
-        LudoDB::registerService('ChatMessages');
-        LudoDB::registerService('Player');
-        LudoDB::registerService('Countries');
-        LudoDB::registerService('GameImport');
+        LudoDBServiceRegistry::register('Game');
+        LudoDBServiceRegistry::register('Fen');
+        LudoDBServiceRegistry::register('Databases');
+        LudoDBServiceRegistry::register('Database');
+        LudoDBServiceRegistry::register('Folders');
+        LudoDBServiceRegistry::register('Folder');
+        LudoDBServiceRegistry::register('Eco');
+        LudoDBServiceRegistry::register('Seek');
+        LudoDBServiceRegistry::register('Session');
+        LudoDBServiceRegistry::register('Folder');
+        LudoDBServiceRegistry::register('ChessLogin');
+        LudoDBServiceRegistry::register('ChessDBInstaller');
+        LudoDBServiceRegistry::register('Chat');
+        LudoDBServiceRegistry::register('ChatMessages');
+        LudoDBServiceRegistry::register('Player');
+        LudoDBServiceRegistry::register('Countries');
+        LudoDBServiceRegistry::register('GameImport');
+        #LudoDBServiceRegistry::register('ChessFS');
+        LudoDBServiceRegistry::register('ChessFSPgn');
     }
 
     public function read(){
-        return LudoDB::getAllServices();
+        return LudoDBServiceRegistry::getAll();
     }
     public function cacheEnabled(){
         return false;

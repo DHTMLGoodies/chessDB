@@ -15,13 +15,19 @@
             "references": "chess_time_control(id) on delete cascade"
         },
         "from_elo": {
-            "db": "int"
+            "db": "int",
+            "access": "rw"
         },
         "to_elo": {
-            "db": "int"
+            "db": "int",
+            "access": "rw"
         },
         "rated": {
-            "db": "char(1)"
+            "db": "char(1)",
+            "access":"rw"
+        },
+        "created": {
+            "db": "timestamp"
         }
     },
     "indexes": ["player_id"]

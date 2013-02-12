@@ -50,9 +50,11 @@ class Player extends LudoDBModel implements LudoDBService
         $this->setValue('online_player', $online);
     }
 
-    public function gravatar($email, $size = 80, $default = "")
+    public function gravatar()
     {
         $size = 80;
+        $default = "";
+        if(!$this->getValue('email'))return "";
         return "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $this->getValue('email') ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
         /*
         $url = 'http://www.gravatar.com/avatar/';
@@ -69,12 +71,17 @@ class Player extends LudoDBModel implements LudoDBService
         */
     }
 
+    public function seeks(){
+        $seeks = new Seeks($this->getId());
+        return $seeks->getValues();
+    }
+
     public function getValidServices(){
-        return array("gravatar");
+        return array("gravatar", "seeks");
     }
 
     public function validateArguments($service, $arguments){
-        return count($arguments) === 0;
+        return count($arguments) === 1;
     }
 
     public function validateServiceData($service, $data){
