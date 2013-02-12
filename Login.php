@@ -12,7 +12,7 @@ class ChessLogin implements LudoDBService
 
     const COOKIE_NAME = 'dhtml_chess_sesssion';
 
-    public static function getValidServices(){
+    public function getValidServices(){
         return array("signin");
     }
 

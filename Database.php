@@ -12,7 +12,7 @@ class Database extends LudoDBModel implements LudoDBService
         return count($arguments) === 1 && is_numeric($arguments[0]);
     }
 
-    public static function getValidServices(){
+    public function getValidServices(){
         return array('games','read','save');
     }
 

@@ -25,7 +25,7 @@ class Folders extends LudoDBTreeCollection implements LudoDBService
         )
     );
 
-    public static function getValidServices(){
+    public function getValidServices(){
         return array('read');
     }
 

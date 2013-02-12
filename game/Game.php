@@ -13,7 +13,7 @@ class Game extends LudoDBModel implements LudoDBService
         $this->setValue('fen', $fen);
     }
 
-    public static function getValidServices(){
+    public function getValidServices(){
         return array('read','save','delete');
     }
 

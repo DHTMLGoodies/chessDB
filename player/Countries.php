@@ -11,7 +11,7 @@ class Countries extends LudoDBCollection implements LudoDBService
         "sql" => "select * from country order by name"
     );
 
-    public static function getValidServices(){
+    public function getValidServices(){
         return array('read');
     }
     public function validateService($service, $arguments){

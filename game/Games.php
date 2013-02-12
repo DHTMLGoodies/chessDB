@@ -8,7 +8,7 @@ class Games extends LudoDBCollection implements LudoDBService
 {
     protected $JSONConfig = true;
 
-    public static function getValidServices(){
+    public function getValidServices(){
         return array("read");
     }
     public function validateService($service, $arguments){

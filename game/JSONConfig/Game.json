@@ -97,7 +97,12 @@
 			"class":"moves",
             "access": "rw",
 			"set":"setMoves"
-		}
+		},
+        "last_moves":{
+            "db":"varchar(64)",
+            "access": "rw",
+            "default" : ""
+        }
 	},
 	"indexes":["database_id", "created_by"]
 }

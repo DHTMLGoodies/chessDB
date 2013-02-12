@@ -10,7 +10,7 @@ class Eco extends LudoDBModel implements LudoDBService
 
     // TODO refactor collection
 
-    public static function getValidServices(){
+    public function getValidServices(){
         return array('moves','read');
     }
 

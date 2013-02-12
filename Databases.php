@@ -12,7 +12,7 @@ class Databases extends LudoDBCollection implements LudoDBService
         "model" => "Database",
         "static" => array("type" => "database")
     );
-    public static function getValidServices(){
+    public function getValidServices(){
         return array('read');
     }
     public function validateService($service, $arguments){

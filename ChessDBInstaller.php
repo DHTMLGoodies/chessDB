@@ -77,7 +77,7 @@ class ChessDBInstaller implements LudoDBService
     public function cacheEnabled(){
         return false;
     }
-    public static function getValidServices(){
+    public function getValidServices(){
         return array("install");
     }
 }

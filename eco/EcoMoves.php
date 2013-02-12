@@ -19,7 +19,7 @@ class EcoMoves extends LudoDBCollection implements LudoDBService
         return isset($fen) ? Fen::getIdByFen(str_replace("_", "/", $fen)) : null;
 
     }
-    public static function getValidServices(){
+    public function getValidServices(){
         return array('read');
     }
     public function validateService($service, $arguments){
