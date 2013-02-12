@@ -13,7 +13,8 @@
         },
         "correspondence": {
             "db": "char(1)",
-            "access": "rw"
+            "access": "rw",
+            "default": "1"
         },
         "add_time_on": {
             "db": "int",

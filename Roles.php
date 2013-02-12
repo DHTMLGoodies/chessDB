@@ -4,21 +4,35 @@
  * User: Alf Magne Kalleland
  * Date: 05.02.13
  */
-class ChessRoles
+class ChessRoles implements LudoDBService
 {
     private $roles = array(
-        'LOGIN' => 1,
-        'EDIT_GAMES' => 2,
-        'ROLE_IMPORT' => 4
+        'LOGIN' => array('code' => 1, 'label' => 'Login'),
+        'EDIT_GAMES' => array('code' => 2,'label' => 'Edit and save games'),
+        'ROLE_IMPORT' => array('code' => 4, 'label' =>'Import games from pgn files')
     );
 
-    private $roleLabels = array(
-        'LOGIN' => 'Login',
-        'EDIT_GAMES' => 'Edit games',
-        'ROLE_IMPORT' => 'Import games'
-    );
+    public function read(){
+        return $this->roles;
+    }
 
     public function hasAccessTo(Player $user, $role){
         return $user->getAccess() & $role;
+    }
+
+    public function getValidServices(){
+        return array('read');
+    }
+
+    public function validateArguments($service, $arguments){
+        return count($arguments) === 0;
+    }
+
+    public function validateServiceData($service, $arguments){
+        return true;
+    }
+
+    public function cacheEnabled(){
+        return false;
     }
 }
