@@ -15,8 +15,11 @@ class Databases extends LudoDBCollection implements LudoDBService
     public function getValidServices(){
         return array('read');
     }
-    public function validateService($service, $arguments){
+    public function validateArguments($service, $arguments){
         return count($arguments) === 0;
+    }
+    public function validateServiceData($service, $data){
+        return true;
     }
 
     public function getValues(){

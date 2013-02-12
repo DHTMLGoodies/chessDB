@@ -3,7 +3,7 @@
  * LudoDBModel for chess player objects
  */
 
-class Player extends LudoDBModel
+class Player extends LudoDBModel implements LudoDBService
 {
     protected $JSONConfig = true;
 
@@ -50,9 +50,10 @@ class Player extends LudoDBModel
         $this->setValue('online_player', $online);
     }
 
-    function getGravatar($email, $size = 80, $default = "")
+    public function gravatar($email, $size = 80, $default = "")
     {
-        return "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
+        $size = 80;
+        return "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $this->getValue('email') ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
         /*
         $url = 'http://www.gravatar.com/avatar/';
         $url .= md5(strtolower(trim($email)));
@@ -66,5 +67,21 @@ class Player extends LudoDBModel
         }
         return $url;
         */
+    }
+
+    public function getValidServices(){
+        return array("gravatar");
+    }
+
+    public function validateArguments($service, $arguments){
+        return count($arguments) === 0;
+    }
+
+    public function validateServiceData($service, $data){
+        return true;
+    }
+
+    public function cacheEnabled(){
+        return false;
     }
 }

@@ -71,9 +71,13 @@ class ChessDBInstaller implements LudoDBService
         return $cl->exists();
     }
 
-    public function validateService($serviceName, $arguments){
+    public function validateArguments($serviceName, $arguments){
         return count($arguments) === 0;
     }
+    public function validateServiceData($serviceName, $data){
+        return true;
+    }
+
     public function cacheEnabled(){
         return false;
     }

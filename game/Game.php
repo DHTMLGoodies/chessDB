@@ -95,7 +95,7 @@ class Game extends LudoDBModel implements LudoDBService
         return $move;
     }
 
-    public function validateService($service, $arguments){
+    public function validateArguments($service, $arguments){
         if(count($arguments)>1)return false;
         switch($service){
             case 'read':
@@ -104,6 +104,10 @@ class Game extends LudoDBModel implements LudoDBService
                 return count($arguments) === 0 || is_numeric($arguments[0]);
 
         }
+        return true;
+    }
+
+    public function validateServiceData($service, $data){
         return true;
     }
 
@@ -145,3 +149,4 @@ class Game extends LudoDBModel implements LudoDBService
         return true;
     }
 }
+

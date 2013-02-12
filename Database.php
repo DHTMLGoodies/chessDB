@@ -8,10 +8,12 @@ class Database extends LudoDBModel implements LudoDBService
 {
     protected $JSONConfig = true;
 
-    public function validateService($service, $arguments){
+    public function validateArguments($service, $arguments){
         return count($arguments) === 1 && is_numeric($arguments[0]);
     }
-
+    public function validateServiceData($service, $arguments){
+        return true;
+    }
     public function getValidServices(){
         return array('games','read','save');
     }

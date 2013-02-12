@@ -9,7 +9,6 @@ class PlayerByUsernamePassword extends Player
     protected $JSONConfig = true;
 
     public function __construct($username, $password){
-        $password = md5($password);
         parent::__construct($username, $password);
     }
 }

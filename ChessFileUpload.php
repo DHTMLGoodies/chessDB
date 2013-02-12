@@ -67,7 +67,11 @@ class ChessFileUpload extends LudoDBModel implements LudoDBService
         return $ret;
     }
 
-    public function validateService($service, $arguments){
+    public function validateArguments($service, $arguments){
+        return true;
+    }
+
+    public function validateServiceData($service, $arguments){
         return true;
     }
 }

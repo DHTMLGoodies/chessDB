@@ -50,7 +50,11 @@ class GameImport implements LudoDBService
         return $g->getId();
     }
 
-    public function validateService($service, $args){
+    public function validateArguments($service, $args){
+        return true;
+    }
+
+    public function validateServiceData($service, $data){
         return true;
     }
 
