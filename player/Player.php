@@ -46,6 +46,19 @@ class Player extends LudoDBModel implements LudoDBService
         $this->setValue('full_name', $name);
     }
 
+
+    public function games()
+    {
+        $obj = new PlayerGames($this->getId(), '0');
+        return $obj->getValues();
+    }
+
+    public function archive()
+    {
+        $obj = new PlayerGames($this->getId(), '1');
+        return $obj->getValues();
+    }
+
     public function setOnlinePlayer($online){
         $this->setValue('online_player', $online);
     }
@@ -77,7 +90,7 @@ class Player extends LudoDBModel implements LudoDBService
     }
 
     public function getValidServices(){
-        return array("gravatar", "seeks");
+        return array("gravatar", "seeks", "games", "archive");
     }
 
 
