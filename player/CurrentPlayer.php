@@ -1,6 +1,6 @@
 <?php
 /**
- * Current player
+ * Logged on player
  * User: Alf Magne Kalleland
  * Date: 13.02.13
  * Time: 01:27
@@ -12,12 +12,12 @@ class CurrentPlayer extends Player
 
     public function __construct()
     {
-        $me = Session::getInstance()->getUser()->getId();
-        if (!$me) {
+        $myId = Session::getInstance()->getUser()->getId();
+        if (!$myId) {
             throw new LudoDBUnauthorizedException("Your are not signed in");
         }
         $this->disableCommit();
-        parent::__construct($me);
+        parent::__construct($myId);
     }
 
     public function validateArguments($service, $arguments)

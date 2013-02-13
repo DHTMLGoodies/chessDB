@@ -19,13 +19,14 @@ class ChessSessionTest extends ChessTests
         LudoDB::enableSqlLogging();
         /// when
         $login = new Session();
-        $session = $login->signIn(array(
+        $login->signIn(array(
             "username" => "username",
             "password" => md5("Pass1234"))
         );
 
         // then
-        $this->assertNotNull($session);
+        $this->assertNotNull($login->getKey());
+        $this->assertTrue($login->isSignedIn());
     }
 
     /**
@@ -39,10 +40,10 @@ class ChessSessionTest extends ChessTests
         $this->createUser($username, $password);
 
         $login = new Session();
-        $session = $login->signIn(array(
+        $login->signIn(array(
             'username' => $username, 'password' => md5($password)
         ));
-        $key = $session->getKey();
+        $key = $login->getKey();
 
         // when
         $auth = new Session();
@@ -57,21 +58,16 @@ class ChessSessionTest extends ChessTests
      */
     public function shouldGetLoggedOnUser(){
         // given
-        ini_set('display_errors','on');
-
         $username = 'username';
         $password = 'Pass1234';
-
         $this->createUser($username, $password);
 
+        // when
         $login = new Session();
-        $session = $login->signIn(array(
+        $login->signIn(array(
             'username' => $username, 'password' => md5($password)
         ));
-        $key = $session->getKey();
-        $_COOKIE[ChessRegistry::getCookieName()] = $key;
-
-        // when
+        $this->mockCookie($login->getKey());
         $user = $login->getUser();
 
         // then
@@ -84,5 +80,9 @@ class ChessSessionTest extends ChessTests
         $this->assertEquals($user->getValues(), $player->getValues());
 
 
+    }
+
+    private function mockCookie($key){
+        $_COOKIE[ChessRegistry::getCookieName()] = $key;
     }
 }

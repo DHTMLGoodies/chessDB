@@ -115,6 +115,7 @@ class Session extends LudoDBModel implements LudoDBService
     private $user;
 
     /**
+     * Returned signed in user or empty Player instance when not signed in.
      * @return Player
      */
     public function getUser()
@@ -129,6 +130,10 @@ class Session extends LudoDBModel implements LudoDBService
             }
         }
         return $this->user;
+    }
+
+    public function isSignedIn(){
+        return $this->getValue('session_key') ? true : false;
     }
 
     private static $instance;
