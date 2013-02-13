@@ -16,13 +16,11 @@ class CurrentPlayer extends Player
         if (!$myId) {
             throw new LudoDBUnauthorizedException("Your are not signed in");
         }
-        $this->disableCommit();
         parent::__construct($myId);
     }
 
-    public function validateArguments($service, $arguments)
-    {
-        return $this->getValue('id') ? count($arguments) === 0 : false;
+    public function getValidServices(){
+        return array_merge(parent::getValidServices(), array('read','save'));
     }
 
 }

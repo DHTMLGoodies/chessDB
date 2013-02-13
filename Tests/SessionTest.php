@@ -7,7 +7,7 @@
 
 require_once __DIR__."/../autoload.php";
 
-class ChessSessionTest extends ChessTests
+class SessionTest extends ChessTests
 {
     /**
      * @test

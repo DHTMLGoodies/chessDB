@@ -18,8 +18,8 @@ class AllChessTests
         $suite->addTestSuite("MetadataTest");
         $suite->addTestSuite("PlayerTest");
         $suite->addTestSuite("SeekTest");
-        $suite->addTestSuite("ChessSessionTest");
         $suite->addTestSuite("ImportTest");
+        $suite->addTestSuite("SessionTest");
 
         return $suite;
     }

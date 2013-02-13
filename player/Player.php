@@ -84,25 +84,57 @@ class Player extends LudoDBModel implements LudoDBService
         */
     }
 
+    public function getPassword(){
+        return $this->getValue('password');
+    }
+
     public function seeks(){
         $seeks = new Seeks($this->getId());
         return $seeks->getValues();
     }
 
     public function getValidServices(){
-        return array("gravatar", "seeks", "games", "archive");
+        return array("gravatar", "seeks", "games", "archive", "register");
     }
 
 
+
     public function validateArguments($service, $arguments){
+        switch($service){
+            case 'read':
+                return count($arguments) === 1;
+            case "register":
+                return count($arguments) < 2;
+            default:
+        }
         return count($arguments) === 1;
     }
 
     public function validateServiceData($service, $data){
+        switch($service){
+            case "save":
+                if(!isset($data['username']) || !isset($data['email']) || !isset($data['password']) || !isset($data['repeat_password'])){
+                    throw new LudoDBException("Missing user data");
+                }
+                if($data['password'] != $data['repeat_password']){
+                    throw new LudoDBException("Password does not match");
+                }
+
+        }
         return true;
     }
 
     public function cacheEnabled(){
         return false;
+    }
+
+
+    public function register($userDetails){
+        ini_set('display_errors','on');
+        $ret = $this->save($userDetails);
+        $session = new Session();
+        $session->signIn(array("username" => $this->getUsername(),"password" => $this->getPassword()));
+
+        return array_merge($ret, array('token' => $session->getKey()));
     }
 }

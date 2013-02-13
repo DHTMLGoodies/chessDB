@@ -68,7 +68,7 @@ class Session extends LudoDBModel implements LudoDBService
 
     public function getValidServices()
     {
-        return array("authenticate", "signin");
+        return array("authenticate", "signIn");
     }
 
     public function validateArguments($service, $arguments)
@@ -87,10 +87,10 @@ class Session extends LudoDBModel implements LudoDBService
         if ($pl->getId()) {
             $this->setUserId($pl->getId());
             $this->commit();
-            $this->setCookie($this);
-            return $this;
+            $this->setCookie();
+            return $this->getKey();
         }
-        return null;
+        throw new LudoDBUnauthorizedException("Invalid username or password");
     }
 
     private function setCookie()
@@ -103,10 +103,20 @@ class Session extends LudoDBModel implements LudoDBService
         return $days * 24 * 60 * 60;
     }
 
-    public function authenticate($session)
+    public function authenticate($key)
     {
-        $session = new Session($session);
-        return $session->getId() ? $session : null;
+        if(!is_string($key)){
+            throw new LudoDBInvalidArgumentsException("Invalid session key ".$key);
+        }
+        $session = new Session($key);
+        if($session->getId() && !$session->expired()){
+            $user =  $session->getUser();
+            return array(
+                'id' => $user->getId(),
+                'user_access' => $user->getAccess()
+            );
+        }
+        throw new LudoDBUnauthorizedException("Invalid session key");
     }
 
     /**
@@ -153,5 +163,4 @@ class Session extends LudoDBModel implements LudoDBService
     {
         return true;
     }
-
 }

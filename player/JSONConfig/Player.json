@@ -1,5 +1,6 @@
 {
     "table": "chess_player",
+    "sql": "select * from chess_player where id=?",
     "columns": {
         "id": "int auto_increment not null primary key",
         "username": {
@@ -9,7 +10,7 @@
         },
         "password": {
             "db": "varchar(128)",
-            "access": "rw",
+            "access": "w",
             "canConstructBy": true
         },
         "full_name": {
@@ -40,7 +41,7 @@
             "access": "rw"
         },
 		"title":{
-			"db":"varchar2(10)",
+			"db":"varchar(10)",
 			"access": "rw"
 		},
         "indexes": ["country", "active", "online_player", "username", "password", "full_name"]
