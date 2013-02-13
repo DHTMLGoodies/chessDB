@@ -15,7 +15,7 @@ class Player extends LudoDBModel implements LudoDBService
     public function getFullName()
     {
         if ($this->getId()) {
-            return $this->getValue('firstname') . " " . $this->getValue('lastname');
+            return $this->getValue('full_name');
         }
         return null;
     }

@@ -14,9 +14,9 @@ class ChessSessionTest extends ChessTests
      */
     public function shouldBeAbleToSignIn(){
         // given
-        ini_set('display_errors','on');
         $this->createUser("username","Pass1234");
         LudoDB::enableSqlLogging();
+
         /// when
         $login = new Session();
         $login->signIn(array(

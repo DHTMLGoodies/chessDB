@@ -39,6 +39,10 @@
             "db": "smallint",
             "access": "rw"
         },
+		"title":{
+			"db":"varchar2(10)",
+			"access": "rw"
+		},
         "indexes": ["country", "active", "online_player", "username", "password", "full_name"]
     }
 }
