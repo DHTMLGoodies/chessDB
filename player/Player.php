@@ -80,6 +80,7 @@ class Player extends LudoDBModel implements LudoDBService
         return array("gravatar", "seeks");
     }
 
+
     public function validateArguments($service, $arguments){
         return count($arguments) === 1;
     }

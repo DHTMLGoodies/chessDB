@@ -84,6 +84,11 @@
             "db": "varchar(64)",
             "access": "rw"
         },
+        "finished": {
+            "db": "char(1)",
+            "access": "rw",
+            "default": "0"
+        },
         "comment": {
             "db": "text",
             "access" : "rw"

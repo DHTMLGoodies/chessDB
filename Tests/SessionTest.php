@@ -57,6 +57,7 @@ class ChessSessionTest extends ChessTests
      */
     public function shouldGetLoggedOnUser(){
         // given
+        ini_set('display_errors','on');
         $username = 'username';
         $password = 'Pass1234';
 
@@ -75,6 +76,9 @@ class ChessSessionTest extends ChessTests
         $this->assertNotNull($user);
         $this->assertEquals(1, $user->getId());
         $this->assertEquals("username", $user->getUsername());
+
+        $player = new CurrentPlayer();
+        $this->assertEquals($user->getValues(), $player->getValues());
 
 
     }

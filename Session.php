@@ -114,15 +114,13 @@ class Session extends LudoDBModel implements LudoDBService
      * @var Player
      */
     private $user;
-    private $userLoaded;
 
     /**
      * @return null|Player
      */
     public function getUser()
     {
-        if (!isset($this->userLoaded)) {
-            $this->userLoaded = true;
+        if (!isset($this->user)) {;
             $cookie = $this->getCookieValue();
             if (isset($cookie)) {
                 $session = new Session($cookie);
@@ -131,8 +129,21 @@ class Session extends LudoDBModel implements LudoDBService
                     $this->user = $user->getId() ? $user : null;
                 }
             }
+            if(!isset($this->user)){
+                $this->user = new Player();
+
+            }
         }
+        echo $this->user->getId();
         return $this->user;
+    }
+
+    private static $instance;
+    public static function getInstance(){
+        if(!isset(self::$instance)){
+            self::$instance = new Session();
+        }
+        return self::$instance;
     }
 
     private function getCookieValue()
