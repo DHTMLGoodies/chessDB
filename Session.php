@@ -85,18 +85,17 @@ class Session extends LudoDBModel implements LudoDBService
     {
         $pl = new PlayerByUsernamePassword($userDetails['username'], $userDetails['password']);
         if ($pl->getId()) {
-            $session = new Session();
-            $session->setUserId($pl->getId());
-            $session->commit();
-            $this->setCookie($session);
-            return $session;
+            $this->setUserId($pl->getId());
+            $this->commit();
+            $this->setCookie($this);
+            return $this;
         }
         return null;
     }
 
-    private function setCookie(Session $session)
+    private function setCookie()
     {
-        setcookie(ChessRegistry::getCookieName(), $session->getKey(), time() + $this->daysToSeconds(365));
+        setcookie(ChessRegistry::getCookieName(), $this->getKey(), time() + $this->daysToSeconds(365));
     }
 
     private function daysToSeconds($days)
@@ -116,37 +115,31 @@ class Session extends LudoDBModel implements LudoDBService
     private $user;
 
     /**
-     * @return null|Player
+     * @return Player
      */
     public function getUser()
     {
-        if (!isset($this->user)) {;
-            $cookie = $this->getCookieValue();
-            if (isset($cookie)) {
-                $session = new Session($cookie);
-                if (!$session->expired()) {
-                    $user = new Player($session->getUserId());
-                    $this->user = $user->getId() ? $user : null;
-                }
+        if (!isset($this->user)) {
+            if(!$this->expired()){
+                $user = new Player($this->getUserId());
+                $this->user = $user->getId() ? $user : null;
             }
             if(!isset($this->user)){
                 $this->user = new Player();
-
             }
         }
-        echo $this->user->getId();
         return $this->user;
     }
 
     private static $instance;
     public static function getInstance(){
         if(!isset(self::$instance)){
-            self::$instance = new Session();
+            self::$instance = new Session(self::getCookieValue());
         }
         return self::$instance;
     }
 
-    private function getCookieValue()
+    private static function getCookieValue()
     {
         return isset($_COOKIE[ChessRegistry::getCookieName()]) ? $_COOKIE[ChessRegistry::getCookieName()] : null;
     }

@@ -58,15 +58,17 @@ class ChessSessionTest extends ChessTests
     public function shouldGetLoggedOnUser(){
         // given
         ini_set('display_errors','on');
+
         $username = 'username';
         $password = 'Pass1234';
 
         $this->createUser($username, $password);
 
         $login = new Session();
-        $key = $login->signIn(array(
+        $session = $login->signIn(array(
             'username' => $username, 'password' => md5($password)
         ));
+        $key = $session->getKey();
         $_COOKIE[ChessRegistry::getCookieName()] = $key;
 
         // when
@@ -74,6 +76,7 @@ class ChessSessionTest extends ChessTests
 
         // then
         $this->assertNotNull($user);
+
         $this->assertEquals(1, $user->getId());
         $this->assertEquals("username", $user->getUsername());
 

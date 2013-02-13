@@ -38,7 +38,7 @@ class Player extends LudoDBModel implements LudoDBService
         $this->setValue('username', $username);
     }
 
-    private function getUsername(){
+    public function getUsername(){
         return $this->getValue('username');
     }
 
