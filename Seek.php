@@ -15,6 +15,16 @@ class Seek extends LudoDBModel implements LudoDBService
     }
 
     public function validateServiceData($service, $data){
+        switch($service){
+            case "save":
+                if($data['from_elo'] > $data['to_elo']){
+                    throw new LudoDBInvalidArgumentsException("Invalid ELO. ");
+                };
+                break;
+            default:
+
+        }
         return true;
     }
+
 }
