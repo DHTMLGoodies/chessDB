@@ -18,10 +18,10 @@ class GameImport implements LudoDBService
     }
 
     public function getValidServices(){
-        return array('save');
+        return array('import');
     }
 
-    public function save($request){
+    public function import($request){
         $ret = array();
         $filePath = $this->getFilePath($request);
         if(!file_exists($filePath)){

@@ -8,73 +8,98 @@ class Game extends LudoDBModel implements LudoDBService
 {
     protected $JSONConfig = true;
 
-    public function setFen($fen){
+    private $reservedMetadata = array('white', 'black', 'site', 'event', 'result', 'fen', 'eco',
+        'plycount', 'annotator', 'timecontrol', 'date', 'round', 'termination');
+
+    public function setFen($fen)
+    {
         $this->setValue('fen_id', Fen::getIdByFen($fen));
         $this->setValue('fen', $fen);
     }
 
-    public function getValidServices(){
-        return array('read','save','delete');
+    public function getValidServices()
+    {
+        return array('read', 'save', 'delete');
     }
 
-    public function getFen(){
+    public function getFen()
+    {
         return $this->getValue('fen');
     }
 
-    public function getFenId(){
+    public function getFenId()
+    {
         return $this->getValue('fen_id');
     }
 
-    public function setMetadata($metadataValues){
+    public function setMetadata($metadataValues)
+    {
         $this->setValue('metadata', $metadataValues);
     }
 
-    public function setDatabaseId($databaseId){
+    public function setDatabaseId($databaseId)
+    {
         $this->setValue('database_id', $databaseId);
     }
 
-    public function getDatabaseId(){
+    public function getDatabaseId()
+    {
         return $this->getValue('database_id');
     }
 
-    public function setMoves($moves){
+    public function setMoves($moves)
+    {
         $this->setValue('moves', $moves);
     }
 
-    public function getMoves(){
+    public function getMoves()
+    {
         $ret = $this->getValue('moves');
-        if(!isset($ret))$ret = array();
+        if (!isset($ret)) $ret = array();
         return $ret;
     }
 
-    public function getMetadata(){
+    public function getMetadata()
+    {
         return $this->getValue('metadata');
+    }
+
+    public function getTermination(){
+        return $this->getValue('termination');
+    }
+
+    public function getPlyCount(){
+        return $this->getValue('plycount');
     }
 
     /**
      * Return last fen position in game or start position.
      * @return String
      */
-    public function getCurrentFen(){
+    public function getCurrentFen()
+    {
         return $this->gameParser()->getFen();
     }
 
     private $fenParser;
-    private function gameParser(){
-        if(!isset($this->fenParser)){
+
+    private function gameParser()
+    {
+        if (!isset($this->fenParser)) {
             $fen = $this->getFen();
-            if(!$fen)$fen = ChessRegistry::getDefaultFen();
+            if (!$fen) $fen = ChessRegistry::getDefaultFen();
             $this->fenParser = new FenParser0x88($fen);
             $moves = $this->getMoves();
-            foreach($moves as $move){
+            foreach ($moves as $move) {
                 $this->fenParser->makeMove($move);
             }
         }
         return $this->fenParser;
     }
 
-    protected function beforeInsert(){
-        if(!$this->getFen()){
+    protected function beforeInsert()
+    {
+        if (!$this->getFen()) {
             $this->setFen(ChessRegistry::getDefaultFen());
         }
     }
@@ -84,8 +109,9 @@ class Game extends LudoDBModel implements LudoDBService
      * @param $move
      * @return Array
      */
-    public function appendMove($move){
-        if(!$this->getId())$this->commit();
+    public function appendMove($move)
+    {
+        if (!$this->getId()) $this->commit();
         $move = $this->gameParser()->getParsed($move);
         $move['game_id'] = $this->getId();
         $move['fen_id'] = Fen::getIdByFen($move['fen']);
@@ -95,9 +121,10 @@ class Game extends LudoDBModel implements LudoDBService
         return $move;
     }
 
-    public function validateArguments($service, $arguments){
-        if(count($arguments)>1)return false;
-        switch($service){
+    public function validateArguments($service, $arguments)
+    {
+        if (count($arguments) > 1) return false;
+        switch ($service) {
             case 'read':
                 return count($arguments) === 1 && is_numeric($arguments[0]);
             case 'save':
@@ -107,25 +134,26 @@ class Game extends LudoDBModel implements LudoDBService
         return true;
     }
 
-    public function validateServiceData($service, $data){
+    public function validateServiceData($service, $data)
+    {
         return true;
     }
 
-    public function save($data){
+    public function save($data)
+    {
 
         $data = $this->withSpecialMetadataKeysMoved($data);
 
-        if(isset($data['white']))$data['white_id'] = $this->getPlayerIdByName($data['white']);
-        if(isset($data['black']))$data['black_id'] = $this->getPlayerIdByName($data['black']);
+        if (isset($data['white'])) $data['white_id'] = $this->getPlayerIdByName($data['white']);
+        if (isset($data['black'])) $data['black_id'] = $this->getPlayerIdByName($data['black']);
 
         return parent::save($data);
     }
 
-    private function withSpecialMetadataKeysMoved($data){
-        $keys = array('white','black','site','event','result','fen','eco',
-            'plycount','annotator','timecontrol','date','round','termination');
-        foreach($keys as $key){
-            if(isset($data['metadata'][$key])){
+    private function withSpecialMetadataKeysMoved($data)
+    {
+        foreach ($this->reservedMetadata as $key) {
+            if (isset($data['metadata'][$key])) {
                 $data[$key] = $data['metadata'][$key];
                 unset($data['metadata'][$key]);
             }
@@ -133,9 +161,10 @@ class Game extends LudoDBModel implements LudoDBService
         return $data;
     }
 
-    private function getPlayerIdByName($name){
+    private function getPlayerIdByName($name)
+    {
         $player = new PlayerByName($name);
-        if(!$player->getId()){
+        if (!$player->getId()) {
             $p = new Player();
             $p->setFullName($name);
             $p->setOnlinePlayer(0);
@@ -145,7 +174,8 @@ class Game extends LudoDBModel implements LudoDBService
         return null;
     }
 
-    public function cacheEnabled(){
+    public function cacheEnabled()
+    {
         return true;
     }
 }

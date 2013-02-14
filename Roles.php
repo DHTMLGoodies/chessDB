@@ -17,7 +17,7 @@ class ChessRoles implements LudoDBService
     }
 
     public function hasAccessTo(Player $user, $role){
-        return $user->getAccess() & $role;
+        return $user->getUserAccess() & $role;
     }
 
     public function getValidServices(){

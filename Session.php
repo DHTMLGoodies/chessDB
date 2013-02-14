@@ -113,7 +113,7 @@ class Session extends LudoDBModel implements LudoDBService
             $user =  $session->getUser();
             return array(
                 'id' => $user->getId(),
-                'user_access' => $user->getAccess()
+                'user_access' => $user->getUserAccess()
             );
         }
         throw new LudoDBUnauthorizedException("Invalid session key");

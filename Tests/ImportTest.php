@@ -48,7 +48,7 @@ class ImportTest extends ChessTests
         $import = new GameImport();
 
         // when
-        $gameIds = $import->save(array(
+        $gameIds = $import->import(array(
             "file" => "pgn/test.pgn",
             "databaseId" => 1
         ));
@@ -65,7 +65,7 @@ class ImportTest extends ChessTests
         $import = new GameImport();
 
         // when
-        $gameIds = $import->save(array(
+        $gameIds = $import->import(array(
             "file" => "pgn/test.pgn",
             "databaseId" => 1
         ));
@@ -81,7 +81,7 @@ class ImportTest extends ChessTests
     public function shouldSaveMoves(){
         // given
         $import = new GameImport();
-        $gameIds = $import->save(array(
+        $gameIds = $import->import(array(
             "file" => "pgn/test.pgn",
             "databaseId" => 1
         ));
@@ -100,7 +100,7 @@ class ImportTest extends ChessTests
     public function shouldSaveMetadata(){
         // given
         $import = new GameImport();
-        $gameIds = $import->save(array(
+        $gameIds = $import->import(array(
             "file" => "pgn/test.pgn",
             "databaseId" => 1
         ));
@@ -124,7 +124,7 @@ class ImportTest extends ChessTests
         $import = new GameImport();
 
         // when
-        $games = $import->save(array(
+        $games = $import->import(array(
             "file" => "pgn/test-timer.pgn",
             "databaseId" => 1
         ));

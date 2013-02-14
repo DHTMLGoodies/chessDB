@@ -20,8 +20,12 @@ class Player extends LudoDBModel implements LudoDBService
         return null;
     }
 
-    public function getAccess(){
+    public function getUserAccess(){
         return $this->getValue('user_access');
+    }
+
+    public function setUserAccess($access){
+        $this->setValue('user_access', $access);
     }
 
     public function isValid()
@@ -112,9 +116,15 @@ class Player extends LudoDBModel implements LudoDBService
 
     public function validateServiceData($service, $data){
         switch($service){
-            case "save":
+            case "register":
                 if(!isset($data['username']) || !isset($data['email']) || !isset($data['password']) || !isset($data['repeat_password'])){
                     throw new LudoDBException("Missing user data");
+                }
+                if($this->hasRowWith(array("email" => $data["email"]))){
+                    throw new LudoDBException("Invalid email address");
+                }
+                if($this->hasRowWith(array("username" => $data["username"]))){
+                    throw new LudoDBException("Invalid user name");
                 }
                 if($data['password'] != $data['repeat_password']){
                     throw new LudoDBException("Password does not match");
@@ -130,11 +140,18 @@ class Player extends LudoDBModel implements LudoDBService
 
 
     public function register($userDetails){
-        ini_set('display_errors','on');
-        $ret = $this->save($userDetails);
+        $this->setDefaultValuesForNewPlayers();
+        $ret = $this->setValues($userDetails);
+        $this->commit();
+
         $session = new Session();
         $session->signIn(array("username" => $this->getUsername(),"password" => $this->getPassword()));
 
         return array_merge($ret, array('token' => $session->getKey()));
+    }
+
+    private function setDefaultValuesForNewPlayers(){
+        $this->setOnlinePlayer(1);
+        $this->setUserAccess(1);
     }
 }

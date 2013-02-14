@@ -22,7 +22,8 @@
             "access": "rw"
         },
         "online_player": {
-            "db": "char(1) default '1'"
+            "db": "char(1)",
+			"default" : "0"
         },
         "country": {
             "db": "varchar(100)",
@@ -42,7 +43,8 @@
         },
 		"title":{
 			"db":"varchar(10)",
-			"access": "rw"
+			"access": "rw",
+			"default": ""
 		},
         "indexes": ["country", "active", "online_player", "username", "password", "full_name"]
     }
