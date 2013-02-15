@@ -25,7 +25,7 @@ class AllServices implements LudoDBService
         LudoDBServiceRegistry::register('Player');
         LudoDBServiceRegistry::register('Countries');
         LudoDBServiceRegistry::register('GameImport');
-        #LudoDBServiceRegistry::register('ChessFS');
+        LudoDBServiceRegistry::register('ChessFS');
         LudoDBServiceRegistry::register('ChessFSPgn');
     }
 
