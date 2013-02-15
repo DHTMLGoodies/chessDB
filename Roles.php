@@ -32,7 +32,7 @@ class ChessRoles implements LudoDBService
         return true;
     }
 
-    public function cacheEnabled(){
+    public function cacheEnabledFor($service){
         return false;
     }
 }
