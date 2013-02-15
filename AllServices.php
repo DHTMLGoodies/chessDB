@@ -22,6 +22,7 @@ class AllServices implements LudoDBService
         LudoDBServiceRegistry::register('ChessDBInstaller');
         LudoDBServiceRegistry::register('Chat');
         LudoDBServiceRegistry::register('ChatMessages');
+        LudoDBServiceRegistry::register('CurrentPlayer');
         LudoDBServiceRegistry::register('Player');
         LudoDBServiceRegistry::register('Countries');
         LudoDBServiceRegistry::register('GameImport');
@@ -46,5 +47,9 @@ class AllServices implements LudoDBService
 
     public function getValidServices(){
         return array('read');
+    }
+
+    public function getOnSuccessMessageFor($service){
+        return "";
     }
 }

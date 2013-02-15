@@ -18,6 +18,10 @@ class Database extends LudoDBModel implements LudoDBService
         return array('games','read','save');
     }
 
+    public function getOnSuccessMessageFor($service){
+        return "";
+    }
+
     public function games(){
         $g = new Games($this->getId());
         return $g->read();

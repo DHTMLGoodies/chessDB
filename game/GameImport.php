@@ -21,6 +21,10 @@ class GameImport implements LudoDBService
         return array('import');
     }
 
+    public function getOnSuccessMessageFor($service){
+        return "";
+    }
+
     public function import($request){
         $ret = array();
         $filePath = $this->getFilePath($request);

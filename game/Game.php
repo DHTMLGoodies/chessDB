@@ -22,6 +22,10 @@ class Game extends LudoDBModel implements LudoDBService
         return array('read', 'save', 'delete');
     }
 
+    public function getOnSuccessMessageFor($service){
+        return "";
+    }
+
     public function getFen()
     {
         return $this->getValue('fen');

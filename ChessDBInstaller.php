@@ -84,4 +84,7 @@ class ChessDBInstaller implements LudoDBService
     public function getValidServices(){
         return array("install");
     }
+    public function getOnSuccessMessageFor($service){
+        return "";
+    }
 }

@@ -29,6 +29,10 @@ class Folders extends LudoDBTreeCollection implements LudoDBService
         return array('read');
     }
 
+    public function getOnSuccessMessageFor($service){
+        return "";
+    }
+
     public function validateArguments($service, $arguments){
         return count($arguments) === 0;
     }

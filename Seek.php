@@ -10,6 +10,10 @@ class Seek extends LudoDBModel implements LudoDBService
         return array('save');
     }
 
+    public function getOnSuccessMessageFor($service){
+        return "";
+    }
+
     public function validateArguments($service, $arguments){
         return count($arguments) === 0;
     }

@@ -71,6 +71,10 @@ class Session extends LudoDBModel implements LudoDBService
         return array("authenticate", "signIn","signOut");
     }
 
+    public function getOnSuccessMessageFor($service){
+        return "";
+    }
+
     public function validateArguments($service, $arguments)
     {
         return count($arguments) === 0;

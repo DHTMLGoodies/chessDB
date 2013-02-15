@@ -14,6 +14,10 @@ class Eco extends LudoDBModel implements LudoDBService
         return array('moves','read');
     }
 
+    public function getOnSuccessMessageFor($service){
+        return "";
+    }
+
     private $fen;
     private $previousFen;
 
