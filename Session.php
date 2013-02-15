@@ -68,7 +68,7 @@ class Session extends LudoDBModel implements LudoDBService
 
     public function getValidServices()
     {
-        return array("authenticate", "signIn");
+        return array("authenticate", "signIn","signOut");
     }
 
     public function validateArguments($service, $arguments)
@@ -93,9 +93,26 @@ class Session extends LudoDBModel implements LudoDBService
         throw new LudoDBUnauthorizedException("Invalid username or password");
     }
 
+    public function signOut(){
+        $s = new Session($this->getCookieValue());
+        if($s->getId() && !$s->expired()){
+            $s->setLoggedOut();
+            $s->commit();
+            $this->clearCookie();
+        }
+    }
+
+    public function setLoggedOut(){
+        $this->setValue('logged_out',1);
+    }
+
     private function setCookie()
     {
         setcookie(ChessRegistry::getCookieName(), $this->getKey(), time() + $this->daysToSeconds(365));
+    }
+
+    public function clearCookie(){
+        setcookie(ChessRegistry::getCookieName(), "", time() - $this->daysToSeconds(365));
     }
 
     private function daysToSeconds($days)
