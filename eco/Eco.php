@@ -11,7 +11,7 @@ class Eco extends LudoDBModel implements LudoDBService
     // TODO refactor collection
 
     public function getValidServices(){
-        return array('moves','read');
+        return array('moves','read',"generate");
     }
 
     public function getOnSuccessMessageFor($service){
@@ -19,12 +19,10 @@ class Eco extends LudoDBModel implements LudoDBService
     }
 
     private $fen;
-    private $previousFen;
 
-    public function __construct($previousFen = null, $fen = null){
-        if(!isset($previousFen))$previousFen = ChessRegistry::getDefaultFen();
+    public function __construct($fen = null){
+        if(!isset($fen))$fen = ChessRegistry::getDefaultFen();
         $this->fen = $this->getValidFen($fen);
-        $this->previousFen = $this->getValidFen($previousFen);
         parent::__construct();
     }
 
@@ -33,7 +31,7 @@ class Eco extends LudoDBModel implements LudoDBService
     }
 
     public function validateArguments($service, $arguments){
-        return count($arguments) === 1 || ($service == 'moves');
+        return count($arguments) === 1 || ($service == 'moves' || $service=='generate');
     }
 
     public function validateServiceData($service, $data){
@@ -41,11 +39,8 @@ class Eco extends LudoDBModel implements LudoDBService
     }
 
     public function moves(){
-        if(isset($this->fen) && $this->fen){
-            $moves = new EcoMovesDetailed(Fen::getIdByFen($this->previousFen),Fen::getIdByFen($this->fen));
-        }else{
-            $moves = new EcoMoves(Fen::getIdByFen($this->previousFen));
-        }
+
+        $moves = new EcoMoves(Fen::getIdByFen($this->fen));
         return $moves->read();
     }
 
@@ -95,11 +90,11 @@ class Eco extends LudoDBModel implements LudoDBService
         $lastMove = $moves[$index];
         $fenId = Fen::getIdByFen($lastMove['fen']);
         if($index === 0){
-            $previousFen = $eco['fen'];
+            $fen = $eco['fen'];
         }else{
-            $previousFen = $moves[$index-1]['fen'];
+            $fen = $moves[$index-1]['fen'];
         }
-        $previousFenId = isset($previousFen) ? Fen::getIdByFen($previousFen) : null;
+        $fenId = isset($fen) ? Fen::getIdByFen($fen) : null;
         $fromSquare = $lastMove['from'];
         $toSquare = $lastMove['to'];
         $notation = $lastMove['m'];
@@ -109,7 +104,7 @@ class Eco extends LudoDBModel implements LudoDBService
             'opening_name' => $openingName,
             'variation' => $variation,
             'fen_id' => $fenId,
-            'previous_fen_id' => $previousFenId,
+            'previous_fen_id' => $fenId,
             'from_square' => $fromSquare,
             'to_square' => $toSquare,
             'notation' => $notation
@@ -121,6 +116,6 @@ class Eco extends LudoDBModel implements LudoDBService
     }
 
     public function cacheEnabledFor($service){
-        return $service === "read";
+        return $service === "moves";
     }
 }

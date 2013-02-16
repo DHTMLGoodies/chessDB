@@ -36,6 +36,6 @@ class EcoMoves extends LudoDBCollection implements LudoDBService
     }
 
     public function cacheEnabledFor($service){
-        return $service === "read";
+        return false;
     }
 }
