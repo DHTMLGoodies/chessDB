@@ -8,8 +8,6 @@ class Eco extends LudoDBModel implements LudoDBService
 {
     protected $JSONConfig = true;
 
-    // TODO refactor collection
-
     public function getValidServices(){
         return array('moves','read');
     }
