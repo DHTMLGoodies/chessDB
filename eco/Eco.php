@@ -11,7 +11,7 @@ class Eco extends LudoDBModel implements LudoDBService
     // TODO refactor collection
 
     public function getValidServices(){
-        return array('moves','read',"generate");
+        return array('moves','read');
     }
 
     public function getOnSuccessMessageFor($service){
