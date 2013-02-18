@@ -145,7 +145,6 @@ class Game extends LudoDBModel implements LudoDBService
 
     public function save($data)
     {
-
         $data = $this->withSpecialMetadataKeysMoved($data);
 
         if (isset($data['white'])) $data['white_id'] = $this->getPlayerIdByName($data['white']);
@@ -175,7 +174,7 @@ class Game extends LudoDBModel implements LudoDBService
             $p->commit();
             return $p->getId();
         }
-        return null;
+        return $player->getId();
     }
 
     public function shouldCache($service)

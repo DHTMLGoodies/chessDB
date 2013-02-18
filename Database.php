@@ -15,11 +15,17 @@ class Database extends LudoDBModel implements LudoDBService
         return true;
     }
     public function getValidServices(){
-        return array('games','read','save');
+        return array('games','read','save','randomGame');
     }
 
     public function getOnSuccessMessageFor($service){
         return "";
+    }
+
+    public function randomGame(){
+        $id = $this->db->getValue("select id from chess_game where database_id=? order by rand()", $this->getId());
+        $game = new Game($id);
+        return $game->read();
     }
 
     public function games(){
