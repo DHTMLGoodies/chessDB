@@ -24,8 +24,12 @@ class Database extends LudoDBModel implements LudoDBService
 
     public function randomGame(){
         $id = $this->db->getValue("select id from chess_game where database_id=? order by rand()", $this->getId());
-        $game = new Game($id);
-        return $game->read();
+        if(isset($id)){
+            $game = new Game($id);
+            return $game->read();
+        }else{
+            throw new LudoDBObjectNotFoundException("No games found in selected database");
+        }
     }
 
     public function games(){
