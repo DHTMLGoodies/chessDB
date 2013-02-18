@@ -6,24 +6,60 @@
  */
 class GameImport implements LudoDBService
 {
-    private $fileArg;
-    private $databaseArg;
-    public function __construct($file = null, $databaseArg = null){
+    private $file;
+    private $databaseId;
+    public function __construct($databaseId = null, $file = null){
         if(isset($file)){
-            $this->fileArg = $file;
+            $this->file = $file;
         }
-        if(isset($databaseArg)){
-            $this->databaseArg = $databaseArg;
+        if(isset($databaseId)){
+            $this->databaseId = $databaseId;
         }
     }
 
     public function getValidServices(){
-        return array('import');
+        return array('import','importQueued');
     }
 
     public function getOnSuccessMessageFor($service){
-        return "";
+        return "Games successfully imported";
     }
+
+    public function importQueued(){
+        $ret = array();
+        if(!$this->databaseId){
+            throw new LudoDBInvalidArgumentsException("No database id given");
+        }
+        $files = $this->getPgnFilesInQueuedFolder();
+
+        if(count($files) === 0){
+            throw new LudoDBObjectNotFoundException("No pgn files found in queued folder");
+        }
+
+        foreach($files as $file){
+            $path = implode('/', array(ChessRegistry::getImportQueueFolder(), $file));
+            $ret = array_merge($ret, $this->import(array("file" => $path, "databaseId" => $this->databaseId)));
+
+            $this->moveFileToImportedFolder($path);
+        }
+    }
+
+    private function moveFileToImportedFolder($path){
+        $tokens = explode("/", $path);
+        $filename = array_pop($tokens);
+        $tokens[] = "imported";
+        $tokens[] = $filename;
+        rename($path, implode("/", $tokens));
+    }
+
+    private function getPgnFilesInQueuedFolder(){
+        $folder = ChessRegistry::getImportQueueFolder();
+        if(!isset($folder)){
+            throw new Exception("PGN folder not set using ChessRegistry::setImportQueueFolder");
+        }
+        return ChessFSPgn::getPgnFilesIn($folder);
+    }
+
 
     public function import($request){
         $ret = array();
@@ -40,11 +76,11 @@ class GameImport implements LudoDBService
     }
 
     private function getFilePath($request){
-        return isset($request['file']) ? $request['file'] : ChessRegistry::getPgnFolder().$this->fileArg.".pgn";
+        return isset($request['file']) ? $request['file'] : ChessRegistry::getPgnFolder().$this->file.".pgn";
     }
 
     private function getDatabaseId($request){
-        return isset($request['databaseId']) ? $request['databaseId'] : $this->databaseArg;
+        return isset($request['databaseId']) ? $request['databaseId'] : $this->databaseId;
     }
 
     private function importGame($game, $intoDb = null){

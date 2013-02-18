@@ -118,6 +118,28 @@ class ImportTest extends ChessTests
     /**
      * @test
      */
+    public function shouldBeAbleToImportQueued(){
+        // given
+        copy("../../../pgn/fischer.pgn", "../../../import-queue/fischer.pgn");
+        ChessRegistry::setImportQueueFolder("../../../import-queue/");
+        $import = new GameImport(1);
+
+        // when
+        $import->importQueued();
+
+        $db = new Database(1);
+        $games = $db->games();
+
+        // then
+        $this->assertEquals(69, count($games));
+        $this->assertFileNotExists("../../../import-queue/fischer.pgn");
+        $this->assertFileExists("../../../import-queue/imported/fischer.pgn");
+
+
+    }
+    /**
+     * @test
+     */
     public function shouldImportGamesInAcceptableTime(){
         // given
         $this->startTimer();
@@ -134,6 +156,8 @@ class ImportTest extends ChessTests
         $this->assertEquals(25, count($games));
         $this->assertLessThan(12.5, $time);
     }
+
+
 
     private $startTime;
     private function startTimer(){
