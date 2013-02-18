@@ -39,9 +39,9 @@ class GameImport implements LudoDBService
         foreach($files as $file){
             $path = implode('/', array(ChessRegistry::getImportQueueFolder(), $file));
             $ret = array_merge($ret, $this->import(array("file" => $path, "databaseId" => $this->databaseId)));
-
             $this->moveFileToImportedFolder($path);
         }
+        return $ret;
     }
 
     private function moveFileToImportedFolder($path){
