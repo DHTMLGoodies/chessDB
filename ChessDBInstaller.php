@@ -10,7 +10,7 @@ class ChessDBInstaller implements LudoDBService
     private $classes = array(
         'Game','Move','Eco','Database','Folder','Metadata','MetadataValue',
         'Session','Seek','Chat','ChatMessage','ChatMessages','Fen','Player',
-        'TimeControl'
+        'TimeControl','ChessFileUpload','Country'
     );
     public function install(){
         try{
