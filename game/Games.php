@@ -24,7 +24,7 @@ class Games extends LudoDBCollection implements LudoDBService
         return true;
     }
 
-    public function cacheEnabledFor($service){
+    public function shouldCache($service){
         return $service === "read";
     }
 }

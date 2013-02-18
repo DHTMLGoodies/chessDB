@@ -33,7 +33,7 @@ class AllServices implements LudoDBService
     public function read(){
         return LudoDBServiceRegistry::getAll();
     }
-    public function cacheEnabledFor($service){
+    public function shouldCache($service){
         return false;
     }
 

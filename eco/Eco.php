@@ -113,7 +113,7 @@ class Eco extends LudoDBModel implements LudoDBService
         return $this->parser->getFileLocation()."/pgn/eco.pgn";
     }
 
-    public function cacheEnabledFor($service){
+    public function shouldCache($service){
         return $service === "moves";
     }
 }

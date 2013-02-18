@@ -134,7 +134,7 @@ class Player extends LudoDBModel implements LudoDBService
         return true;
     }
 
-    public function cacheEnabledFor($service){
+    public function shouldCache($service){
         return false;
     }
 

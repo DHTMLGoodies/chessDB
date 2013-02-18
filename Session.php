@@ -80,7 +80,7 @@ class Session extends LudoDBModel implements LudoDBService
         return count($arguments) === 0;
     }
 
-    public function cacheEnabledFor($service)
+    public function shouldCache($service)
     {
         return false;
     }

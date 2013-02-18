@@ -178,7 +178,7 @@ class Game extends LudoDBModel implements LudoDBService
         return null;
     }
 
-    public function cacheEnabledFor($service)
+    public function shouldCache($service)
     {
         return $service === 'read';
     }
