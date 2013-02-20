@@ -9,7 +9,7 @@ class Eco extends LudoDBModel implements LudoDBService
     protected $JSONConfig = true;
 
     public function getValidServices(){
-        return array('moves','read');
+        return array('moves','read','generate');
     }
 
     public function getOnSuccessMessageFor($service){
@@ -52,6 +52,7 @@ class Eco extends LudoDBModel implements LudoDBService
         }
         if(!$this->exists())$this->createTable();
         $this->deleteTableData()->yesImSure();
+        LudoDBCache::clearByClass("Eco");
         $this->moveDataIntoJSONFile($this->getJSONData());
         $this->insertDefaultData();
     }
