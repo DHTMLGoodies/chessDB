@@ -12,6 +12,10 @@ class Player extends LudoDBModel implements LudoDBService
         $this->setValue('password', md5($password));
     }
 
+    public function setMd5Password($password){
+        $this->setValue('password', $password);
+    }
+
     public function getFullName()
     {
         if ($this->getId()) {
@@ -26,6 +30,10 @@ class Player extends LudoDBModel implements LudoDBService
 
     public function setUserAccess($access){
         $this->setValue('user_access', $access);
+    }
+
+    public function grantAdminAccess(){
+        $this->setUserAccess(1+2+4+8+16+32+64+128+256+512+1024);
     }
 
     public function isValid()

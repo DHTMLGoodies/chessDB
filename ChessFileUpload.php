@@ -11,7 +11,7 @@ class ChessFileUpload extends LudoDBModel implements LudoDBService
     protected $validExtensions = null;
     public static $validServices = array('save','read');
 
-    const FILE_UPLOAD_KEY = self::FILE_UPLOAD_KEY;
+    const FILE_UPLOAD_KEY = 'FILE_UPLOAD_PATH';
     
     public function __construct($id = null)
     {
