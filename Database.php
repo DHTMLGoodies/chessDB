@@ -28,7 +28,7 @@ class Database extends LudoDBModel implements LudoDBService
             $game = new Game($id);
             return $game->read();
         }else{
-            throw new LudoDBObjectNotFoundException("No games found in selected database");
+            throw new LudoDBObjectNotFoundException("No games found in selected database(" . $this->getId().")");
         }
     }
 
