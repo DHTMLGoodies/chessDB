@@ -21,7 +21,7 @@ class CurrentPlayer extends Player
     }
 
     public function validateArguments($service, $arguments){
-        return count($arguments) === 0;
+        return count($arguments) === 0 || (count($arguments) === 1 && is_numeric($arguments[1]));
     }
 
     public function getValidServices(){
