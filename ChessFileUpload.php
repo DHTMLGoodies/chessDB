@@ -9,10 +9,9 @@ class ChessFileUpload extends LudoDBModel implements LudoDBService
     protected $JSONConfig = true;
     private static $tempPath;
     protected $validExtensions = null;
-    public static $validServices = array('save','read');
 
     const FILE_UPLOAD_KEY = 'FILE_UPLOAD_PATH';
-    
+
     public function __construct($id = null)
     {
         if (!isset(self::$tempPath)) {
@@ -24,28 +23,51 @@ class ChessFileUpload extends LudoDBModel implements LudoDBService
         parent::__construct($id);
     }
 
+    public function getValidServices(){
+        return array('save','read');
+    }
+
     public static function setUploadPath($path){
         LudoDBRegistry::set(self::FILE_UPLOAD_KEY, $path);
     }
 
-    public function save($values)
+    public function save()
     {
+        if(!CurrentPlayer::getInstance()->hasAccessTo(ChessRoles::LOGIN)){
+            throw new Exception("You do not have access to upload files");
+        }
         $this->extractUploadedFile();
-        return parent::save($values);
+        $this->commit();
+        return $this->getId();
     }
 
     private function extractUploadedFile()
     {
+
         if (empty($_FILES)) {
-            throw new Exception("No files uploaded", 400);
+            throw new LudoDBException("No files uploaded", 400);
         }
+
         $file = array_shift($_FILES);
         $this->setValue('file_size', $file['size']);
         $this->setValue('display_name', $file['name']);
         $this->setValue('created_date', date("Y-m-d H:i:s"));
+        $this->setValue('user_id', CurrentPlayer::getInstance()->getId());
         $tempPath = $this->getTempPath($file['name']);
         $this->setValue('path_on_server', $tempPath);
         move_uploaded_file($file['tmp_name'], $tempPath);
+
+        if(!file_exists($tempPath)){
+
+            copy($file['tmp_name'], $tempPath);
+            if(!file_exists($tempPath)){
+                throw new LudoDBException("Could not write temp file " . $file['tmp_name'] . " to " . LudoDBRegistry::get(self::FILE_UPLOAD_KEY));
+            }
+        }
+    }
+
+    public function getPathOnServer(){
+        return $this->getValue('path_on_server');
     }
 
     private function getTempPath($filename)

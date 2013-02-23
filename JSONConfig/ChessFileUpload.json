@@ -1,5 +1,5 @@
 {
-    "sql": "select * from file_upload where ID=?",
+    "sql": "select * from chess_file_upload where id=?",
     "table": "chess_file_upload",
     "columns": {
         "id": "int auto_increment not null primary key",

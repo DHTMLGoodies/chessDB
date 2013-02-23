@@ -95,10 +95,6 @@ class ChessDBInstaller implements LudoDBService
         if (phpversion() < '5.3') {
             throw new Exception("PHP 5.3 or higher is required. Your version: " . phpversion());
         }
-        /*
-        if (!in_array('mod_rewrite', apache_get_modules())) {
-            throw new Exception("mod_rewrite module not activated on your web server");
-        }*/
     }
 
     public function isInstalled()

@@ -5,7 +5,7 @@
  * Date: 04.02.13
  */
 error_reporting(E_ALL);
-ini_set('display_errors','on');
+ini_set('display_errors', 'on');
 require_once __DIR__ . "/../autoload.php";
 require_once __DIR__ . "/../../parser/FenParser0x88.php";
 require_once __DIR__ . "/../../parser/Board0x88Config.php";
@@ -19,8 +19,11 @@ require_once __DIR__ . "/../../CHESS_JSON.php";
 class ImportTest extends ChessTests
 {
 
-    public function setUp(){
+    public function setUp()
+    {
         parent::setUp();
+
+        LudoDBRegistry::set('FILE_UPLOAD_PATH', '/tmp/');
 
         $mv = new MetadataValue();
         $mv->drop()->yesImSure();
@@ -35,22 +38,49 @@ class ImportTest extends ChessTests
         $mv->createTable();
 
         $db = new Database(1);
-        if(!$db->getId()){
+        if (!$db->getId()) {
             $db->setTitle('My database');
             $db->commit();
         }
+
+
     }
+
+    private function mockFileUpload($filePath)
+    {
+        $cfu = new ChessFileUpload();
+        $tokens = explode("/", $filePath);
+        $tokens[1] = "tmp-" . $tokens[1];
+        $newFilePath = implode("/", $tokens);
+
+        copy($filePath, $newFilePath);
+        $_FILES = array(
+            array(
+                'size' => filesize($newFilePath),
+                'name' => $tokens[1],
+                'tmp_name' => $newFilePath
+            )
+        );
+
+        $cfu->save();
+        return  $cfu->getId();
+
+    }
+
     /**
      * @test
      */
-    public function shouldBeAbleToImportGames(){
+    public function shouldBeAbleToImportGames()
+    {
         // given
         $import = new GameImport();
 
+        $fileId = $this->mockFileUpload('pgn/test.pgn');
+
         // when
         $gameIds = $import->import(array(
-            "file" => "pgn/test.pgn",
-            "databaseId" => 1
+            "pgnFile" => $fileId,
+            "database" => 1
         ));
 
         // then
@@ -60,14 +90,16 @@ class ImportTest extends ChessTests
     /**
      * @test
      */
-    public function shouldStoreDatabaseId(){
+    public function shouldStoreDatabaseId()
+    {
         // given
         $import = new GameImport();
+        $fileId = $this->mockFileUpload('pgn/test.pgn');
 
         // when
         $gameIds = $import->import(array(
-            "file" => "pgn/test.pgn",
-            "databaseId" => 1
+            "pgnFile" => $fileId,
+            "database" => 1
         ));
         $game = new Game($gameIds[0]);
 
@@ -78,12 +110,15 @@ class ImportTest extends ChessTests
     /**
      * @test
      */
-    public function shouldSaveMoves(){
+    public function shouldSaveMoves()
+    {
         // given
         $import = new GameImport();
+        $fileId = $this->mockFileUpload('pgn/test.pgn');
+
         $gameIds = $import->import(array(
-            "file" => "pgn/test.pgn",
-            "databaseId" => 1
+            "pgnFile" => $fileId,
+            "database" => 1
         ));
 
         // when
@@ -97,12 +132,15 @@ class ImportTest extends ChessTests
     /**
      * @test
      */
-    public function shouldSaveMetadata(){
+    public function shouldSaveMetadata()
+    {
         // given
         $import = new GameImport();
+        $fileId = $this->mockFileUpload('pgn/test.pgn');
+
         $gameIds = $import->import(array(
-            "file" => "pgn/test.pgn",
-            "databaseId" => 1
+            "pgnFile" => $fileId,
+            "database" => 1
         ));
 
         // when
@@ -118,7 +156,8 @@ class ImportTest extends ChessTests
     /**
      * @test
      */
-    public function shouldBeAbleToImportQueued(){
+    public function shouldBeAbleToImportQueued()
+    {
         // given
         copy("../../../pgn/fischer.pgn", "../../../import-queue/fischer.pgn");
         ChessRegistry::setImportQueueFolder("../../../import-queue/");
@@ -133,21 +172,21 @@ class ImportTest extends ChessTests
         // then
         $this->assertEquals(69, count($games));
         $this->assertFileNotExists("../../../import-queue/fischer.pgn");
-        $this->assertFileExists("../../../import-queue/imported/fischer.pgn");
-
-
     }
+
     /**
      * @test
      */
-    public function shouldImportGamesInAcceptableTime(){
+    public function shouldImportGamesInAcceptableTime()
+    {
         // given
         $this->startTimer();
         $import = new GameImport();
 
+        $fileId = $this->mockFileUpload('pgn/test-timer.pgn');
         // when
         $games = $import->import(array(
-            "file" => "pgn/test-timer.pgn",
+            "pgnFile" => $fileId,
             "databaseId" => 1
         ));
         $time = $this->getElapsed(__FUNCTION__);
@@ -158,29 +197,33 @@ class ImportTest extends ChessTests
     }
 
 
-
     private $startTime;
-    private function startTimer(){
+
+    private function startTimer()
+    {
         $this->startTime = $this->getTime();
     }
 
-    private function getTime(){
+    private function getTime()
+    {
         list($usec, $sec) = explode(" ", microtime());
         return ((float)$usec + (float)$sec);
     }
 
-    private function getElapsed($test){
+    private function getElapsed($test)
+    {
         $ret = $this->getTime() - $this->startTime;
         $ret = number_format($ret, 3);
         $this->logTime($test, $ret);
         return $ret;
     }
 
-    private function logTime($test, $elapsed){
+    private function logTime($test, $elapsed)
+    {
 
         $time = new TestTimer();
-        if(!$time->exists())$time->createTable();
-        $time->setTestName("TEST: ". $test);
+        if (!$time->exists()) $time->createTable();
+        $time->setTestName("TEST: " . $test);
         $time->setTestTime($elapsed);
         $time->setTestDate(date("Y-m-d H:i:s"));
         $time->commit();

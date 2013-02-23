@@ -77,20 +77,35 @@ class GameImport implements LudoDBService
         }
         $parser = new PgnParser($filePath);
         $games = $parser->getGames();
+        $dbId = $this->getDatabaseId($request);
         foreach ($games as $game) {
-            $ret[] = $this->importGame($game, $this->getDatabaseId($request));
+            $ret[] = $this->importGame($game, $dbId);
         }
         return $ret;
     }
 
     private function getFilePath($request)
     {
-        return isset($request['file']) ? $request['file'] : ChessRegistry::getPgnFolder() . $this->file . ".pgn";
+        if(isset($request['file']))return $request['file'];
+        if(isset($request['pgnFile']) && is_numeric($request['pgnFile'])){
+            $file = new ChessFileUpload($request['pgnFile']);
+            return $file->getPathOnServer();
+        }
+        return false;
+
     }
 
     private function getDatabaseId($request)
     {
-        return isset($request['databaseId']) ? $request['databaseId'] : $this->databaseId;
+        if(isset($request['importAsNew']) && $request['importAsNew']){
+            $db = new Database();
+            $db->setTitle($request['newDatabase']);
+            $db->setFolderId($request['folder']);
+            $db->commit();
+            return $db->getId();
+
+        }
+        return isset($request['database']) ? $request['database'] : $this->databaseId;
     }
 
     private function importGame($game, $intoDb = null)

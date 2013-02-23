@@ -15,6 +15,8 @@ class ChessTests extends PHPUnit_Framework_TestCase
             LudoDB::setPassword('administrator');
             LudoDB::setDb('PHPUnit');
             self::$connected = true;
+
+            LudoDBRegistry::set('FILE_UPLOAD_PATH', '/tmp/');
         }
         if (!self::$logCleared) {
             self::$logCleared = true;
@@ -24,12 +26,26 @@ class ChessTests extends PHPUnit_Framework_TestCase
         $classes = array(
             'Game','Move','Database','Folder','Metadata','MetadataValue',
             'Session','Seek','Chat','ChatMessage','ChatMessages','Fen','Player',
-            'TimeControl'
+            'TimeControl','ChessFileUpload'
         );
         $util = new  LudoDBUtility();
         $util->dropAndCreate($classes);
 
+        $this->createAdminUserAndSignIn();
+    }
 
+    private function createAdminUserAndSignIn(){
+
+        $pl = new Player();
+        $pl->grantAdminAccess();
+        $pl->setUsername('alfmagne');
+        $pl->setPassword(md5('Test25ab'));
+        $pl->commit();
+
+        $session = new Session();
+        $session->signIn(array('username' => 'alfmagne', 'password' => md5('Test25ab')));
+
+        #die(CurrentPlayer::getInstance()->getUserAccess());
     }
 
     public function createUser($username, $password)

@@ -34,5 +34,4 @@ class CurrentPlayer extends Player
         }
         return self::$instance;
     }
-
 }

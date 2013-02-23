@@ -22,6 +22,10 @@ class Database extends LudoDBModel implements LudoDBService
         return "";
     }
 
+    public function setFolderId($id){
+        $this->setValue('folder_id', $id);
+    }
+
     public function randomGame(){
         $id = $this->db->getValue("select id from chess_game where database_id=? order by rand()", $this->getId());
         if(isset($id)){

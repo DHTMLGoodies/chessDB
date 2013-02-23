@@ -110,12 +110,16 @@ class Session extends LudoDBModel implements LudoDBService
         $this->setValue('logged_out',1);
     }
 
+    private static $cookieValue;
     private function setCookie()
     {
-        setcookie(ChessRegistry::getCookieName(), $this->getKey(), time() + $this->daysToSeconds(365));
+        $key = $this->getKey();
+        self::$cookieValue = $key;
+        setcookie(ChessRegistry::getCookieName(), $key, time() + $this->daysToSeconds(365));
     }
 
     public function clearCookie(){
+        self::$cookieValue = null;
         setcookie(ChessRegistry::getCookieName(), "", time() - $this->daysToSeconds(365));
     }
 
@@ -177,6 +181,7 @@ class Session extends LudoDBModel implements LudoDBService
 
     private static function getCookieValue()
     {
+        if(isset(self::$cookieValue))return self::$cookieValue;
         return isset($_COOKIE[ChessRegistry::getCookieName()]) ? $_COOKIE[ChessRegistry::getCookieName()] : null;
     }
 
