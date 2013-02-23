@@ -6,10 +6,14 @@
  */
 class ChessRoles implements LudoDBService
 {
+    const LOGIN = 1;
+    const EDIT_GAMES = 2;
+    const IMPORT_GAMES = 3;
+
     private $roles = array(
         'LOGIN' => array('code' => 1, 'label' => 'Login'),
         'EDIT_GAMES' => array('code' => 2,'label' => 'Edit and save games'),
-        'ROLE_IMPORT' => array('code' => 4, 'label' =>'Import games from pgn files')
+        'IMPORT_GAMES' => array('code' => 4, 'label' =>'Import games from pgn files')
     );
 
     public function read(){

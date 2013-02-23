@@ -9,11 +9,16 @@ class Player extends LudoDBModel implements LudoDBService
 
     public function setPassword($password)
     {
-        $this->setValue('password', md5($password));
+        if(!$this->isMd5($password))$password = md5($password);
+        $this->setValue('password', $password);
     }
 
-    public function setMd5Password($password){
-        $this->setValue('password', $password);
+    private function isMd5($string){
+        return preg_match("/^[0-9a-f]{32}$/i", $string);
+    }
+
+    public function hasAccessTo($role){
+        return $this->getUserAccess() & $role ? true : false;
     }
 
     public function getFullName()
@@ -32,8 +37,18 @@ class Player extends LudoDBModel implements LudoDBService
         $this->setValue('user_access', $access);
     }
 
+    public function grantAccessTo($role){
+        if(!$this->hasAccessTo($role)){
+            $this->setUserAccess($this->getUserAccess() + $role);
+        }
+    }
+
+    public function clearUserAccess(){
+        $this->setUserAccess(0);
+    }
+
     public function grantAdminAccess(){
-        $this->setUserAccess(1+2+4+8+16+32+64+128+256+512+1024);
+        $this->setUserAccess(1+2+4+8+16+32+64+128+256+512+1024+2048+4096+8192);
     }
 
     public function isValid()
@@ -155,7 +170,7 @@ class Player extends LudoDBModel implements LudoDBService
         $session = new Session();
         $session->signIn(array("username" => $this->getUsername(),"password" => $this->getPassword()));
 
-        return array_merge($ret, array('token' => $session->getKey()));
+        return array('token' => $session->getKey(), 'access' => $this->getUserAccess());
     }
 
     private function setDefaultValuesForNewPlayers(){

@@ -49,7 +49,7 @@ class ChessDBInstaller implements LudoDBService
             $pl = new Player();
             $pl->grantAdminAccess();
             $pl->setUsername($details['adminUserName']);
-            $pl->setMd5Password($details['adminPassword']);
+            $pl->setPassword($details['adminPassword']);
             $pl->commit();
         }
     }
@@ -95,9 +95,10 @@ class ChessDBInstaller implements LudoDBService
         if (phpversion() < '5.3') {
             throw new Exception("PHP 5.3 or higher is required. Your version: " . phpversion());
         }
+        /*
         if (!in_array('mod_rewrite', apache_get_modules())) {
             throw new Exception("mod_rewrite module not activated on your web server");
-        }
+        }*/
     }
 
     public function isInstalled()
@@ -167,7 +168,8 @@ class ChessDBInstaller implements LudoDBService
             case "validateConnection":
                 return isset($this->successMessage) ? $this->successMessage : "Connection successful!";
             default:
-                return "Installation complete. Remember to open /router.php and specify the correct database connection details";
+                return "Installation complete. To complete the installation, create a file called
+                    connection.php and insert your database details. See connection.template.php for example";
         }
     }
 }

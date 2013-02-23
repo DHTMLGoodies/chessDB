@@ -44,4 +44,41 @@ class PlayerTest extends ChessTests
         $this->assertEquals('user1', $user->getUsername());
         $this->assertEquals(md5('pass1'), $user->getPassword());
     }
+
+    public function shouldBeAbleToGetAccessToRoles(){
+        // given
+        $pl = new Player();
+        $pl->setFullName("Alf Magne Kalleland");
+        $pl->commit();
+
+        // then
+        $this->assertFalse($pl->hasAccessTo(ChessRoles::LOGIN));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldBeAbleToGrantAccessToARole(){
+        // given
+        $pl = new Player();
+        // when
+        $pl->grantAccessTo(ChessRoles::LOGIN);
+        // then
+        $this->assertEquals(ChessRoles::LOGIN, $pl->getUserAccess());
+
+
+    }
+
+    /**
+     * @test
+     */
+    public function shouldNotGrantAccessWhenAccessIsAlreadyGiven(){
+        // given
+        $pl = new Player();
+        // when
+        $pl->grantAccessTo(ChessRoles::LOGIN);
+        $pl->grantAccessTo(ChessRoles::LOGIN);
+        // then
+        $this->assertEquals(ChessRoles::LOGIN, $pl->getUserAccess());
+    }
 }

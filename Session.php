@@ -92,7 +92,7 @@ class Session extends LudoDBModel implements LudoDBService
             $this->setUserId($pl->getId());
             $this->commit();
             $this->setCookie();
-            return $this->getKey();
+            return array('token' => $this->getKey(), 'access' => $pl->getUserAccess());
         }
         throw new LudoDBUnauthorizedException("Invalid username or password");
     }
