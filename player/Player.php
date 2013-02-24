@@ -132,6 +132,7 @@ class Player extends LudoDBModel implements LudoDBService
                 return count($arguments) === 1;
             case "register":
                 return count($arguments) < 2;
+
             default:
         }
         return count($arguments) === 1;
@@ -176,5 +177,13 @@ class Player extends LudoDBModel implements LudoDBService
     private function setDefaultValuesForNewPlayers(){
         $this->setOnlinePlayer(1);
         $this->setUserAccess(1);
+    }
+
+    public function save($data){
+        $cp = CurrentPlayer::getInstance();
+        if(!$cp->hasAccessTo(ChessRoles::EDIT_USERS) && $cp->getId() !== $this->getId()){
+            throw new LudoDBUnauthorizedException("You are not allowed to edit this user");
+        }
+        return parent::save($data);
     }
 }

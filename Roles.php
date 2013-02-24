@@ -8,7 +8,8 @@ class ChessRoles implements LudoDBService
 {
     const LOGIN = 1;
     const EDIT_GAMES = 2;
-    const IMPORT_GAMES = 3;
+    const IMPORT_GAMES = 4;
+    const EDIT_USERS = 8;
 
     private $roles = array(
         'LOGIN' => array('code' => 1, 'label' => 'Login'),
