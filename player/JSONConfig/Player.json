@@ -34,7 +34,7 @@
             "access": "r"
         },
         "user_access": {
-            "db": "bit(64) default 0",
+            "db": "int default 0",
             "access": "r"
         },
         "elo":{

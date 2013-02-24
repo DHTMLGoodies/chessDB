@@ -124,8 +124,6 @@ class Player extends LudoDBModel implements LudoDBService
         return array("gravatar", "seeks", "games", "archive", "register");
     }
 
-
-
     public function validateArguments($service, $arguments){
         switch($service){
             case 'read':
@@ -165,7 +163,7 @@ class Player extends LudoDBModel implements LudoDBService
 
     public function register($userDetails){
         $this->setDefaultValuesForNewPlayers();
-        $ret = $this->setValues($userDetails);
+        $this->setValues($userDetails);
         $this->commit();
 
         $session = new Session();
