@@ -91,7 +91,7 @@ class Session extends LudoDBModel implements LudoDBService
         if ($pl->getId()) {
             $this->setUserId($pl->getId());
             $this->commit();
-            $this->setCookie();
+            $this->setCookie($userDetails);
             return array('token' => $this->getKey(), 'access' => $pl->getUserAccess());
         }
         throw new LudoDBUnauthorizedException("Invalid username or password");
@@ -111,11 +111,12 @@ class Session extends LudoDBModel implements LudoDBService
     }
 
     private static $cookieValue;
-    private function setCookie()
+    private function setCookie($userDetails)
     {
+        $rememberMe = isset($userDetails['rememberMe']) ? $userDetails['rememberMe'] : false;
         $key = $this->getKey();
         self::$cookieValue = $key;
-        setcookie(ChessRegistry::getCookieName(), $key, time() + $this->daysToSeconds(365));
+        setcookie(ChessRegistry::getCookieName(), $key, $rememberMe ? time() + $this->daysToSeconds(365) : null);
     }
 
     public function clearCookie(){

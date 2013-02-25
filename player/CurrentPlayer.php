@@ -44,18 +44,21 @@ class CurrentPlayer extends Player
 
     public function save($values)
     {
-        if (isset($values['password']) && !$values['password']) {
-            unset($values['password']);
+        if(isset($values['email'])){
+            unset($values['email']);
         }
         if(isset($values['user_access'])){
             unset($values['user_access']);
         }
-        if (isset($values['password']) && isset($values['repeat_password']) && $values['password']
-            && $values['password'] != $values['repeat_password']
-        ) {
+        if ($this->passwordMismatch($values)) {
             throw new LudoDBException("Passwords does not match");
         }
         return parent::save($values);
+    }
+
+    private function passwordMismatch($values){
+        return isset($values['password']) && isset($values['repeat_password']) && $values['password']
+            && $values['password'] != $values['repeat_password'];
     }
 
     public function getOnSuccessMessageFor($service){

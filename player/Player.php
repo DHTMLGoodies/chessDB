@@ -130,7 +130,6 @@ class Player extends LudoDBModel implements LudoDBService
                 return count($arguments) === 1;
             case "register":
                 return count($arguments) < 2;
-
             default:
         }
         return count($arguments) === 1;
@@ -162,12 +161,12 @@ class Player extends LudoDBModel implements LudoDBService
 
 
     public function register($userDetails){
-        $this->setDefaultValuesForNewPlayers();
         $this->setValues($userDetails);
+        $this->setDefaultValuesForNewPlayers();
         $this->commit();
-
+        $rememberMe = isset($userDetails['rememberMe']) ? true : false;
         $session = new Session();
-        $session->signIn(array("username" => $this->getUsername(),"password" => $this->getPassword()));
+        $session->signIn(array("username" => $this->getUsername(),"password" => $this->getPassword(), "rememberMe" => $rememberMe));
 
         return array('token' => $session->getKey(), 'access' => $this->getUserAccess());
     }
@@ -181,6 +180,12 @@ class Player extends LudoDBModel implements LudoDBService
         $cp = CurrentPlayer::getInstance();
         if(!$cp->hasAccessTo(ChessRoles::EDIT_USERS) && $cp->getId() !== $this->getId()){
             throw new LudoDBUnauthorizedException("You are not allowed to edit this user");
+        }
+        if(!$cp->hasAccessTo(ChessRoles::EDIT_USERS)){
+            if(isset($data['user_access']))unset($data['user_access']);
+        }
+        if (isset($values['password']) && !$values['password']) {
+            unset($values['password']);
         }
         return parent::save($data);
     }
