@@ -39,7 +39,7 @@ class CurrentPlayer extends Player
     }
 
     public function read(){
-        return $this->getSomeValues(array('username','email','full_name','user_access'));
+        return $this->getSomeValues(array('country','username','email','full_name','user_access'));
     }
 
     public function save($values)
