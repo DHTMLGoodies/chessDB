@@ -37,10 +37,6 @@
             "db": "int default 0",
             "access": "r"
         },
-        "elo":{
-            "db": "smallint",
-            "access": "rw"
-        },
 		"title":{
 			"db":"varchar(10)",
 			"access": "rw",

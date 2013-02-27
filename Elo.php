@@ -37,6 +37,10 @@ class Elo extends LudoDBModel
         "indexes" => array("category", "player_id")
     );
 
+    public function __construct($playerId = null, $category = null){
+        parent::__construct($playerId, $category);
+    }
+
     protected function populate(){
         parent::populate();
         if(!$this->getId()){
