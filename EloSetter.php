@@ -28,7 +28,7 @@ class EloSetter
         if($eloMe->isProvisional()){
             $this->registerProvisional($eloMe, $eloOpponent, $result);
             if($eloOpponent->isProvisional()){
-                $this->registerProvisional($eloOpponent, $eloMe, $result * -1);
+                $this->registerProvisional($eloOpponent, new Elo($me->getId(), $this->category), $result * -1);
             }
         }else{
             $expectedScore = $this->getExpectedScore($eloMe->getElo(), $eloOpponent->getElo());
@@ -36,7 +36,7 @@ class EloSetter
             $eloMe->setElo($eloMe->getElo()+ $adjustment);
 
             if($eloOpponent->isProvisional()){
-                $this->registerProvisional($eloOpponent, $eloMe, $result * -1);
+                $this->registerProvisional($eloOpponent, new Elo($me->getId(), $this->category), $result * -1);
             }else{
                 $blackAdjustment = ($adjustment * $this->getKFactor($eloOpponent) / $this->getKFactor($eloMe)) * -1;
                 $eloOpponent->setElo($eloOpponent->getElo()+ $blackAdjustment);
