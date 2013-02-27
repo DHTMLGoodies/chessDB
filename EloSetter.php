@@ -2,58 +2,54 @@
 
 class EloSetter
 {
-    private $player;
     private $category;
 
-    public function __construct(Player $player, $categoryId){
-        $this->player = $player;
+    public function __construct($categoryId){
         $this->category = $categoryId;
     }
 
-    public function registerWinAgainst(Player $pl){
-        $this->registerResult($this->player,$pl, 1);
-    }
-
-    public function registerDrawAgainst(Player $pl){
-        $this->registerResult($this->player, $pl,  0.5);
-    }
-
-    public function registerLossAgainst(Player $pl){
-        $this->registerResult($this->player, $pl, -1);
-    }
-
     public function registerResult(Player $white, Player $black, $result){
-        $eloMe = new Elo($white->getId(), $this->category);
-        $eloOpponent = new Elo($black->getId(), $this->category);
-        if($eloMe->isProvisional()){
-            $this->registerProvisional($eloMe, $eloOpponent, $result);
-            if($eloOpponent->isProvisional()){
-                $this->registerProvisional($eloOpponent, new Elo($white->getId(), $this->category), $result * -1);
-            }
-        }else{
-            $expectedScore = $this->getExpectedScore($eloMe->getElo(), $eloOpponent->getElo());
-            $adjustment = $this->getKFactor($eloMe) * ($result - $expectedScore);
-            $eloMe->setElo($eloMe->getElo()+ $adjustment);
+        $eloWhite = new Elo($white->getId(), $this->category);
+        $eloBlack = new Elo($black->getId(), $this->category);
 
-            if($eloOpponent->isProvisional()){
-                $this->registerProvisional($eloOpponent, new Elo($white->getId(), $this->category), $result * -1);
-            }else{
-                $blackAdjustment = ($adjustment * $this->getKFactor($eloOpponent) / $this->getKFactor($eloMe)) * -1;
-                $eloOpponent->setElo($eloOpponent->getElo()+ $blackAdjustment);
-            }
-            // TODO blacks rating should be -1 * (White adjustment * Black K factor / White K factor)
+        if($eloWhite->isProvisional()){
+            $adjustment = $this->getProvisionalAdjustment($eloBlack, $result);
+            $eloWhite->appendProvisional($eloBlack->getElo() + $adjustment);
+        }else{
+            $adjustment =  $this->getRatingAdjustmentFor($eloWhite, $eloBlack, $result);
+            $eloWhite->setElo($eloWhite->getElo() + $adjustment);
         }
-        $eloMe->commit();
-        $eloOpponent->commit();
+
+        $this->updateBlackElo($eloWhite, $eloBlack, $result);
+
+        $eloWhite->commit();
+        $eloBlack->commit();
     }
 
-    private function registerProvisional(Elo $eloMe, Elo $eloOpponent, $result){
+    private function updateBlackElo(Elo $eloWhite, Elo $eloBlack, $result){
+        $e = new Elo($eloWhite->getPlayerId(), $this->category);
+        if($eloBlack->isProvisional()){
+            $adjustment = $this->getProvisionalAdjustment($e, $result  * -1);
+            $eloBlack->appendProvisional($e->getElo() + $adjustment);
+        }else{
+            $adjustment =  $this->getRatingAdjustmentFor($eloWhite, $eloBlack, $result);
+            $adjustmentBlack = ($adjustment * $this->getKFactor($eloBlack) / $this->getKFactor($e)) * -1;
+            $eloBlack->setElo($eloBlack->getElo() + $adjustmentBlack);
+        }
+    }
+
+    private function getRatingAdjustmentFor(Elo $white, Elo $against, $result){
+        $expectedScore = $this->getExpectedScore($white->getElo(), $against->getElo());
+        return $this->getKFactor($white) * ($result - $expectedScore);
+    }
+
+    private function getProvisionalAdjustment(Elo $eloOpponent, $result){
         if($result === 0.5){
             $addition = 0;
         }else{
             $addition = ($eloOpponent->isProvisional() ? 200 : 400) * $result;
         }
-        $eloMe->setElo($eloOpponent->getElo() + $addition);
+        return $addition;
     }
 
     private function getExpectedScore($ratingA, $ratingB){

@@ -29,9 +29,9 @@ class EloTest extends ChessTests
         $user = $this->createUser('username','password');
 
         // when
-        $eloSetter = new EloSetter($user, 1);
+        $eloSetter = new EloSetter(1);
         $userWithElo = $this->getUserWithElo(1500);
-        $eloSetter->registerWinAgainst($userWithElo);
+        $eloSetter->registerResult($user, $userWithElo, 1);
 
         $elo = new Elo($user->getId(), 1);
         $this->assertTrue($elo->isProvisional());
@@ -47,9 +47,9 @@ class EloTest extends ChessTests
         $user = $this->createUser('username','password');
 
         // when
-        $eloSetter = new EloSetter($user, 1);
-        $eloSetter->registerWinAgainst($this->getUserWithElo(1500));
-        $eloSetter->registerWinAgainst($this->getUserWithElo(1400));
+        $eloSetter = new EloSetter(1);
+        $eloSetter->registerResult($user, $this->getUserWithElo(1500), 1);
+        $eloSetter->registerResult($user, $this->getUserWithElo(1400), 1);
 
 
         $elo = new Elo($user->getId(), 1);
@@ -67,11 +67,11 @@ class EloTest extends ChessTests
         $user = $this->createUser('username','password');
 
         // when
-        $eloSetter = new EloSetter($user, 1);
-        $eloSetter->registerWinAgainst($this->getUserWithElo(1500));
-        $eloSetter->registerWinAgainst($this->getUserWithElo(1400));
-        $eloSetter->registerLossAgainst($this->getUserWithElo(1200));
-        $eloSetter->registerDrawAgainst($this->getUserWithElo(2000));
+        $eloSetter = new EloSetter(1);
+        $eloSetter->registerResult($user, $this->getUserWithElo(1500), 1);
+        $eloSetter->registerResult($user, $this->getUserWithElo(1400), 1);
+        $eloSetter->registerResult($user, $this->getUserWithElo(1200), -1);
+        $eloSetter->registerResult($user, $this->getUserWithElo(2000), 0.5);
 
 
         $elo = new Elo($user->getId(), 1);
@@ -90,8 +90,8 @@ class EloTest extends ChessTests
         $player2 = $this->getUserWithElo(2000);
 
         // when
-        $eloSetter = new EloSetter($player1, 1);
-        $eloSetter->registerWinAgainst($player2);
+        $eloSetter = new EloSetter(1);
+        $eloSetter->registerResult($player1, $player2, 1);
 
         $elo1 = new Elo($player1->getId(), 1);
         $elo2 = new Elo($player2->getId(), 1);
@@ -100,7 +100,6 @@ class EloTest extends ChessTests
         $this->assertEquals((1500+2200)/2, $elo1->getElo(), "1850");
         $this->assertEquals('2000;1300', $elo2->getProvisional());
         $this->assertEquals((2000+1300)/2, $elo2->getElo(), "1650");
-
     }
 
 
@@ -154,8 +153,8 @@ class EloTest extends ChessTests
         $this->assertEquals(1400, $player->getElo(1));
         $this->assertEquals(1100, $opponent->getElo(1));
 
-        $eloSetter = new EloSetter($player, 1);
-        $eloSetter->registerWinAgainst($opponent);
+        $eloSetter = new EloSetter(1);
+        $eloSetter->registerResult($player, $opponent, 1);
 
         // then
         $elo = new Elo($player->getId(), 1);
@@ -163,8 +162,8 @@ class EloTest extends ChessTests
 
         // when
         $player = $this->getUserWithNonProvisionalElo(1548);
-        $eloSetter = new EloSetter($player, 1);
-        $eloSetter->registerWinAgainst($this->getUserWithElo(1212));
+        $eloSetter = new EloSetter( 1);
+        $eloSetter->registerResult($player, $this->getUserWithElo(1212), 1);
 
         $pl = new Player($player->getId());
         // then
@@ -191,12 +190,12 @@ class EloTest extends ChessTests
         $pl->setPassword(uniqid('pass'));
         $pl->commit();
 
-        $eloSetter = new EloSetter($pl, 1);
+        $eloSetter = new EloSetter(1);
         for($i=0;$i<10;$i++){
-            $eloSetter->registerWinAgainst($this->getUserWithElo(1500));
-            $eloSetter->registerWinAgainst($this->getUserWithElo(1400));
-            $eloSetter->registerLossAgainst($this->getUserWithElo(1200));
-            $eloSetter->registerDrawAgainst($this->getUserWithElo(2000));
+            $eloSetter->registerResult($pl, $this->getUserWithElo(1500),1);
+            $eloSetter->registerResult($pl, $this->getUserWithElo(1400),1);
+            $eloSetter->registerResult($pl, $this->getUserWithElo(1200),-1);
+            $eloSetter->registerResult($pl, $this->getUserWithElo(2000), 0.5);
         }
         if(isset($eloValue)){
             $elo = new Elo($pl->getId(), 1);
