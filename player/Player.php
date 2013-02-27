@@ -189,4 +189,9 @@ class Player extends LudoDBModel implements LudoDBService
         }
         return parent::save($data);
     }
+
+    public function getElo($category){
+        $elo = new Elo($this->getId(), $category);
+        return $elo->getElo();
+    }
 }

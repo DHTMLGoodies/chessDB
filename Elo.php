@@ -55,7 +55,7 @@ class Elo extends LudoDBModel
         if($this->isProvisional()){
             $this->appendProvisional($elo);
         }
-        $this->setValue('elo', $elo);
+        $this->setValue('elo', max(1015, $elo));
     }
 
     private function appendProvisional($elo){

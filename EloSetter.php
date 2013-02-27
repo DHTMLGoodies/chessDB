@@ -33,14 +33,33 @@ class EloSetter
             }
             $eloMe->setElo($eloOpponent->getElo() + $addition);
         }else{
-            $val = 1 / (1 + 10 * exp(($eloOpponent->getElo() - $eloMe->getElo()) / 400 ));
-            $eloMe->setElo($eloMe->getElo()+ (30 * $val * $result));
+            $expectedScore = $this->getExpectedScore($eloMe->getElo(), $eloOpponent->getElo());
+            $val = $this->getKFactor($eloMe) * ($result - $expectedScore);
+            #$val = $expectedScore * ($this->getKFactor($eloMe) * $result);
+            /*
+            $scoreDiff = $eloMe->getElo() - $eloOpponent->getElo();
+            $dividend = 10 * exp( ($scoreDiff / $this->getFFactor($eloOpponent)) + 1 );
+            $val = $this->getKFactor($eloMe) * ($result - (1 / $dividend));
+            */
+            $eloMe->setElo($eloMe->getElo()+ $val);
         }
 
         if($firstRun){
             $this->registerResult($me, $against, $result*-1, false);
         }
         $eloMe->commit();
+    }
 
+    private function getExpectedScore($ratingA, $ratingB){
+        $qa = pow(10, $ratingA / 400);
+        $qb = pow(10, $ratingB / 400);
+
+        return $qa / ($qa + $qb);
+    }
+
+    private function getKFactor(Elo $elo){
+        if($elo->getElo() > 2400)return 16;
+        if($elo->getElo() >= 2100)return 24;
+        return 32;
     }
 }

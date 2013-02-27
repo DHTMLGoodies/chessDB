@@ -1,6 +1,7 @@
 <?php
 
 require_once(__DIR__ . "/../autoload.php");
+ini_set('display_errors','on');
 
 class EloTest extends ChessTests
 {
@@ -9,6 +10,7 @@ class EloTest extends ChessTests
      * @test
      */
     public function shouldGetDefaultElo(){
+        ini_set('display_errors','on');
         // given
         $user = $this->createUser('username','password');
 
@@ -119,22 +121,44 @@ class EloTest extends ChessTests
     /**
      * @test
      */
+    public function shouldFindEloFormula(){
+
+        $this->assertEquals(0.686, $this->getExpectedScore(1613, 1477));
+        $this->assertEquals(0.506, $this->getExpectedScore(1613, 1609));
+
+    }
+
+    private function getExpectedScore($ratingA, $ratingB){
+        $qa = pow(10, $ratingA / 400);
+        $qb = pow(10, $ratingB / 400);
+
+        return number_format($qa / ($qa + $qb), 3);
+    }
+
+    /**
+     * @test
+     */
     public function shouldDetermineEloForNonProvisional(){
         // given
         $player = $this->getUserWithNonProvisionalUser();
         // when
         $elo = new Elo($player->getId(), 1);
-        $elo->setElo(1600);
+        $elo->setElo(1400);
         $elo->commit();
         // then
         $this->assertFalse($elo->isProvisional());
 
+
+        $opponent = $this->getUserWithElo(1100);
+        $this->assertEquals(1400, $player->getElo(1));
+        $this->assertEquals(1100, $opponent->getElo(1));
+
         $eloSetter = new EloSetter($player, 1);
-        $eloSetter->registerWinAgainst($this->getUserWithElo(1100));
+        $eloSetter->registerWinAgainst($opponent);
 
         // then
         $elo = new Elo($player->getId(), 1);
-        $this->assertEquals(1400, $elo->getElo());
+        $this->assertEquals(1405, $elo->getElo());
     }
 
     private function getUserWithElo($eloValue, $category = 1){
