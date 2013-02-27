@@ -11,24 +11,24 @@ class EloSetter
     }
 
     public function registerWinAgainst(Player $pl){
-        $this->registerResult($pl, $this->player, 1);
+        $this->registerResult($this->player,$pl, 1);
     }
 
     public function registerDrawAgainst(Player $pl){
-        $this->registerResult($pl, $this->player,  0.5);
+        $this->registerResult($this->player, $pl,  0.5);
     }
 
     public function registerLossAgainst(Player $pl){
-        $this->registerResult($pl, $this->player, -1);
+        $this->registerResult($this->player, $pl, -1);
     }
 
-    private function registerResult(Player $against, Player $me, $result){
-        $eloMe = new Elo($me->getId(), $this->category);
-        $eloOpponent = new Elo($against->getId(), $this->category);
+    public function registerResult(Player $white, Player $black, $result){
+        $eloMe = new Elo($white->getId(), $this->category);
+        $eloOpponent = new Elo($black->getId(), $this->category);
         if($eloMe->isProvisional()){
             $this->registerProvisional($eloMe, $eloOpponent, $result);
             if($eloOpponent->isProvisional()){
-                $this->registerProvisional($eloOpponent, new Elo($me->getId(), $this->category), $result * -1);
+                $this->registerProvisional($eloOpponent, new Elo($white->getId(), $this->category), $result * -1);
             }
         }else{
             $expectedScore = $this->getExpectedScore($eloMe->getElo(), $eloOpponent->getElo());
@@ -36,7 +36,7 @@ class EloSetter
             $eloMe->setElo($eloMe->getElo()+ $adjustment);
 
             if($eloOpponent->isProvisional()){
-                $this->registerProvisional($eloOpponent, new Elo($me->getId(), $this->category), $result * -1);
+                $this->registerProvisional($eloOpponent, new Elo($white->getId(), $this->category), $result * -1);
             }else{
                 $blackAdjustment = ($adjustment * $this->getKFactor($eloOpponent) / $this->getKFactor($eloMe)) * -1;
                 $eloOpponent->setElo($eloOpponent->getElo()+ $blackAdjustment);
