@@ -9,8 +9,6 @@ class EloTest extends ChessTests
      * @test
      */
     public function shouldGetDefaultElo(){
-        LudoDB::enableSqlLogging();
-        ini_set('display_errors','on');
         // given
         $user = $this->createUser('username','password');
 
@@ -85,6 +83,20 @@ class EloTest extends ChessTests
      * @test
      */
     public function shouldSetEloForBothPlayers(){
+        // given
+        $player1 = $this->getUserWithElo(1500);
+        $player2 = $this->getUserWithElo(2000);
+
+        // when
+        $eloSetter = new EloSetter($player1, 1);
+        $eloSetter->registerWinAgainst($player2);
+
+        $elo1 = new Elo($player1->getId(), 1);
+        $elo2 = new Elo($player2->getId(), 1);
+
+        // then
+        $this->assertEquals((1500+2200)/2, $elo1->getElo());
+        $this->assertEquals((2000+1300)/2, $elo2->getElo());
 
     }
 
