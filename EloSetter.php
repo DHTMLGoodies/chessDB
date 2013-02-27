@@ -32,6 +32,9 @@ class EloSetter
                 $addition = ($eloOpponent->isProvisional() ? 200 : 400) * $result;
             }
             $eloMe->setElo($eloOpponent->getElo() + $addition);
+        }else{
+            $val = 1 / (1 + 10 * exp(($eloOpponent->getElo() - $eloMe->getElo()) / 400 ));
+            $eloMe->setElo($eloMe->getElo()+ (30 * $val * $result));
         }
 
         if($firstRun){

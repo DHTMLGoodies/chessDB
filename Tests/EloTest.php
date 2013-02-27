@@ -100,6 +100,8 @@ class EloTest extends ChessTests
 
     }
 
+
+
     /**
      * @test
      */
@@ -114,6 +116,27 @@ class EloTest extends ChessTests
         $this->assertTrue($elo->isProvisional());
     }
 
+    /**
+     * @test
+     */
+    public function shouldDetermineEloForNonProvisional(){
+        // given
+        $player = $this->getUserWithNonProvisionalUser();
+        // when
+        $elo = new Elo($player->getId(), 1);
+        $elo->setElo(1600);
+        $elo->commit();
+        // then
+        $this->assertFalse($elo->isProvisional());
+
+        $eloSetter = new EloSetter($player, 1);
+        $eloSetter->registerWinAgainst($this->getUserWithElo(1100));
+
+        // then
+        $elo = new Elo($player->getId(), 1);
+        $this->assertEquals(1400, $elo->getElo());
+    }
+
     private function getUserWithElo($eloValue, $category = 1){
         $pl = new Player();
         $pl->setUsername(uniqid('user'));
@@ -125,6 +148,24 @@ class EloTest extends ChessTests
         $elo->commit();
 
         return $pl;
+    }
+
+    private function getUserWithNonProvisionalUser(){
+        $pl = new Player();
+        $pl->setUsername(uniqid('user'));
+        $pl->setPassword(uniqid('pass'));
+        $pl->commit();
+
+        $eloSetter = new EloSetter($pl, 1);
+        for($i=0;$i<10;$i++){
+            $eloSetter->registerWinAgainst($this->getUserWithElo(1500));
+            $eloSetter->registerWinAgainst($this->getUserWithElo(1400));
+            $eloSetter->registerLossAgainst($this->getUserWithElo(1200));
+            $eloSetter->registerDrawAgainst($this->getUserWithElo(2000));
+        }
+
+        return $pl;
+
     }
 
 }
