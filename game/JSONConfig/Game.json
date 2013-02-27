@@ -107,7 +107,15 @@
             "db":"varchar(64)",
             "access": "rw",
             "default" : ""
-        }
+        },
+		"game_category": {
+			"db": "int",
+			"default": "1"
+		},
+		"rated" : {
+			"db": "char(1)",
+			"default": "1"
+		}
 	},
-	"indexes":["database_id", "created_by"]
+	"indexes":["database_id", "created_by","game_category","white_id","black_id"]
 }

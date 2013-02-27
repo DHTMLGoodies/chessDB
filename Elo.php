@@ -7,6 +7,9 @@
  */
 class Elo extends LudoDBModel
 {
+
+    const COUNT_PROVISIONAL = 8;
+
     protected $config = array(
         "sql" => "select * from chess_elo where player_id=? and category=? order by id desc",
         "table" => "chess_elo",
@@ -77,7 +80,7 @@ class Elo extends LudoDBModel
     }
 
     public function isProvisional(){
-        return count(explode(";", $this->getValue('provisional'))) < 20;
+        return count(explode(";", $this->getValue('provisional'))) < self::COUNT_PROVISIONAL;
     }
 
     public function setCategory($id){

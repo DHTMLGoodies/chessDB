@@ -97,8 +97,9 @@ class EloTest extends ChessTests
         $elo2 = new Elo($player2->getId(), 1);
 
         // then
-        $this->assertEquals((1500+2200)/2, $elo1->getElo());
-        $this->assertEquals((2000+1300)/2, $elo2->getElo());
+        $this->assertEquals((1500+2200)/2, $elo1->getElo(), "1850");
+        $this->assertEquals('2000;1300', $elo2->getProvisional());
+        $this->assertEquals((2000+1300)/2, $elo2->getElo(), "1650");
 
     }
 
@@ -140,7 +141,7 @@ class EloTest extends ChessTests
      */
     public function shouldDetermineEloForNonProvisional(){
         // given
-        $player = $this->getUserWithNonProvisionalUser();
+        $player = $this->getUserWithNonProvisionalElo();
         // when
         $elo = new Elo($player->getId(), 1);
         $elo->setElo(1400);
@@ -159,6 +160,16 @@ class EloTest extends ChessTests
         // then
         $elo = new Elo($player->getId(), 1);
         $this->assertEquals(1405, $elo->getElo());
+
+        // when
+        $player = $this->getUserWithNonProvisionalElo(1548);
+        $eloSetter = new EloSetter($player, 1);
+        $eloSetter->registerWinAgainst($this->getUserWithElo(1212));
+
+        $pl = new Player($player->getId());
+        // then
+        $this->assertEquals(1552, $pl->getElo(1));
+
     }
 
     private function getUserWithElo($eloValue, $category = 1){
@@ -174,7 +185,7 @@ class EloTest extends ChessTests
         return $pl;
     }
 
-    private function getUserWithNonProvisionalUser(){
+    private function getUserWithNonProvisionalElo($eloValue = null){
         $pl = new Player();
         $pl->setUsername(uniqid('user'));
         $pl->setPassword(uniqid('pass'));
@@ -187,7 +198,13 @@ class EloTest extends ChessTests
             $eloSetter->registerLossAgainst($this->getUserWithElo(1200));
             $eloSetter->registerDrawAgainst($this->getUserWithElo(2000));
         }
+        if(isset($eloValue)){
+            $elo = new Elo($pl->getId(), 1);
+            $elo->setElo($eloValue);
+            $elo->commit();
 
+            return new Player($pl->getId());
+        }
         return $pl;
 
     }
