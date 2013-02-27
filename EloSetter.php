@@ -11,15 +11,33 @@ class EloSetter
     }
 
     public function registerWinAgainst(Player $pl){
+        $this->registerResult($pl, $this->player, 1);
+    }
 
-        $eloMe = new Elo($this->player, $this->category);
-        $eloOpponent = new Elo($pl->getId(), $this->category);
+    public function registerDrawAgainst(Player $pl){
+        $this->registerResult($pl, $this->player,  0.5);
+    }
 
+    public function registerLossAgainst(Player $pl){
+        $this->registerResult($pl, $this->player, -1);
+    }
+
+    private function registerResult(Player $against, Player $me, $result, $firstRun = true){
+        $eloMe = new Elo($me->getId(), $this->category);
+        $eloOpponent = new Elo($against->getId(), $this->category);
         if($eloMe->isProvisional()){
-            $newElo = new Elo();
-            $newElo->setPlayerId($this->player->getId());
-            $newElo->setElo($eloOpponent->getElo() + $eloOpponent->isProvisional() ? 200 : 400);
-            $newElo->commit();
+            if($result === 0.5){
+                $addition = 0;
+            }else{
+                $addition = ($eloOpponent->isProvisional() ? 200 : 400) * $result;
+            }
+            $eloMe->setElo($eloOpponent->getElo() + $addition);
         }
+
+        if($firstRun){
+            $this->registerResult($me, $against, $result*-1, false);
+        }
+        $eloMe->commit();
+
     }
 }

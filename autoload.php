@@ -69,7 +69,10 @@ spl_autoload_register(
                 'dgtgameparser' => '/../parser/DGTGameParser.php',
                 'eco' => '/eco/Eco.php',
                 'ecomoves' => '/eco/EcoMoves.php',
-                'ecomovesdetailed' => '/eco/EcoMovesDetailed.php',
+                'elo' => '/Elo.php',
+                'elolist' => '/EloList.php',
+                'elosetter' => '/EloSetter.php',
+                'elotest' => '/Tests/EloTest.php',
                 'fen' => '/Fen.php',
                 'fenparser0x88' => '/../parser/FenParser0x88.php',
                 'fentest' => '/Tests/FenTest.php',
@@ -85,6 +88,7 @@ spl_autoload_register(
                 'gametest' => '/Tests/GameTest.php',
                 'grandparent' => '/ludoDB/Tests/classes/Dependencies/GrandParent.php',
                 'importtest' => '/Tests/ImportTest.php',
+                'ixhprofruns' => '/ludoDB/xhprof/xhprof_lib/utils/xhprof_runs.php',
                 'jsontest' => '/ludoDB/Tests/JSONTest.php',
                 'leafnode' => '/ludoDB/Tests/classes/LeafNode.php',
                 'leafnodes' => '/ludoDB/Tests/classes/LeafNodes.php',
@@ -110,6 +114,7 @@ spl_autoload_register(
                 'ludodbobject' => '/ludoDB/LudoDBObject.php',
                 'ludodbobjectnotfoundexception' => '/ludoDB/LudoDBExceptions.php',
                 'ludodbpdo' => '/ludoDB/LudoDBPDO.php',
+                'ludodbprofiling' => '/ludoDB/LudoDBProfiling.php',
                 'ludodbregistry' => '/ludoDB/LudoDBRegistry.php',
                 'ludodbrequesthandler' => '/ludoDB/LudoDBRequestHandler.php',
                 'ludodbservice' => '/ludoDB/LudoDBInterfaces.php',
@@ -178,7 +183,8 @@ spl_autoload_register(
                 'testtable' => '/ludoDB/Tests/classes/TestTable.php',
                 'testtimer' => '/ludoDB/Tests/classes/TestTimer.php',
                 'timecontrol' => '/TimeControl.php',
-                'xhpprofiling' => '/../profiling/XHPProfiling.php'
+                'xhpprofiling' => '/ludoDB/xhprof/XHPProfiling.php',
+                'xhprofruns_default' => '/ludoDB/xhprof/xhprof_lib/utils/xhprof_runs.php'
             );
         }
         $cn = strtolower($class);

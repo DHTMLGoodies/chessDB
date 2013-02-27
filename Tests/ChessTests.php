@@ -26,7 +26,7 @@ class ChessTests extends PHPUnit_Framework_TestCase
         $classes = array(
             'Game','Move','Database','Folder','Metadata','MetadataValue',
             'Session','Seek','Chat','ChatMessage','ChatMessages','Fen','Player',
-            'TimeControl','ChessFileUpload'
+            'TimeControl','ChessFileUpload','Elo'
         );
         $util = new  LudoDBUtility();
         $util->dropAndCreate($classes);

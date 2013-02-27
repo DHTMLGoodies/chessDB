@@ -27,22 +27,26 @@ class Elo extends LudoDBModel
                 "access" => "rw"
             ),
             "provisional" => array(
-                "db" => "char(1)",
-                "access" => "rw",
-                "default" => 1
+                "db" => "varchar(1024)",
+                "access" => "rw"
             )
         ),
         "indexes" => array("category", "player_id")
     );
 
-    private $eloValues;
+    protected function populate(){
+        parent::populate();
+        if(!$this->getId()){
+            $this->setPlayerId($this->arguments[0]);
+            $this->setCategory($this->arguments[1]);
+            $this->commit();
+        }
+    }
+
     public function getElo(){
         if($this->isProvisional()){
-            if(!isset($eloValues)){
-                $coll = new EloList($this->arguments[0], $this->arguments[1]);
-                $this->eloValues = array_values($coll->getValues());
-            }
-            return count($this->eloValues) ? round($this->eloValues / count ($this->eloValues)) : 1200;
+            $eloValues = explode(";", $this->getProvisional());
+            return count($eloValues ) && is_numeric($eloValues[0]) ? round(array_sum($eloValues)  / count ($eloValues )) : $this->getValue('elo');
         }
         return $this->getValue('elo');
     }
@@ -52,7 +56,22 @@ class Elo extends LudoDBModel
     }
 
     public function setElo($elo){
+        if($this->isProvisional()){
+            $this->appendProvisional($elo);
+        }
         $this->setValue('elo', $elo);
+    }
+
+    private function appendProvisional($elo){
+        $val = $this->getProvisional();
+        if($val)$val.=";";
+        $val.=$elo;
+        $this->setValue('provisional', $val);
+    }
+
+    public function getProvisional(){
+        $ret = $this->getValue('provisional');
+        return isset($ret) ? $ret : '';
     }
 
     public function getPlayerId(){
@@ -64,7 +83,7 @@ class Elo extends LudoDBModel
     }
 
     public function isProvisional(){
-        return $this->getValue('provisional') ? true : false;
+        return count(explode(";", $this->getValue('provisional'))) < 20;
     }
 
     public function setCategory($id){
