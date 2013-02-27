@@ -20,6 +20,7 @@ class AllChessTests
         $suite->addTestSuite("SeekTest");
         $suite->addTestSuite("ImportTest");
         $suite->addTestSuite("SessionTest");
+        $suite->addTestSuite("EloTest");
 
         return $suite;
     }
