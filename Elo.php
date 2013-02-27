@@ -51,10 +51,6 @@ class Elo extends LudoDBModel
         return $this->getValue('elo');
     }
 
-    private function getCategory(){
-        return $this->getValue('category');
-    }
-
     public function setElo($elo){
         if($this->isProvisional()){
             $this->appendProvisional($elo);
@@ -63,10 +59,8 @@ class Elo extends LudoDBModel
     }
 
     private function appendProvisional($elo){
-        $val = $this->getProvisional();
-        if($val)$val.=";";
-        $val.=$elo;
-        $this->setValue('provisional', $val);
+        $pr = $this->getProvisional();
+        $this->setValue('provisional', $pr ? $pr .";". $elo : $elo);
     }
 
     public function getProvisional(){
