@@ -132,6 +132,10 @@ class Game extends LudoDBModel implements LudoDBService
             case 'read':
                 return count($arguments) === 1 && is_numeric($arguments[0]);
             case 'save':
+                $cp = CurrentPlayer::getInstance();
+                if(!$cp->hasAccessTo(ChessRoles::EDIT_GAMES) && !$cp->hasAccessTo(ChessRoles::IMPORT_GAMES)){
+                    throw new LudoDBUnauthorizedException("Your are not authorized to save new games");
+                }
                 return count($arguments) === 0 || is_numeric($arguments[0]);
 
         }
