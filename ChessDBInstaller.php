@@ -38,7 +38,7 @@ class ChessDBInstaller implements LudoDBService
         $path = dirname(__FILE__)."/../../installer/chess.lock";
         file_put_contents($path, "locked");
         if(!file_exists($path)){
-            throw new Exception("Installed, but could not write installer lock file to ". $path);
+            throw new Exception("Unable to write lock file to ". $path.". Make sure that your web server has access to write files to this folder");
         }
 
     }
