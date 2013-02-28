@@ -42,6 +42,8 @@ class ChessTests extends PHPUnit_Framework_TestCase
         $pl->setPassword(md5('Test25ab'));
         $pl->commit();
 
+
+
         $session = new Session();
         $session->signIn(array('username' => 'alfmagne', 'password' => md5('Test25ab')));
 

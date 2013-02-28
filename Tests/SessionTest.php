@@ -58,6 +58,9 @@ class SessionTest extends ChessTests
      */
     public function shouldGetLoggedOnUser(){
         // given
+        if(Session::getInstance()->isSignedIn()){
+            Session::getInstance()->signOut();
+        }
         $username = 'username';
         $password = 'Pass1234';
         $this->createUser($username, $password);
@@ -73,7 +76,7 @@ class SessionTest extends ChessTests
         // then
         $this->assertNotNull($user);
 
-        $this->assertEquals(1, $user->getId());
+        $this->assertEquals(2, $user->getId());
         $this->assertEquals("username", $user->getUsername());
 
         $player = new CurrentPlayer();

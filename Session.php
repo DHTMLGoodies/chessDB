@@ -103,6 +103,7 @@ class Session extends LudoDBModel implements LudoDBService
             $s->setLoggedOut();
             $s->commit();
             $this->clearCookie();
+            self::$instance = null;
         }
     }
 

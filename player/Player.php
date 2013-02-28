@@ -74,9 +74,9 @@ class Player extends LudoDBModel implements LudoDBService
     }
 
 
-    public function games()
+    public function games($category)
     {
-        $obj = new PlayerGames($this->getId(), '0');
+        $obj = new PlayerGames($this->getId(), '0', $category);
         return $obj->getValues();
     }
 
@@ -96,19 +96,6 @@ class Player extends LudoDBModel implements LudoDBService
         $default = "";
         if(!$this->getValue('email'))return "";
         return "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $this->getValue('email') ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
-        /*
-        $url = 'http://www.gravatar.com/avatar/';
-        $url .= md5(strtolower(trim($email)));
-        $url .= "?s=$s&d=$d&r=$r";
-        if ($img) {
-            $url = '<img src="' . $url . '"';
-            foreach ($atts as $key => $val) {
-                $url .= ' ' . $key . '="' . $val . '"';
-            }
-            $url .= ' />';
-        }
-        return $url;
-        */
     }
 
     public function getPassword(){
@@ -149,6 +136,11 @@ class Player extends LudoDBModel implements LudoDBService
                 }
                 if($data['password'] != $data['repeat_password']){
                     throw new LudoDBException("Password does not match");
+                }
+                break;
+            case "games":
+                if(!empty($data) || !is_numeric($data)){
+                    throw new LudoDBException("Numeric category missing.");
                 }
 
         }

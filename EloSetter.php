@@ -29,8 +29,8 @@ class EloSetter
     private function updateBlackElo(Elo $eloWhite, Elo $eloBlack, $result){
         $e = new Elo($eloWhite->getPlayerId(), $this->category);
         if($eloBlack->isProvisional()){
-            $adjustment = $this->getProvisionalAdjustment($e, $result  * -1);
-            $eloBlack->appendProvisional($e->getElo() + $adjustment);
+            $adjustmentBlack = $this->getProvisionalAdjustment($e, $result  * -1);
+            $eloBlack->appendProvisional($e->getElo() + $adjustmentBlack);
         }else{
             $adjustment =  $this->getRatingAdjustmentFor($eloWhite, $eloBlack, $result);
             $adjustmentBlack = ($adjustment * $this->getKFactor($eloBlack) / $this->getKFactor($e)) * -1;
