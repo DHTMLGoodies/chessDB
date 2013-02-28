@@ -52,15 +52,20 @@ class Elo extends LudoDBModel
 
     public function getElo(){
         if($this->isProvisional()){
-            $eloValues = explode(";", $this->getProvisional());
-            return count($eloValues ) && is_numeric($eloValues[0]) ? round(array_sum($eloValues)  / count ($eloValues )) : $this->getValue('elo');
+            return $this->getProvisionalElo();
         }
         return $this->getValue('elo');
+    }
+
+    private function getProvisionalElo(){
+        $eloValues = explode(";", $this->getProvisional());
+        return count($eloValues ) && is_numeric($eloValues[0]) ? round(array_sum($eloValues)  / count ($eloValues )) : $this->getValue('elo');
     }
 
     public function setElo($elo){
         if($this->isProvisional()){
             $this->appendProvisional($elo);
+            $elo = $this->getProvisionalElo();
         }
         $this->setValue('elo', max(1015, $elo));
     }
