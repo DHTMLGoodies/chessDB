@@ -53,7 +53,7 @@ class ChessDBInstaller implements LudoDBService
             $pl->commit();
 
             $session = new Session();
-            $session->signIn(array('username' => $details['adminUserName'], 'password' => $details['adminPassword']));
+            $session->signIn(array('username' => $details['adminUserName'], 'password' => $details['adminPassword'], 'rememberMe' => true));
         }
     }
 

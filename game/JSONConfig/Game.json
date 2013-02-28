@@ -59,7 +59,8 @@
 		"database_id":{
 			"db":"int",
 			"access":"rw",
-            "references": "chess_database(id) on delete cascade"
+            "references": "chess_database(id) on delete cascade",
+            "alias":"databaseId"
 		},
 		"created_by":{
 			"db":"int",
