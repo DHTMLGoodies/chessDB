@@ -116,7 +116,11 @@
 		"rated" : {
 			"db": "char(1)",
 			"default": "1"
-		}
+		},
+        "public" : {
+            "db": "char(1)",
+            "access": "r"
+        }
 	},
 	"indexes":["database_id", "created_by","game_category","white_id","black_id"]
 }
