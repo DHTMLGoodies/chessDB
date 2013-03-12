@@ -122,5 +122,8 @@
             "access": "r"
         }
 	},
-	"indexes":["database_id", "created_by","game_category","white_id","black_id"]
+	"indexes":["database_id", "created_by","game_category","white_id","black_id"],
+    "static":{
+        "type": "game"
+    }
 }
