@@ -15,6 +15,7 @@ class ChessDBInstaller implements LudoDBService
 
     public function install($details = null)
     {
+        ini_set('display_errors','off');
         try {
             $this->writeLockFile();
             $this->validatePHP();
@@ -79,12 +80,14 @@ class ChessDBInstaller implements LudoDBService
     private function validateDBConnection()
     {
         try {
+            ob_start();
             $dbName = LudoDBRegistry::get('DB_NAME');
             LudoDB::setDb("information_schema");
             LudoDB::getInstance()->connect();
             LudoDB::setDb($dbName);
             LudoDB::createDatabase($dbName);
             LudoDB::getInstance()->connect();
+            ob_end_clean();
         } catch (Exception $e) {
             throw new LudoDBException("Cannot connect to database, error message: " . $e->getMessage(), 400);
         }
@@ -128,6 +131,8 @@ class ChessDBInstaller implements LudoDBService
 
     public function validateConnection($dbDetails)
     {
+        ini_set('display_errors','off');
+
         $keys = array("host", "username", "password", "db");
         foreach ($keys as &$key) {
             if (!isset($dbDetails[$key])) {
@@ -144,6 +149,7 @@ class ChessDBInstaller implements LudoDBService
             LudoDB::createDatabase($dbDetails['db']);
             $this->setConnectionSuccessMessage('Connection successful. Database ' . $dbDetails['db'] . " created");
         }
+
         return $dbDetails;
     }
 

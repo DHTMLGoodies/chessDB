@@ -9,7 +9,7 @@ class Eco extends LudoDBModel implements LudoDBService
     protected $JSONConfig = true;
 
     public function getValidServices(){
-        return array('moves','read');
+        return array('moves','read', 'generate');
     }
 
     public function getOnSuccessMessageFor($service){
