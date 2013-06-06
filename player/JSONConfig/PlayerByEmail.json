@@ -1,0 +1,4 @@
+{
+    "sql" : "select * from chess_player where email=?",
+    "extends" : "Player"
+}

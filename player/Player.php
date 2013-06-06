@@ -17,6 +17,10 @@ class Player extends LudoDBModel implements LudoDBService
         return preg_match("/^[0-9a-f]{32}$/i", $string);
     }
 
+    public function getId(){
+        return $this->getValue('id');
+    }
+
     public function hasAccessTo($role){
         return $this->getUserAccess() & $role ? true : false;
     }
@@ -31,6 +35,10 @@ class Player extends LudoDBModel implements LudoDBService
 
     public function getUserAccess(){
         return $this->getValue('user_access');
+    }
+
+    public function setEmail($email){
+        $this->setValue('email', $email);
     }
 
     public function setUserAccess($access){

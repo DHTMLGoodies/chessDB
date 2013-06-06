@@ -8,8 +8,14 @@ class Database extends LudoDBModel implements LudoDBService
 {
     protected $JSONConfig = true;
 
+    public function getSql(){
+        return is_numeric($this->arguments[0]) ?
+            "select id,title,folder_id from chess_database where id=?":
+            "select id,title,folder_id from chess_database where title=?";
+    }
+
     public function validateArguments($service, $arguments){
-        return count($arguments) === 1 && is_numeric($arguments[0]);
+        return count($arguments) === 1;
     }
     public function validateServiceData($service, $arguments){
         return true;
