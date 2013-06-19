@@ -102,8 +102,6 @@ class EloTest extends ChessTests
         $this->assertEquals((2000+1300)/2, $elo2->getElo(), "1650");
     }
 
-
-
     /**
      * @test
      */

@@ -21,7 +21,7 @@ class GameImport implements LudoDBService
 
     public function getValidServices()
     {
-        return array('import', 'importQueued');
+        return array('save', 'importQueued');
     }
 
     public function getOnSuccessMessageFor($service)
@@ -43,7 +43,7 @@ class GameImport implements LudoDBService
 
         foreach ($files as $file) {
             $path = implode('/', array(ChessRegistry::getImportQueueFolder(), $file));
-            $ret = array_merge($ret, $this->import(array("file" => $path, "databaseId" => $this->databaseId)));
+            $ret = array_merge($ret, $this->save(array("file" => $path, "databaseId" => $this->databaseId)));
             $this->moveFileToImportedFolder($path);
         }
         return $ret;
@@ -68,7 +68,7 @@ class GameImport implements LudoDBService
     }
 
 
-    public function import($request)
+    public function save($request)
     {
         $ret = array();
         $filePath = $this->getFilePath($request);
@@ -78,9 +78,18 @@ class GameImport implements LudoDBService
         $parser = new PgnParser($filePath);
         $games = $parser->getGames();
         $dbId = $this->getDatabaseId($request);
+
+        $count = count($games);
+
+        $pr = LudoDBProgress::getInstance();
+        $pr->setSteps($count + 1, "Initializing import");
+        $c = 0;
         foreach ($games as $game) {
+            $c++;
+            $pr->increment(1, "Importing game ". $c . " of ". $count);
             $ret[] = $this->importGame($game, $dbId);
         }
+        $pr->increment(1, "Finished with import");
         return $ret;
     }
 
