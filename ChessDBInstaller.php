@@ -13,7 +13,7 @@ class ChessDBInstaller implements LudoDBService
         'TimeControl', 'ChessFileUpload', 'Country','Elo'
     );
 
-    public function install($details = null)
+    public function save($details = null)
     {
         ini_set('display_errors','off');
         try {
@@ -126,7 +126,7 @@ class ChessDBInstaller implements LudoDBService
 
     public function getValidServices()
     {
-        return array("install", "validateConnection");
+        return array("save", "validateConnection");
     }
 
     public function validateConnection($dbDetails)
