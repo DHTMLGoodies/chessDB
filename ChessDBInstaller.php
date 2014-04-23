@@ -126,7 +126,7 @@ class ChessDBInstaller implements LudoDBService
 
     public function getValidServices()
     {
-        return array("save", "validateConnection");
+        return array("save", "validateConnection", "database");
     }
 
     public function validateConnection($dbDetails)
@@ -151,6 +151,11 @@ class ChessDBInstaller implements LudoDBService
         }
 
         return $dbDetails;
+    }
+
+    public function database(){
+        $util = new LudoDBUtility();
+        return $util->getDatabaseCreate($this->classes);
     }
 
     private function setConnectionDetails($dbDetails){
