@@ -116,14 +116,14 @@ class Player extends LudoDBModel implements LudoDBService
     }
 
     public function getValidServices(){
-        return array("gravatar", "seeks", "games", "archive", "register");
+        return array("gravatar", "seeks", "games", "archive", "save");
     }
 
     public function validateArguments($service, $arguments){
         switch($service){
             case 'read':
                 return count($arguments) === 1;
-            case "register":
+            case "save":
                 return count($arguments) < 2;
             default:
         }
@@ -160,8 +160,8 @@ class Player extends LudoDBModel implements LudoDBService
     }
 
 
-    public function register($userDetails){
-        $this->setValues($userDetails);
+    public function save($userDetails){
+        parent::save($userDetails);
         $this->setDefaultValuesForNewPlayers();
         $this->commit();
         $rememberMe = isset($userDetails['rememberMe']) ? true : false;
@@ -176,7 +176,7 @@ class Player extends LudoDBModel implements LudoDBService
         $this->setUserAccess(1);
     }
 
-    public function save($data){
+    public function edit($data){
         $cp = CurrentPlayer::getInstance();
         if(!$cp->hasAccessTo(ChessRoles::EDIT_USERS) && $cp->getId() !== $this->getId()){
             throw new LudoDBUnauthorizedException("You are not allowed to edit this user");
