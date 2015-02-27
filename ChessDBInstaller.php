@@ -55,6 +55,8 @@ class ChessDBInstaller implements LudoDBService
 
             $session = new Session();
             $session->signIn(array('username' => $details['adminUserName'], 'password' => $details['adminPassword'], 'rememberMe' => true));
+        }else{
+            throw new LudoDBException("Could not create user");
         }
     }
 

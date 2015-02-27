@@ -75,6 +75,8 @@ class GameImport implements LudoDBService
         if (!file_exists($filePath)) {
             throw new Exception("File not found $filePath", 400);
         }
+
+
         $parser = new PgnParser($filePath);
         $games = $parser->getGames();
         $dbId = $this->getDatabaseId($request);
@@ -84,12 +86,15 @@ class GameImport implements LudoDBService
         $pr = LudoDBProgress::getInstance();
         $pr->setSteps($count + 1, "Initializing import");
         $c = 0;
+
+        LudoDb::getInstance()->startTransaction();
         foreach ($games as $game) {
             $c++;
             $pr->increment(1, "Importing game ". $c . " of ". $count);
             $ret[] = $this->importGame($game, $dbId);
         }
         $pr->increment(1, "Finished with import");
+        LudoDB::getInstance()->commitTransaction();
         return $ret;
     }
 
