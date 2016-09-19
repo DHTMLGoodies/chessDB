@@ -87,7 +87,7 @@ class GameImport implements LudoDBService
         $pr->setSteps($count + 1, "Initializing import");
         $c = 0;
 
-        LudoDb::getInstance()->startTransaction();
+        LudoDB::getInstance()->startTransaction();
         foreach ($games as $game) {
             $c++;
             $pr->increment(1, "Importing game ". $c . " of ". $count);
